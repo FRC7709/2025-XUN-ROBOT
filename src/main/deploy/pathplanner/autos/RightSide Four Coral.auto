@@ -87,12 +87,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.3
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -104,12 +98,6 @@
                       "type": "named",
                       "data": {
                         "name": "PrimitiveIntake"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.4
                       }
                     },
                     {
@@ -226,12 +214,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.3
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -243,12 +225,6 @@
                       "type": "named",
                       "data": {
                         "name": "PrimitiveIntake"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.4
                       }
                     },
                     {
@@ -365,12 +341,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.3
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -382,12 +352,6 @@
                       "type": "named",
                       "data": {
                         "name": "PrimitiveIntake"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.4
                       }
                     },
                     {
@@ -504,12 +468,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.3
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -521,12 +479,6 @@
                       "type": "named",
                       "data": {
                         "name": "PrimitiveIntake"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.4
                       }
                     },
                     {
