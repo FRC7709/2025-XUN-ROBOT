@@ -59,7 +59,7 @@ public class LEDSubsystem extends SubsystemBase {
   }
 
   public void tracking() {
-    ledAnimation = new StrobeAnimation(0, 0, 127);
+    ledAnimation = new StrobeAnimation(0, 0, 127, 0, 0.5, ledNum);
     candle.animate(ledAnimation);
     LEDConstants.LEDFlag = false;
   }

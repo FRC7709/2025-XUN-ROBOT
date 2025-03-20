@@ -114,12 +114,20 @@ public class TrackLeftReef_Auto extends Command {
   public void end(boolean interrupted) {
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
+    if(xPidError <= 0.05 && yPidError <= 0.05 && rotationPidError <= 2) {
+      LEDConstants.arrivePosition_Base = true;
+      LEDConstants.LEDFlag = true;
+    }else {
+      LEDConstants.arrivePosition_Base = false;
+      LEDConstants.tracking = false;
+      LEDConstants.LEDFlag = true;
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_PhotonVisionSubsystem.isArrive_Reef("LeftReef");
   }
 
 }

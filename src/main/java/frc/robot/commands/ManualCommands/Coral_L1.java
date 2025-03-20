@@ -12,17 +12,17 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
 public class Coral_L1 extends Command {
-  private final ElevatorSubsystem m_Elevator;
-  private final EndEffectorSubsystem m_EndEffector;
+  private final ElevatorSubsystem m_ElevatorSubsystem;
+  private final EndEffectorSubsystem m_EndEffectorSubsystem;
   private final BooleanSupplier ifFeedFunc;
   // Variables
   private boolean ifFeed;
 
   public Coral_L1(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
-    this.m_Elevator = elevatorSubsystem;
-    this.m_EndEffector = endEffectorSubsystem;
+    this.m_ElevatorSubsystem = elevatorSubsystem;
+    this.m_EndEffectorSubsystem = endEffectorSubsystem;
     this.ifFeedFunc = ifFeed;
-    addRequirements(m_Elevator, m_EndEffector);
+    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
   }
 
   @Override
@@ -36,16 +36,16 @@ public class Coral_L1 extends Command {
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
     // Move to the position
-    if(m_EndEffector.canUp()) {
-      m_Elevator.outCoral_L1();
-      m_EndEffector.Arm_shootCoral_L1();
+    if(m_EndEffectorSubsystem.canUp()) {
+      m_ElevatorSubsystem.outCoral_L1();
+      m_EndEffectorSubsystem.Arm_shootCoral_L1();
     }
     // Shoot when you ready
-    if(ifFeed) m_EndEffector.Wheel_shootCoral_L1();
-    else m_EndEffector.stopWheel();
+    if(ifFeed) m_EndEffectorSubsystem.Wheel_shootCoral_L1();
+    else m_EndEffectorSubsystem.stopWheel();
 
     // LED controller
-    if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
+    if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
     }else {
@@ -58,9 +58,9 @@ public class Coral_L1 extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_Elevator.toPrimitive();
-    // m_EndEffector.primitiveArm();
-    // m_EndEffector.stopWheel();
+    // m_ElevatorSubsystem.toPrimitive();
+    // m_EndEffectorSubsystem.primitiveArm();
+    // m_EndEffectorSubsystem.stopWheel();
 
     // LEDConstants.intakeArriving = false;
     // LEDConstants.arrivePosition_Intake = false;

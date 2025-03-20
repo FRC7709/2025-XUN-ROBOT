@@ -71,6 +71,6 @@ public class Coral_L2_Elevator_Auto extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint();
   }
 }

@@ -39,7 +39,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public ClimberSubsystem() {
     goalAngle = ClimberConstants.climbInAngle;
     //Climber Motor
-    climbMotor = new SparkMax(ClimberConstants.firstMotor_ID, MotorType.kBrushless);
+    climbMotor = new SparkMax(ClimberConstants.climbMotor_ID, MotorType.kBrushless);
 
     climbMotorConfig = new SparkMaxConfig();
     
@@ -60,7 +60,6 @@ public class ClimberSubsystem extends SubsystemBase {
 
     // PID and Feedforward
     climbPID = new PIDController(ClimberConstants.climbPID_Kp, ClimberConstants.climbPID_Ki, ClimberConstants.climbPID_Kd);
-    // climbPID.setIntegratorRange(ClimberConstants.climbPIDMinOutput, ClimberConstants.climbPIDMaxOutput);
   }
 
   public double getAngle() {

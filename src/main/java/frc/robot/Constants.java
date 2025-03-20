@@ -390,8 +390,7 @@ public final class Constants {
   }
 
   public static class ClimberConstants {
-    public static final int firstMotor_ID = 0;
-    public static final int secondMotor_ID = 0;
+    public static final int climbMotor_ID = 0;
 
     public static final int absolutedEncoder_ID = 0;
 
