@@ -137,9 +137,15 @@ public class TrackRightReef extends Command {
   @Override
   public void end(boolean interrupted) {
     m_SwerveSubsystem.drive(0, 0, 0, false);
-    LEDConstants.arrivePosition_Base = false;
-    LEDConstants.tracking = false;
-    LEDConstants.LEDFlag = true;
+    if(m_PhotonVisionSubsystem.isArrive_Reef("RightReef")) {
+      LEDConstants.arrivePosition_Base = true;
+      LEDConstants.tracking = false;
+      LEDConstants.LEDFlag = true;
+    }else {
+      LEDConstants.arrivePosition_Base = false;
+      LEDConstants.tracking = false;
+      LEDConstants.LEDFlag = true;
+    }
   }
 
   // Returns true when the command should end.

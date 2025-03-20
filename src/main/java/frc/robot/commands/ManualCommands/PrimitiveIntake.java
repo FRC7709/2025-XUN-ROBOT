@@ -54,6 +54,8 @@ public class PrimitiveIntake extends Command {
 
           LEDConstants.intakeArriving = false;
           LEDConstants.arrivePosition_Intake = false;
+          LEDConstants.arrivePosition_Base = false;
+          LEDConstants.tracking = false;
           LEDConstants.LEDFlag = true;
         }
       }
@@ -66,6 +68,8 @@ public class PrimitiveIntake extends Command {
 
       LEDConstants.intakeArriving = false;
       LEDConstants.arrivePosition_Intake = false;
+      LEDConstants.arrivePosition_Base = false;
+      LEDConstants.tracking = false;
       LEDConstants.hasGamePiece = false;
       LEDConstants.LEDFlag = true;
     }
