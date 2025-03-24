@@ -107,38 +107,37 @@ public class TrackNet extends Command {
     if(backTarget_ID == 20 || backTarget_ID == 11) {
       // Rotation-PID calculations
       rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_Back();
-      rotationPidError = Math.abs(rotationPidMeasurements - PhotonConstants.rotationPidSetPoint_Net_Back_ID20_ID11);
+      rotationPidError = m_PhotonVisionSubsystem.getRotationError_Net("ID20_ID11");
       rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_Net_Back_ID20_ID11;
       rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_Net_Back_ID20_ID11);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Net);
       // Y-PID calculations
       yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_Back();
-      yPidError = Math.abs(yPidMeasurements - PhotonConstants.yPidSetPoint_Net_Back_ID20_ID11);
-      yPidMeasurements = (yPidError > 0.05) ? yPidMeasurements : PhotonConstants.yPidSetPoint_Net_Back_ID20_ID11;
+      yPidError = m_PhotonVisionSubsystem.getYError_Net("ID20_ID11");
+      yPidMeasurements = (yPidError > 0.02) ? yPidMeasurements : PhotonConstants.yPidSetPoint_Net_Back_ID20_ID11;
       yPidOutput = -yPidController.calculate(yPidMeasurements, PhotonConstants.yPidSetPoint_Net_Back_ID20_ID11);
       yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Net);
       // X-PID calculations
       xPidMeasurements = m_PhotonVisionSubsystem.getXMeasurements_Back();
-      xPidError = Math.abs(xPidMeasurements - PhotonConstants.xPidSetPoint_Net_Back_ID20_ID11);
-      xPidMeasurements = (xPidError > 0.05) ? xPidMeasurements : PhotonConstants.xPidSetPoint_Net_Back_ID20_ID11;
+      xPidError = m_PhotonVisionSubsystem.getXError_Net("ID20_ID11");
+      xPidMeasurements = (xPidError > 0.02) ? xPidMeasurements : PhotonConstants.xPidSetPoint_Net_Back_ID20_ID11;
       xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_Net_Back_ID20_ID11);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Net);
     }else if(backTarget_ID == 21 || backTarget_ID == 10) {
       // Rotation-PID calculations
       rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_Back();
-      rotationPidError = Math.abs(rotationPidMeasurements - PhotonConstants.rotationPidSetPoint_Net_Back_ID21_ID10);
-      rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_Net_Back_ID21_ID10;
+      rotationPidError = m_PhotonVisionSubsystem.getRotationError_Net("ID21_ID10");
       rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_Net_Back_ID21_ID10);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Net);
       // Y-PID calculations
       yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_Back();
-      yPidError = Math.abs(yPidMeasurements - PhotonConstants.yPidSetPoint_Net_Back_ID21_ID10);
+      yPidError = m_PhotonVisionSubsystem.getYError_Net("ID21_ID10");
       yPidMeasurements = (yPidError > 0.05) ? yPidMeasurements : PhotonConstants.yPidSetPoint_Net_Back_ID21_ID10;
       yPidOutput = -yPidController.calculate(yPidMeasurements, PhotonConstants.yPidSetPoint_Net_Back_ID21_ID10);
       yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Net);
       // X-PID calculations
       xPidMeasurements = m_PhotonVisionSubsystem.getXMeasurements_Back();
-      xPidError = Math.abs(xPidMeasurements - PhotonConstants.xPidSetPoint_Net_Back_ID21_ID10);
+      xPidError = m_PhotonVisionSubsystem.getXError_Net("ID21_ID10");
       xPidMeasurements = (xPidError > 0.05) ? xPidMeasurements : PhotonConstants.xPidSetPoint_Net_Back_ID21_ID10;
       xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_Net_Back_ID21_ID10);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Net);
@@ -148,18 +147,7 @@ public class TrackNet extends Command {
     yPidOutput = 0;
     rotationPidOutput = 0;
   }
-  if((xPidMeasurements == PhotonConstants.xPidSetPoint_Net_FrontRight 
-  && yPidMeasurements == PhotonConstants.yPidSetPoint_Net_FrontRight
-  && rotationPidMeasurements == PhotonConstants.rotationPidSetPoint_Net_FrontRight)
-  || (xPidMeasurements == PhotonConstants.xPidSetPoint_Net_FrontLeft
-  && yPidMeasurements == PhotonConstants.yPidSetPoint_Net_FrontLeft
-  && rotationPidMeasurements == PhotonConstants.rotationPidSetPoint_Net_FrontLeft)
-  || (xPidMeasurements == PhotonConstants.xPidSetPoint_Net_Back_ID21_ID10
-  && yPidMeasurements == PhotonConstants.yPidSetPoint_Net_Back_ID21_ID10
-  && rotationPidMeasurements == PhotonConstants.rotationPidSetPoint_Net_Back_ID21_ID10)
-  || (xPidMeasurements == PhotonConstants.xPidSetPoint_Net_Back_ID20_ID11
-  && yPidMeasurements == PhotonConstants.yPidSetPoint_Net_Back_ID20_ID11
-  && rotationPidMeasurements == PhotonConstants.rotationPidSetPoint_Net_Back_ID20_ID11)) {
+  if(m_PhotonVisionSubsystem.isArrive_Net("ID21_ID10") || m_PhotonVisionSubsystem.isArrive_Net("ID20_ID11")) {
       LEDConstants.LEDFlag = true;
       LEDConstants.arrivePosition_Base = true;
       }

@@ -161,10 +161,10 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
 
   public void setModouleStates_Auto(SwerveModuleState[] desiredStates) {
     SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Swerve_KrakenConstants.maxDriveSpeed_MeterPerSecond);
-    leftFront.setState(desiredStates[0]);
-    rightFront.setState(desiredStates[1]);
-    leftBack.setState(desiredStates[2]);
-    rightBack.setState(desiredStates[3]);
+    leftFront.setState_Auto(desiredStates[0]);
+    rightFront.setState_Auto(desiredStates[1]);
+    leftBack.setState_Auto(desiredStates[2]);
+    rightBack.setState_Auto(desiredStates[3]);
 }
 
   public void resetGyro() {

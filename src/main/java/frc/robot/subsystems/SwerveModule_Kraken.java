@@ -33,6 +33,7 @@ public class SwerveModule_Kraken extends SubsystemBase {
 
   private final PIDController turningPidController;
   private final SimpleMotorFeedforward driveFeedForward;
+  private final SimpleMotorFeedforward driveFeedForward_Auto;
 
   private double stateAngle;
 
@@ -51,6 +52,7 @@ public class SwerveModule_Kraken extends SubsystemBase {
     turningPidController.enableContinuousInput(Module_KrakenConstants.pidRangeMin, Module_KrakenConstants.pidRangeMax);
 
     driveFeedForward = new SimpleMotorFeedforward(Module_KrakenConstants.driveFeedforward_Ks, Module_KrakenConstants.driveFeedforward_Kv, Module_KrakenConstants.driveFeedforward_Ka);
+    driveFeedForward_Auto = new SimpleMotorFeedforward(Module_KrakenConstants.driveFeedforward_Auto_Ks, Module_KrakenConstants.driveFeedforward_Auto_Kv, Module_KrakenConstants.driveFeedforward_Auto_Ka);
 
     turningConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     driveConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
@@ -119,6 +121,17 @@ public class SwerveModule_Kraken extends SubsystemBase {
       turningMotor.set(turningMotorOutput);
     // Drive motor
       double driveMotorOutput = driveFeedForward.calculate(state.speedMetersPerSecond)/12;
+      driveMotor.set(driveMotorOutput);
+  }
+
+  public void setState_Auto(SwerveModuleState state) {
+    // Turn Motor
+      state.optimize(getState().angle);
+      double turningMotorOutput = turningPidController.calculate(getState().angle.getDegrees(), state.angle.getDegrees());
+      stateAngle = state.angle.getDegrees();
+      turningMotor.set(turningMotorOutput);
+    // Drive motor
+      double driveMotorOutput = driveFeedForward_Auto.calculate(state.speedMetersPerSecond)/12;
       driveMotor.set(driveMotorOutput);
   }
 

@@ -31,6 +31,8 @@ public class IntakeCoral extends Command {
 
     LEDConstants.intakeGamePiece = true;
     LEDConstants.hasGamePiece = false;
+    LEDConstants.arrivePosition_Base = false;
+    LEDConstants.tracking = false;
     LEDConstants.LEDFlag = true;
   }
 

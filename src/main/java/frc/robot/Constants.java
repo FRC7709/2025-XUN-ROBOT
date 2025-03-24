@@ -84,6 +84,10 @@ public final class Constants {
     public static final double driveFeedforward_Kv = 2;
     public static final double driveFeedforward_Ka = 0;
 
+    public static final double driveFeedforward_Auto_Ks = 0.13;
+    public static final double driveFeedforward_Auto_Kv = 1.73;
+    public static final double driveFeedforward_Auto_Ka = 1.41;
+
   }
 
   public class Swerve_KrakenConstants {
@@ -92,16 +96,14 @@ public final class Constants {
     public static final int rightFrontDrive_ID = 3;
     public static final int rightBackDrive_ID = 4;
 
-    public static final int leftFrontTurning_ID = 15;
+    public static final int leftFrontTurning_ID = 6;
     public static final int leftBackTurning_ID = 5;
-    public static final int rightFrontTurning_ID = 16;
-    public static final int rightBackTurning_ID = 17;
+    public static final int rightFrontTurning_ID = 7;
+    public static final int rightBackTurning_ID = 8;
 
     public static final int leftFrontAbsolutedEncoder_ID = 42;
     public static final int leftBackAbsolutedEncoder_ID = 41;
     public static final int rightFrontAbsolutedEncoder_ID = 43;
-
-
     public static final int rightBackAbsolutedEncoder_ID = 44;
 
     public static final double leftFrontOffset = -0.352806;
@@ -160,9 +162,9 @@ public final class Constants {
     public static final double yPidController_Ki = 0;
     public static final double yPidController_Kd = 0.0015;
 
-    public static final double rotationPidController_Kp = 0.0015;
+    public static final double rotationPidController_Kp = 0.0019;
     public static final double rotationPidController_Ki = 0;
-    public static final double rotationPidController_Kd = 0.000;
+    public static final double rotationPidController_Kd = 0.0001;
 
     public static final double xPidMaxOutput = 0.4;
     public static final double yPidMaxOutput = 0.4;
@@ -174,9 +176,9 @@ public final class Constants {
     public static final double xPidMaxOutput_Reef = 0.3;
     public static final double yPidMaxOutput_Reef = 0.3;
     public static final double rotationPidMaxOutput_Reef = 0.3;
-    public static final double xPidMaxOutput_NeedSlow_Reef= 0.2;
-    public static final double yPidMaxOutput_NeedSlow_Reef = 0.2;
-    public static final double rotationPidMaxOutput_NeedSlow_Reef = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Reef= 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Reef = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Reef = 0.05;
 
     public static final double xPidMaxOutput_CoralStation = 0.4;
     public static final double yPidMaxOutput_CoralStation = 0.4;
@@ -206,13 +208,13 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Processor = 0.2;
     public static final double rotationPidMaxOutput_NeedSlow_Processor = 0.2;
 
-    public static final double xPidSetPoint_RightReef = 0.428; 
-    public static final double yPidSetPoint_RightReef = -0.127;
-    public static final double rotationPidSetPoint_RightReef = 181;
+    public static final double xPidSetPoint_RightReef = 0.479; 
+    public static final double yPidSetPoint_RightReef = -0.0947;
+    public static final double rotationPidSetPoint_RightReef = 177;
 
-    public static final double xPidSetPoint_LeftReef = 0.445;
-    public static final double yPidSetPoint_LeftReef = 0.125;
-    public static final double rotationPidSetPoint_LeftReef = 181.2;
+    public static final double xPidSetPoint_LeftReef = 0.4977;
+    public static final double yPidSetPoint_LeftReef = 0.15;
+    public static final double rotationPidSetPoint_LeftReef = 179.9;
 
     public static final double xPidSetPoint_MiddleReef_FrontRight = 0;
     public static final double yPidSetPoint_MiddleReef_FrontRight = 0;
@@ -281,8 +283,8 @@ public final class Constants {
   }
 
   public class ElevatorConstants {
-    public static final int elevator_FirstMotor_ID = 6;
-    public static final int elevator_SecondMotor_ID = 7;
+    public static final int elevator_FirstMotor_ID = 11;
+    public static final int elevator_SecondMotor_ID = 12;
 
     public static final double primitivePosition = -0.2;//-0.14
     public static final double coralL1Position = 4;//3.72

@@ -190,6 +190,36 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   public double getRotationMeasurements_Back() {
     return botRotationMeasurements_Back;
   }
+
+  public double getXError_Net(String ID) {
+    if(ID == "ID20_ID11") return Math.abs(getXMeasurements_Back() - PhotonConstants.xPidSetPoint_Net_Back_ID20_ID11);
+    else return Math.abs(getXMeasurements_Back() - PhotonConstants.xPidSetPoint_Net_Back_ID21_ID10);
+  }
+
+  public double getYError_Net(String ID) {
+    if(ID == "ID20_ID11") return Math.abs(getYMeasurements_Back() - PhotonConstants.yPidSetPoint_Net_Back_ID20_ID11);
+    else return Math.abs(getYMeasurements_Back() - PhotonConstants.yPidSetPoint_Net_Back_ID21_ID10);
+  }
+
+  public double getRotationError_Net(String ID) {
+    if(ID == "ID20_ID11") return Math.abs(getRotationMeasurements_Back() - PhotonConstants.rotationPidSetPoint_Net_Back_ID20_ID11);
+    else return Math.abs(getRotationMeasurements_Back() - PhotonConstants.rotationPidSetPoint_Net_Back_ID21_ID10);
+  }
+
+  // public double getXError_Processor(String ID) {
+  //   if(ID == "ID20_ID11") return Math.abs(getXMeasurements_Back() - PhotonConstants.xPidSetPoint_Processor_Back_ID20_ID11);
+  //   else return Math.abs(getXMeasurements_Back() - PhotonConstants.xPidSetPoint_Processor_Back_ID21_ID10);
+  // }
+
+  // public double getYError_Processor(String ID) {
+  //   if(ID == "ID20_ID11") return Math.abs(getYMeasurements_Back() - PhotonConstants.yPidSetPoint_Processor_Back_ID20_ID11);
+  //   else return Math.abs(getYMeasurements_Back() - PhotonConstants.yPidSetPoint_Processor_Back_ID21_ID10);
+  // }
+
+  // public double getRotationError_Processor(String ID) {
+  //   if(ID == "ID20_ID11") return Math.abs(getRotationMeasurements_Back() - PhotonConstants.rotationPidSetPoint_Processor_Back_ID20_ID11);
+  //   else return Math.abs(getRotationMeasurements_Back() - PhotonConstants.rotationPidSetPoint_Processor_Back_ID21_ID10);
+  // }
   
   public double getXError_Reef(String reef) {
     if(reef == "RightReef") return Math.abs(getXMeasurements_FrontLeft() - PhotonConstants.xPidSetPoint_RightReef);
@@ -213,7 +243,7 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   }
 
   public boolean isArrive_Reef(String reef) {
-    if(reef == "rightReef") {
+    if(reef == "RightReef") {
       if((getXError_Reef("RightReef")) <= 0.03 && (getYError_Reef("RightReef") <= 0.03) && (getRotationError_Reef("RightReef") <= 0.75) && hasFrontLeftTarget()) return true;
       else return false;
     }else if(reef == "LeftReef") {
@@ -226,6 +256,16 @@ public class PhotonVisionSubsystem extends SubsystemBase {
       if((getXError_Reef("MiddleReef_FrontLeft") <= 0.02) && (getYError_Reef("MiddleReef_FrontLeft") <= 0.02) && (getRotationError_Reef("MiddleReef_FrontLeft") <= 0.5)) return true;
       else return false;
     } 
+  }
+
+  public boolean isArrive_Net(String ID) {
+    if(ID == "ID20_ID11") {
+      if(getXError_Net("ID20_ID11") <= 0.03 && getYError_Net("ID20_ID11") <= 0.03 && getRotationError_Net("ID20_ID11") <= 0.5) return true;
+      else return false;
+    }else {
+      if(getXError_Net("ID21_ID10") <= 0.03 && getYError_Net("ID21_ID10") <= 0.03 && getRotationError_Net("ID21_ID10") <= 0.5) return true;
+      else return false;
+    }
   }
 
   public PhotonPipelineResult getResult(String camera) {
@@ -302,9 +342,9 @@ public class PhotonVisionSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Photon/botYMeasurements_FrontRight", botYMeasurements_FrontRight);
       SmartDashboard.putNumber("Photon/botRotationMeasurements_FrontRight", botRotationMeasurements_FrontRight);
       SmartDashboard.putNumber("Photon/FrontRightTarget_ID", frontRightTarget_ID);
-      SmartDashboard.putNumber("Photon/botXError_FrontRight", getXError_Reef("FrontRight"));
-      SmartDashboard.putNumber("Photon/botYError_FrontRight", getYError_Reef("FrontRight"));
-      SmartDashboard.putNumber("Photon/botRotationError_FrontRight", getRotationError_Reef("FrontRight"));
+      SmartDashboard.putNumber("Photon/botXError_FrontRight", getXError_Reef("LeftReef"));
+      SmartDashboard.putNumber("Photon/botYError_FrontRight", getYError_Reef("LeftReef"));
+      SmartDashboard.putNumber("Photon/botRotationError_FrontRight", getRotationError_Reef("LeftReef"));
 
     }else {
       botXMeasurements_FrontRight = 0;
@@ -318,10 +358,12 @@ public class PhotonVisionSubsystem extends SubsystemBase {
 
       frontLeftTarget_ID = frontLeftTarget.getFiducialId();
       
-
-      SmartDashboard.putNumber("Photon/BotXError_FrontLeft", getXError_Reef("FrontLeft"));
-      SmartDashboard.putNumber("Photon/BotYError_FrontLeft", getYError_Reef("FrontLeft"));
-      SmartDashboard.putNumber("Photon/BotRotationError_FrontLeft", getRotationError_Reef("FrontLeft"));
+      SmartDashboard.putNumber("Photon/botXMeasurements_FrontLeft", botXMeasurements_FrontLeft);
+      SmartDashboard.putNumber("Photon/botYMeasurements_FrontLeft", botYMeasurements_FrontLeft);
+      SmartDashboard.putNumber("Photon/botRotationMeasurements_FrontLeft", botRotationMeasurements_FrontLeft);
+      SmartDashboard.putNumber("Photon/botXError_FrontLeft", getXError_Reef("RightReef"));
+      SmartDashboard.putNumber("Photon/botYError_FrontLeft", getYError_Reef("RightReef"));
+      SmartDashboard.putNumber("Photon/botRotationError_FrontLeft", getRotationError_Reef("RightReef"));
       SmartDashboard.putNumber("Photon/FrontLeftTarget_ID", frontLeftTarget_ID);
 
     }else {
