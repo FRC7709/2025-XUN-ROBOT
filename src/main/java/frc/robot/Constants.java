@@ -363,7 +363,7 @@ public final class Constants {
     public static final double coralL2Angle = 75;
     public static final double coralL3Angle = 82;
     public static final double coralL4Angle = 56;//not yet
-    public static final double coralStationAngle = 76;
+    public static final double coralStationAngle = 82;
     public static final double coralL4UpAngle = 70;
     public static final double algaeFloorAngle = 7;
     public static final double algaeNetAngle = 100;//not yet
