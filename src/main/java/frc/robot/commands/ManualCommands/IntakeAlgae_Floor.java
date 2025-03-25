@@ -16,10 +16,16 @@ public class IntakeAlgae_Floor extends Command {
   private final ElevatorSubsystem m_ElevatorSubsystem;
   private final EndEffectorSubsystem m_EndEffectorSubsystem;
 
+  private final Timer timer;
+
+  private boolean hasAlgae;
+  private boolean isStartTimer;
   public IntakeAlgae_Floor(ElevatorSubsystem ElevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_ElevatorSubsystem = ElevatorSubsystem;
     this.m_EndEffectorSubsystem = endEffectorSubsystem;
+
+    timer = new Timer();
 
     addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
   }
@@ -31,6 +37,9 @@ public class IntakeAlgae_Floor extends Command {
     m_EndEffectorSubsystem.Arm_intakeAlgae_Floor();
     m_EndEffectorSubsystem.intakeAlgae_Floor_Wheel();
 
+    hasAlgae = false;
+    isStartTimer = false;
+
     // LEDConstants.intakeGamePiece = true;
     // LEDConstants.hasGamePiece = false;
     // LEDConstants.LEDFlag = true;
@@ -39,6 +48,21 @@ public class IntakeAlgae_Floor extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(m_EndEffectorSubsystem.hasAlgae() && !isStartTimer) {
+      timer.reset();
+      timer.start();
+      isStartTimer = true;
+
+      if(timer.get() > 0.02) {
+        hasAlgae = true;
+      }else {
+        hasAlgae = false;
+      }
+      
+    }else {
+      isStartTimer = false;
+      hasAlgae = false;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -49,10 +73,12 @@ public class IntakeAlgae_Floor extends Command {
     m_EndEffectorSubsystem.holdAlgae(); 
     if(m_EndEffectorSubsystem.hasAlgae()) {
       LEDConstants.hasGamePiece = true;
+      LEDConstants.hasAlgae = true;
       LEDConstants.intakeGamePiece = false;
       LEDConstants.LEDFlag = true;
     }else {
       LEDConstants.hasGamePiece = false;
+      LEDConstants.hasAlgae = false;
       LEDConstants.intakeGamePiece = false;
       LEDConstants.LEDFlag = true;
     }

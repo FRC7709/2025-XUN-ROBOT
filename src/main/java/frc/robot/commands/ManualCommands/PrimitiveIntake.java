@@ -33,7 +33,7 @@ public class PrimitiveIntake extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_EndEffectorSubsystem.hasAlgae()) {
+    if(LEDConstants.hasAlgae) {
       m_EndEffectorSubsystem.Arm_IDLE();
       m_EndEffectorSubsystem.holdAlgae();
       if(m_EndEffectorSubsystem.arrivedSetpoint()) {

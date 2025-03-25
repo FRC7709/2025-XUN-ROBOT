@@ -5,6 +5,7 @@
 package frc.robot.commands.ManualCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -23,6 +24,8 @@ public class OutAlgae extends Command {
   public void initialize() {
     if (m_EndEffectorSubsystem.hasCoral() == false) {
       m_EndEffectorSubsystem.outAlgae();
+
+      LEDConstants.hasAlgae = false;
     }
   }
 

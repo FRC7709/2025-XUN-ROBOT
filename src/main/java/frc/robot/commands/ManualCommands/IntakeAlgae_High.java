@@ -47,6 +47,7 @@ public class IntakeAlgae_High extends Command {
     // arriveEndEffectorPrimition = false;
 
     LEDConstants.intakeGamePiece = true;
+    LEDConstants.hasAlgae = false;
     LEDConstants.hasGamePiece = false;
     LEDConstants.LEDFlag = true;
   }
@@ -54,25 +55,24 @@ public class IntakeAlgae_High extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(!LEDConstants.hasAlgae) {
+      if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canUp() && !m_EndEffectorSubsystem.hasAlgae()) {
+        m_ElevatorSubsystem.intakeAlgae_High();
 
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canUp() && !m_EndEffectorSubsystem.hasAlgae()) {
-      m_ElevatorSubsystem.intakeAlgae_High();
-
-      if(m_ElevatorSubsystem.arriveSetPoint()) {
-        m_EndEffectorSubsystem.Arm_intakeAlgae_High();
-        m_EndEffectorSubsystem.intakeAlgae_High_Wheel();
+        if(m_ElevatorSubsystem.arriveSetPoint()) {
+          m_EndEffectorSubsystem.Arm_intakeAlgae_High();
+          m_EndEffectorSubsystem.intakeAlgae_High_Wheel();
+        }
       }
-    }
 
-    if(m_EndEffectorSubsystem.hasAlgae()) {
-      m_EndEffectorSubsystem.Arm_IDLE();
-      m_EndEffectorSubsystem.holdAlgae();
+      if(m_EndEffectorSubsystem.hasAlgae()) {
+        m_EndEffectorSubsystem.Arm_IDLE();
+        m_EndEffectorSubsystem.holdAlgae();
 
-      LEDConstants.hasGamePiece = true;
-      LEDConstants.LEDFlag = true;
-    }else {
-      LEDConstants.hasGamePiece = false;
-      LEDConstants.LEDFlag = true;
+        LEDConstants.hasGamePiece = true;
+        LEDConstants.hasAlgae = true;
+        LEDConstants.LEDFlag = true;
+      }
     }
 
 
