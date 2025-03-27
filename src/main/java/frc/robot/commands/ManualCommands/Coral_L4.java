@@ -19,6 +19,7 @@ public class Coral_L4 extends Command {
 
   private final BooleanSupplier ifFeedFunc;
 
+  private boolean ifArrive_EndEffector;
   private boolean ifFeed;
   public Coral_L4(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
     this.m_ElevatorSubsystem = elevatorSubsystem;
@@ -32,7 +33,7 @@ public class Coral_L4 extends Command {
   public void initialize() {
     m_EndEffectorSubsystem.coralL4Primitive_Arm();
 
-
+    ifArrive_EndEffector = false;
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
     LEDConstants.LEDFlag = true;
@@ -45,18 +46,21 @@ public class Coral_L4 extends Command {
     // 
     if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canUp()) {
       m_ElevatorSubsystem.outCoral_L4();    
-      if(m_ElevatorSubsystem.arriveSetPoint()) {
-        m_EndEffectorSubsystem.Arm_shootCoral_L4();
+      ifArrive_EndEffector = true;
+    }
 
-        if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
-          LEDConstants.arrivePosition_Intake = true;
-          LEDConstants.LEDFlag = true;
-        }else {
-          LEDConstants.arrivePosition_Intake = false;
-          LEDConstants.LEDFlag = true;
-        }
+    if(m_ElevatorSubsystem.arriveSetPoint() && ifArrive_EndEffector) {
+      m_EndEffectorSubsystem.Arm_shootCoral_L4();
+
+      if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
+        LEDConstants.arrivePosition_Intake = true;
+        LEDConstants.LEDFlag = true;
+      }else {
+        LEDConstants.arrivePosition_Intake = false;
+        LEDConstants.LEDFlag = true;
       }
-  }
+    }
+
     if((ifFeed) || (LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base)) {
       m_EndEffectorSubsystem.Wheel_shootCoral_L4();
     }else {

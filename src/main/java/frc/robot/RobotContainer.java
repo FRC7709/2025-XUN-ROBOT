@@ -13,6 +13,7 @@ import frc.robot.commands.AutoCommand.Coral_L4_Elevator_Auto;
 import frc.robot.commands.AutoCommand.PrimitiveIntake_Auto;
 import frc.robot.commands.AutoCommand.ShootCoral_Auto;
 import frc.robot.commands.AutoCommand.TrackLeftReef_Auto;
+import frc.robot.commands.AutoCommand.TrackMiddleReef_Auto;
 import frc.robot.commands.AutoCommand.TrackRightReef_Auto;
 import frc.robot.commands.ManualCommands.Coral_L1;
 import frc.robot.commands.ManualCommands.Coral_L2;
@@ -93,7 +94,10 @@ public class RobotContainer {
     NamedCommands.registerCommand("IntakeCoral_IDLE", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.8));
     NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1));
     NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("TrackRightReef_Auto_LeftSide", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.3));
+    NamedCommands.registerCommand("TrackMiddleReef_Auto", new TrackMiddleReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.5));
+    NamedCommands.registerCommand("IntakeHighAlgae_Auto", new IntakeAlgae_High(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
+    NamedCommands.registerCommand("IntakeLowAlgae_Auto", new IntakeAlgae_Low(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
+    // NamedCommands.registerCommand("TrackRightReef_Auto_LeftSide", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.3));
     NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(0.8));
 
     autoChooser = AutoBuilder.buildAutoChooser();
