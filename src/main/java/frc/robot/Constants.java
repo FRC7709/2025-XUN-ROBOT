@@ -398,7 +398,6 @@ public final class Constants {
     public static final int absolutedEncoder_ID = 0;
 
     public static final boolean firstMotorReverse = false;
-    public static final boolean secondMotorReverse = false;
 
     public static final double absolutedEncoderOffset = 0;
 
@@ -410,9 +409,10 @@ public final class Constants {
     public static final double climbPIDMaxRange = 0;
 
     public static final double climbPIDMinOutput = 0;
-    public static final double climbPIDMaxOutput = 0;
+    public static final double climbPIDMaxOutput = 0.4;
 
     public static final double climbOutAngle = 0;
+    public static final double climbAngle = 0; 
     public static final double climbInAngle = 0;
   }
 

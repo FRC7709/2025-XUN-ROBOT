@@ -18,6 +18,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
@@ -44,7 +45,7 @@ public class ClimberSubsystem extends SubsystemBase {
     climbMotorConfig = new SparkMaxConfig();
     
     climbMotorConfig.idleMode(IdleMode.kBrake);
-    climbMotorConfig.inverted(ClimberConstants.secondMotorReverse);
+    climbMotorConfig.inverted(ClimberConstants.firstMotorReverse);
 
     climbMotor.configure(climbMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     //Climber AbsolutedEncoder
@@ -78,6 +79,10 @@ public class ClimberSubsystem extends SubsystemBase {
     goalAngle = ClimberConstants.climbOutAngle;
   }
 
+  public void setClimbAngle() {
+    goalAngle = ClimberConstants.climbAngle;
+  }
+
   public void setInAngle(){
     goalAngle = ClimberConstants.climbInAngle;
   }
@@ -86,6 +91,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     pidOutput = climbPID.calculate(getAngle(), goalAngle);
+    Constants.setMaxOutput(pidOutput, ClimberConstants.climbPIDMaxOutput);
     climbMotor.set(pidOutput);
 
     SmartDashboard.putNumber("Climber/AbsolutedPosition", getAbsolutedPosition());
