@@ -105,6 +105,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     goalPosition = ElevatorConstants.primitivePosition;
   }
 
+  public void prepareForScore() {
+    goalPosition = ElevatorConstants.prepareForScorePosition;
+  }
+
   public double getCurrentPosition() {
     return elevator_FirstMotor.getPosition().getValueAsDouble();
   }

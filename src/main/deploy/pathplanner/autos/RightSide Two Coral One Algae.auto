@@ -132,7 +132,7 @@
           }
         },
         {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -230,7 +230,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "IntakeLowAlgae_Auto"
+                        "name": "IntakeLowAlgae_Autov"
                       }
                     }
                   ]

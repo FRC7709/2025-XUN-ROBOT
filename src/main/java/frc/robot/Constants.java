@@ -256,21 +256,21 @@ public final class Constants {
     public static final double yPidSetPoint_Processor_FrontLeft = 0;
     public static final double rotationPidSetPoint_Processor_FrontLeft = 0;
 
-    public static final double xPidSetPoint_Net_FrontRight = 0;
-    public static final double yPidSetPoint_Net_FrontRight = 0;
-    public static final double rotationPidSetPoint_Net_FrontRight = 0;
+    public static final double xPidSetPoint_Processor_BackRight = 0;
+    public static final double yPidSetPoint_Processor_BackRight = 0;
+    public static final double rotationPidSetPoint_Processor_BackRight = 0;
 
-    public static final double xPidSetPoint_Net_FrontLeft = 0;
-    public static final double yPidSetPoint_Net_FrontLeft = 0;
-    public static final double rotationPidSetPoint_Net_FrontLeft = 0;
+    public static final double xPidSetPoint_Net_BackRight_ID20_ID11 = 0;
+    public static final double yPidSetPoint_Net_BackRight_ID20_ID11 = 0;
+    public static final double rotationPidSetPoint_Net_BackRight_ID20_ID11 = 0;
 
-    public static final double xPidSetPoint_Net_Back_ID20_ID11 = 0;
-    public static final double yPidSetPoint_Net_Back_ID20_ID11 = 0;
-    public static final double rotationPidSetPoint_Net_Back_ID20_ID11 = 0;
+    public static final double xPidSetPoint_Net_BackRight_ID21_ID10 = 0;
+    public static final double yPidSetPoint_Net_BackRight_ID21_ID10 = 0;
+    public static final double rotationPidSetPoint_Net_BackRight_ID21_ID10 = 0;
 
-    public static final double xPidSetPoint_Net_Back_ID21_ID10 = 0;
-    public static final double yPidSetPoint_Net_Back_ID21_ID10 = 0;
-    public static final double rotationPidSetPoint_Net_Back_ID21_ID10 = 0;
+    public static final double xPidSetPoint_Net_BackLeft_ID13_ID1 = 0;
+    public static final double yPidSetPoint_Net_BackLeft_ID13_ID1 = 0;
+    public static final double rotationPidSetPoint_Net_BackLeft_ID13_ID1 = 0;
 
     public static final double arriveXPosition_Reef = 0;
     public static final double arriveXPosition_Cage = 0;
@@ -286,6 +286,7 @@ public final class Constants {
     public static final int elevator_FirstMotor_ID = 11;
     public static final int elevator_SecondMotor_ID = 12;
 
+    public static final double prepareForScorePosition = 20;
     public static final double primitivePosition = -0.2;//-0.14
     public static final double coralL1Position = 4;//3.72
     public static final double coralL2Position = 11.44;//7.42

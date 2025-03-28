@@ -15,6 +15,8 @@ public class NET_Elevator extends Command {
   /** Creates a new NET_Elevator. */
   private final ElevatorSubsystem m_ElevatorSubsystem;
   private final EndEffectorSubsystem m_EndEffectorSubsystem;
+
+  private boolean isArrive_EndEffector;
   public NET_Elevator(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_ElevatorSubsystem = elevatorSubsystem;
@@ -28,6 +30,7 @@ public class NET_Elevator extends Command {
   public void initialize() {
     m_EndEffectorSubsystem.Arm_IDLE();
 
+    isArrive_EndEffector = false;
     LEDConstants.arrivePosition_Intake = false;
     LEDConstants.intakeArriving = true;
     LEDConstants.LEDFlag = true;
@@ -38,15 +41,17 @@ public class NET_Elevator extends Command {
   public void execute() {
     if(m_EndEffectorSubsystem.arrivedSetpoint()) {
       m_ElevatorSubsystem.shootNet();
-      if(m_ElevatorSubsystem.arriveSetPoint()) {
-        m_EndEffectorSubsystem.Arm_shootAlgae_NET();
-        if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
-          LEDConstants.arrivePosition_Intake = true;
-          LEDConstants.LEDFlag = true;
-        }else {
-          LEDConstants.arrivePosition_Intake = false;
-          LEDConstants.LEDFlag = true;
-        }
+      isArrive_EndEffector = true;
+    }
+
+    if(m_ElevatorSubsystem.arriveSetPoint() && isArrive_EndEffector) {
+      m_EndEffectorSubsystem.Arm_shootAlgae_NET();
+      if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
+        LEDConstants.arrivePosition_Intake = true;
+        LEDConstants.LEDFlag = true;
+      }else {
+        LEDConstants.arrivePosition_Intake = false;
+        LEDConstants.LEDFlag = true;
       }
     }
 
@@ -64,6 +69,7 @@ public class NET_Elevator extends Command {
     LEDConstants.intakeArriving = false;
     LEDConstants.arrivePosition_Base = false;
     LEDConstants.LEDFlag = true;
+    if(!m_EndEffectorSubsystem.hasAlgae()) LEDConstants.hasAlgae = false;
   }
 
   // Returns true when the command should end.

@@ -46,7 +46,7 @@ public class ShootProcessor extends Command {
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
 
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && ifFeed) {
+    if(ifFeed || (LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base)) {
       m_EndEffectorSubsystem.Wheel_shootAlgae_Processor();
     }
     if(m_EndEffectorSubsystem.arrivedSetpoint()) {
@@ -72,6 +72,7 @@ public class ShootProcessor extends Command {
     LEDConstants.arrivePosition_Intake = false;
     LEDConstants.intakeArriving = false;
     LEDConstants.LEDFlag = true;
+    if(!m_EndEffectorSubsystem.hasAlgae()) LEDConstants.hasAlgae = false;
   }
 
   // Returns true when the command should end.

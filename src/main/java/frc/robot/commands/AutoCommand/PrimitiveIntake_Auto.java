@@ -28,7 +28,19 @@ public class PrimitiveIntake_Auto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_EndEffectorSubsystem.Arm_IDLE();
+    if(LEDConstants.hasAlgae) {
+      m_EndEffectorSubsystem.Arm_IDLE();
+      m_EndEffectorSubsystem.holdAlgae();
+      if(m_EndEffectorSubsystem.arrivedSetpoint()) {
+        m_ElevatorSubsystem.toPrimitive();
+      }
+
+      LEDConstants.intakeArriving = false;
+      LEDConstants.arrivePosition_Intake = false;
+      LEDConstants.hasGamePiece = true;
+      LEDConstants.LEDFlag = true;
+    }else {
+      m_EndEffectorSubsystem.Arm_IDLE();
       m_EndEffectorSubsystem.stopWheel();
       if(m_EndEffectorSubsystem.arrivedSetpoint()) {
         m_ElevatorSubsystem.toPrimitive();
@@ -38,6 +50,7 @@ public class PrimitiveIntake_Auto extends Command {
       LEDConstants.arrivePosition_Intake = false;
       LEDConstants.hasGamePiece = false;
       LEDConstants.LEDFlag = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
