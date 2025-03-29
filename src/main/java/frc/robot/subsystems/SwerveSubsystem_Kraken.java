@@ -19,6 +19,9 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayPublisher;
+import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,17 +43,20 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
   private final Field2d field;
 
   private RobotConfig robotConfig;
-  
-  /**
-   * 
-   */
+
+  // Data log publisher
+  StructArrayPublisher<SwerveModuleState> module_state_pub = NetworkTableInstance.getDefault()
+  .getStructArrayTopic("Swerve/ModuleStates", SwerveModuleState.struct).publish();
+  StructPublisher<Pose2d> robot_pose_pub = NetworkTableInstance.getDefault()
+  .getStructTopic("Swerve/RobotPose", Pose2d.struct).publish();
+
+
   public SwerveSubsystem_Kraken() {
     leftFront = new SwerveModule_Kraken(
       Swerve_KrakenConstants.leftFrontTurning_ID,
       Swerve_KrakenConstants.leftFrontDrive_ID,
       Swerve_KrakenConstants.leftFrontAbsolutedEncoder_ID,
-      Swerve_KrakenConstants.leftFrontOffset
-            );
+      Swerve_KrakenConstants.leftFrontOffset);
     rightFront = new SwerveModule_Kraken(
       Swerve_KrakenConstants.rightFrontTurning_ID,
       Swerve_KrakenConstants.rightFrontDrive_ID,
@@ -91,32 +97,31 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
     }
     // Configure AutoBuilder last
     AutoBuilder.configure(
-            this::getRobotPose, // Robot pose supplier
-            this::setPose, // Method to reset odometry (will be called if your auto has a starting pose)
-            this::getChassisSpeed, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-            (speeds, feedforwards) -> autoDrive(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
-            new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                    new PIDConstants(Swerve_KrakenConstants.pathingtheta_Kp, Swerve_KrakenConstants.pathingtheta_Ki, Swerve_KrakenConstants.pathingtheta_Kd), // Translation PID constants
-                    new PIDConstants(Swerve_KrakenConstants.pathingMoving_Kp, Swerve_KrakenConstants.pathingMoving_Ki, Swerve_KrakenConstants.pathingMoving_Kd) // Rotation PID constants
-            ),
-            robotConfig, // The robot configuration
-            () -> {
-              // Boolean supplier that controls when the path will be mirrored for the red alliance
-              // This will flip the path being followed to the red side of the field.
-              // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+      this::getRobotPose, // Robot pose supplier
+      this::setPose, // Method to reset odometry (will be called if your auto has a starting pose)
+      this::getChassisSpeed, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+      (speeds, feedforwards) -> autoDrive(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
+      new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
+              new PIDConstants(Swerve_KrakenConstants.pathingtheta_Kp, Swerve_KrakenConstants.pathingtheta_Ki, Swerve_KrakenConstants.pathingtheta_Kd), // Translation PID constants
+              new PIDConstants(Swerve_KrakenConstants.pathingMoving_Kp, Swerve_KrakenConstants.pathingMoving_Ki, Swerve_KrakenConstants.pathingMoving_Kd) // Rotation PID constants
+      ),
+      robotConfig, // The robot configuration
+      () -> {
+        // Boolean supplier that controls when the path will be mirrored for the red alliance
+        // This will flip the path being followed to the red side of the field.
+        // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
 
-              var alliance = DriverStation.getAlliance();
-              if (alliance.isPresent()) {
-                return alliance.get() == DriverStation.Alliance.Red;
-              }
-              return false;
-            },
-            this // Reference to this subsystem to set requirements
+        var alliance = DriverStation.getAlliance();
+        if (alliance.isPresent()) {
+          return alliance.get() == DriverStation.Alliance.Red;
+        }
+        return false;
+      },
+      this // Reference to this subsystem to set requirements
     );
 
     // // Set up custom logging to add the current path to a field 2d widget
     PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
-
   }
 
 
@@ -205,18 +210,21 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // Log publisher
+    module_state_pub.set(getModuleStates());
+    robot_pose_pub.set(getRobotPose());
     // Odmoetry update
     odometry.update(getRotation(), getModulesPosition());
     field.setRobotPose(odometry.getPoseMeters());
     // Update SmartDashboard
     // Field
     SmartDashboard.putData("Swerve/Field", field);
-
+    // Odometry
     SmartDashboard.putNumber("Swerve/GyroDeg", getRotation().getDegrees());
-    SmartDashboard.putNumber("Swerve/LF_AbsolutePosion", leftFront.getTurningPosition());
-    SmartDashboard.putNumber("Swerve/LR_AbsolutePosion", leftBack.getTurningPosition());
-    SmartDashboard.putNumber("Swerve/RF_AbsolutePosion", rightFront.getTurningPosition());
-    SmartDashboard.putNumber("Swerve/RR_AbsolutePosion", rightBack.getTurningPosition());
+    SmartDashboard.putNumber("Swerve/LF_AbsoluteAngle", leftFront.getTurningAngle());
+    SmartDashboard.putNumber("Swerve/LR_AbsoluteAngle", leftBack.getTurningAngle());
+    SmartDashboard.putNumber("Swerve/RF_AbsoluteAngle", rightFront.getTurningAngle());
+    SmartDashboard.putNumber("Swerve/RR_AbsoluteAngle", rightBack.getTurningAngle());
     // Turning motor position (rotation)
     // SmartDashboard.putNumber("Swerve/LF_TurningMotorPosition", leftFront.getTurningMotorPosition());
     // SmartDashboard.putNumber("Swerve/LR_TurningMotorPosition", leftBack.getTurningMotorPosition());
@@ -227,12 +235,5 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
     SmartDashboard.putNumber("Swerve/LR_DriveMotorPosition", leftBack.getDrivePosition());
     SmartDashboard.putNumber("Swerve/RF_DriveMotorPosition", rightFront.getDrivePosition());
     SmartDashboard.putNumber("Swerve/RR_DriveMotorPosition", rightBack.getDrivePosition());
-
-    SmartDashboard.putNumber("Swerve/leftFrontDrivingVelocity", leftFront.getDriveVelocity());
-    
-    SmartDashboard.putNumber("Swerve/leftFrontStateAngle", leftFront.getStateAngle());
-    SmartDashboard.putNumber("Swerve/leftFrontAngle", leftFront.getTurningAngle());
-
-    SmartDashboard.putNumber("Swerve/GyroYaw", gyro.getYaw().getValueAsDouble());
   }
 }
