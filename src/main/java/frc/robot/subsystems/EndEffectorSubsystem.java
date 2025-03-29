@@ -42,7 +42,6 @@ public class EndEffectorSubsystem extends SubsystemBase {
   private final MotionMagicConfigs wheelMotionMagicConfig;
   private final MotionMagicConfigs turnMotionMagicConfigs;
   private final Slot0Configs wheelMotor_Slot0;
-  private final Slot1Configs wheelMotor_Slot1;
   private final MotionMagicVelocityVoltage requst_wheelSpeed;
   
 
@@ -77,7 +76,6 @@ public class EndEffectorSubsystem extends SubsystemBase {
       wheelMotionMagicConfig = new MotionMagicConfigs();
       turnMotionMagicConfigs = new MotionMagicConfigs();
       wheelMotor_Slot0 = wheelConfig.Slot0;
-      wheelMotor_Slot1 = new Slot1Configs();
       requst_wheelSpeed = new MotionMagicVelocityVoltage(0);
   
       wheelConfig.MotorOutput.withNeutralMode(NeutralModeValue.Brake);
@@ -92,14 +90,6 @@ public class EndEffectorSubsystem extends SubsystemBase {
       wheelMotor_Slot0.kP = 0.3;
       wheelMotor_Slot0.kI = 0;
       wheelMotor_Slot0.kD = 0;
-  
-      wheelMotor_Slot1.kG = 0;
-      wheelMotor_Slot1.kS = 0;
-      wheelMotor_Slot1.kV = 0;
-      wheelMotor_Slot1.kA = 0;
-      wheelMotor_Slot1.kP = 10;
-      wheelMotor_Slot1.kI = 0;
-      wheelMotor_Slot1.kD = 0;
 
       //MotioinMagic Config
       turnMotionMagicConfigs.MotionMagicCruiseVelocity = 40;

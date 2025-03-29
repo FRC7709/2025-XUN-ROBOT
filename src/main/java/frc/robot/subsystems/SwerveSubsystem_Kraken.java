@@ -180,7 +180,7 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
     SwerveModuleState[] state;
     xSpeed = xSpeed * Swerve_KrakenConstants.maxDriveSpeed_MeterPerSecond;
     ySpeed = ySpeed * Swerve_KrakenConstants.maxDriveSpeed_MeterPerSecond;
-    zSpeed = zSpeed * Math.toRadians(Swerve_KrakenConstants.maxAngularVelocity_Angle);;
+    zSpeed = zSpeed * Math.toRadians(Swerve_KrakenConstants.maxAngularVelocity_Angle);
     if(fieldOrient) {
       state = Swerve_KrakenConstants.swerveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, zSpeed, getRotation()));//之後要處理MaxSpeedPerSecond跟MaxRadianPerSecond的問題
     }else{
@@ -210,6 +210,7 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
     field.setRobotPose(odometry.getPoseMeters());
 
     SmartDashboard.putNumber("Swerve/Yaw", gyro.getYaw().getValueAsDouble());
+    SmartDashboard.putData("Swerve/Field", field);
 
     SmartDashboard.putNumber("Swerve/gyro", getRotation().getDegrees());
     SmartDashboard.putNumber("Swerve/leftFrontAbsolutePosion", leftFront.getTurningPosition());

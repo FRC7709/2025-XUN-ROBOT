@@ -275,6 +275,14 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   public double getRotationError_Processor() {
     return Math.abs(getRotationMeasurements_BackRight() - PhotonConstants.rotationPidSetPoint_Processor_BackRight);
   }
+
+  public double getRotationError_CoralStation(String station) {
+    if(station == "RightCoralStation") {
+      return Math.abs(getRotationMeasurements_BackLeft() - PhotonConstants.rotationPidSetPoint_RightCoralStation_BackLeft);
+    }else {
+      return Math.abs(getRotationMeasurements_BackLeft() - PhotonConstants.rotationPidSetPoint_LeftCoralStation_BackLeft);
+    }
+  }
   
   public double getXError_Reef(String reef) {
     if(reef == "RightReef") return Math.abs(getXMeasurements_FrontLeft() - PhotonConstants.xPidSetPoint_RightReef);
@@ -296,6 +304,8 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     else if(reef == "MiddleReef_FrontRight") return Math.abs(getRotationMeasurements_FrontRight() - PhotonConstants.rotationPidSetPoint_MiddleReef_FrontRight);
     else return Math.abs(getRotationMeasurements_FrontLeft() - PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft);
   }
+
+
 
   public boolean isArrive_Reef(String reef) {
     if(reef == "RightReef") {
