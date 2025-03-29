@@ -35,6 +35,8 @@ public class TrackProcessor extends Command {
   private double yPidOutput;
   private double rotationPidOutput;
 
+  private int backRightTarget_ID;
+
   public TrackProcessor(SwerveSubsystem_Kraken swerveSubsystem, PhotonVisionSubsystem photonVisionSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_PhotonVisionSubsystem = photonVisionSubsystem;
@@ -61,24 +63,31 @@ public class TrackProcessor extends Command {
   @Override
   public void execute() {
     if(m_PhotonVisionSubsystem.hasBackRightTarget()){
-      // Rotation-PID calculations
-      rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_BackRight();
-      rotationPidError = Math.abs(rotationPidMeasurements - PhotonConstants.rotationPidSetPoint_Processor_BackRight);
-      rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_Processor_BackRight;
-      rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_Processor_BackRight);
-      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Processor);
-      // Y-PID calculations
-      yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_BackRight();
-      yPidError = Math.abs(yPidMeasurements - PhotonConstants.yPidSetPoint_Processor_BackRight);
-      yPidMeasurements = (yPidError > 0.05) ? yPidMeasurements : PhotonConstants.yPidSetPoint_Processor_BackRight;
-      yPidOutput = -yPidController.calculate(yPidMeasurements, PhotonConstants.yPidSetPoint_Processor_BackRight);
-      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Processor);
-      // X-PID calculations
-      xPidMeasurements = m_PhotonVisionSubsystem.getXMeasurements_BackRight();
-      xPidError = Math.abs(xPidMeasurements - PhotonConstants.xPidSetPoint_Processor_BackRight);
-      xPidMeasurements = (xPidError > 0.05) ? xPidMeasurements : PhotonConstants.xPidSetPoint_Processor_BackRight;
-      xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_Processor_BackRight);
-      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Processor);
+      backRightTarget_ID = m_PhotonVisionSubsystem.getBackRightTargetID();
+      if(backRightTarget_ID == 22) {
+        // Rotation-PID calculations
+        rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_BackRight();
+        rotationPidError = Math.abs(rotationPidMeasurements - PhotonConstants.rotationPidSetPoint_Processor_BackRight);
+        rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_Processor_BackRight;
+        rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_Processor_BackRight);
+        rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Processor);
+        // Y-PID calculations
+        yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_BackRight();
+        yPidError = Math.abs(yPidMeasurements - PhotonConstants.yPidSetPoint_Processor_BackRight);
+        yPidMeasurements = (yPidError > 0.05) ? yPidMeasurements : PhotonConstants.yPidSetPoint_Processor_BackRight;
+        yPidOutput = -yPidController.calculate(yPidMeasurements, PhotonConstants.yPidSetPoint_Processor_BackRight);
+        yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Processor);
+        // X-PID calculations
+        xPidMeasurements = m_PhotonVisionSubsystem.getXMeasurements_BackRight();
+        xPidError = Math.abs(xPidMeasurements - PhotonConstants.xPidSetPoint_Processor_BackRight);
+        xPidMeasurements = (xPidError > 0.05) ? xPidMeasurements : PhotonConstants.xPidSetPoint_Processor_BackRight;
+        xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_Processor_BackRight);
+        xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Processor);
+      }else {
+        xPidOutput = 0;
+        yPidOutput = 0;
+        rotationPidOutput = 0;
+      }
     }else {
       xPidOutput = 0;
       yPidOutput = 0;
