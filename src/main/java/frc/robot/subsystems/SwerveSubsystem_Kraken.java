@@ -205,30 +205,28 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    // Odmoetry update
     odometry.update(getRotation(), getModulesPosition());
     field.setRobotPose(odometry.getPoseMeters());
-
-    SmartDashboard.putNumber("Swerve/Yaw", gyro.getYaw().getValueAsDouble());
+    // Update SmartDashboard
+    // Field
     SmartDashboard.putData("Swerve/Field", field);
 
-    SmartDashboard.putNumber("Swerve/gyro", getRotation().getDegrees());
-    SmartDashboard.putNumber("Swerve/leftFrontAbsolutePosion", leftFront.getTurningPosition());
-    SmartDashboard.putNumber("Swerve/leftBackAbsolutePosion", leftBack.getTurningPosition());
-    SmartDashboard.putNumber("Swerve/rightFrontAbsolutePosion", rightFront.getTurningPosition());
-    SmartDashboard.putNumber("Swerve/rightBackAbsolutePosion", rightBack.getTurningPosition());
-
-    SmartDashboard.putNumber("Swerve/leftFrontTurningMotorPosition", leftFront.getTurningMotorPosition());
-    SmartDashboard.putNumber("Swerve/leftBackTurningMotorPosition", leftBack.getTurningMotorPosition());
-    SmartDashboard.putNumber("Swerve/rightFrontTurningMotorPosition", rightFront.getTurningMotorPosition());
-    SmartDashboard.putNumber("Swerve/rightBackTurningMotorPosition", rightBack.getTurningMotorPosition());
-
-    SmartDashboard.putNumber("Swerve/rightFrontTurningSetpoint", leftFront.getStateAngle());
-    
-    SmartDashboard.putNumber("Swerve/leftFrontDrivingMotorPosition", leftFront.getDrivePosition());
-    SmartDashboard.putNumber("Swerve/leftBackDrivingMotorPosition", leftBack.getDrivePosition());
-    SmartDashboard.putNumber("Swerve/rightFrontDrivingMotorPosition", rightFront.getDrivePosition());
-    SmartDashboard.putNumber("Swerve/rightBackDrivingMotorPosition", rightBack.getDrivePosition());
+    SmartDashboard.putNumber("Swerve/GyroDeg", getRotation().getDegrees());
+    SmartDashboard.putNumber("Swerve/LF_AbsolutePosion", leftFront.getTurningPosition());
+    SmartDashboard.putNumber("Swerve/LR_AbsolutePosion", leftBack.getTurningPosition());
+    SmartDashboard.putNumber("Swerve/RF_AbsolutePosion", rightFront.getTurningPosition());
+    SmartDashboard.putNumber("Swerve/RR_AbsolutePosion", rightBack.getTurningPosition());
+    // Turning motor position (rotation)
+    // SmartDashboard.putNumber("Swerve/LF_TurningMotorPosition", leftFront.getTurningMotorPosition());
+    // SmartDashboard.putNumber("Swerve/LR_TurningMotorPosition", leftBack.getTurningMotorPosition());
+    // SmartDashboard.putNumber("Swerve/RF_TurningMotorPosition", rightFront.getTurningMotorPosition());
+    // SmartDashboard.putNumber("Swerve/RR_TurningMotorPosition", rightBack.getTurningMotorPosition());
+    // Drive motor position (meter)
+    SmartDashboard.putNumber("Swerve/LF_DriveMotorPosition", leftFront.getDrivePosition());
+    SmartDashboard.putNumber("Swerve/LR_DriveMotorPosition", leftBack.getDrivePosition());
+    SmartDashboard.putNumber("Swerve/RF_DriveMotorPosition", rightFront.getDrivePosition());
+    SmartDashboard.putNumber("Swerve/RR_DriveMotorPosition", rightBack.getDrivePosition());
 
     SmartDashboard.putNumber("Swerve/leftFrontDrivingVelocity", leftFront.getDriveVelocity());
     

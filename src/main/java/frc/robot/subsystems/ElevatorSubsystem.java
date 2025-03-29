@@ -173,8 +173,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     lastPosition = getCurrentPosition();
 
     //SmartDashboard
-    SmartDashboard.putNumber("Intake/GoalPosition", goalPosition);
-    SmartDashboard.putNumber("Intake/CurrentPosition", getCurrentPosition());
-    SmartDashboard.putBoolean("Intake/ArrivePosition", arriveSetPoint());
+    SmartDashboard.putNumber("Elevator/GoalPosition", goalPosition);
+    SmartDashboard.putNumber("Elevator/CurrentPosition", getCurrentPosition());
+    SmartDashboard.putBoolean("Elevator/ArrivePosition", arriveSetPoint());
   }
 }
