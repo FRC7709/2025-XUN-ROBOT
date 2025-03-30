@@ -399,17 +399,17 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     return null;
   }
 
-  public static Translation3d rotateTranslation(Translation3d translation, double yaw) {
-    double cosYaw = Math.cos(yaw);
-    double sinYaw = Math.sin(yaw);
+  // public static Translation3d rotateTranslation(Translation3d translation, double yaw) {
+  //   double cosYaw = Math.cos(yaw);
+  //   double sinYaw = Math.sin(yaw);
 
-    // 旋轉 X, Y 坐標
-    double newX = translation.getX() * cosYaw - translation.getY() * sinYaw;
-    double newY = translation.getX() * sinYaw + translation.getY() * cosYaw;
-    double newZ = translation.getZ(); // Z 不受影響
+  //   // 旋轉 X, Y 坐標
+  //   double newX = translation.getX() * cosYaw - translation.getY() * sinYaw;
+  //   double newY = translation.getX() * sinYaw + translation.getY() * cosYaw;
+  //   double newZ = translation.getZ(); // Z 不受影響
 
-    return new Translation3d(newX, newY, newZ);
-}
+  //   return new Translation3d(newX, newY, newZ);
+  // }
 
   @Override
   public void periodic() {
