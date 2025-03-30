@@ -44,7 +44,7 @@ public class Coral_L2 extends Command {
   @Override
   public void execute() {
 
-    if(m_EndEffectorSubsystem.canUp()) {
+    if(m_EndEffectorSubsystem.coralReady()) {
       m_ElevatorSubsystem.outCoral_L2();
       m_EndEffectorSubsystem.Arm_shootCoral_L2();
     }

@@ -46,7 +46,7 @@ public class ShootNet extends Command {
   @Override
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canUp()) {
+    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.coralReady()) {
       arriveEndEffectorPrimition = true;
     }
     if(arriveEndEffectorPrimition) {

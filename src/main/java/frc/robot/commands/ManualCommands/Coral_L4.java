@@ -21,6 +21,7 @@ public class Coral_L4 extends Command {
 
   private boolean ifArrive_EndEffector;
   private boolean ifFeed;
+
   public Coral_L4(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
     this.m_ElevatorSubsystem = elevatorSubsystem;
     this.m_EndEffectorSubsystem = endEffectorSubsystem;
@@ -44,7 +45,7 @@ public class Coral_L4 extends Command {
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
     // 
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canUp()) {
+    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.coralReady()) {
       m_ElevatorSubsystem.outCoral_L4();    
       ifArrive_EndEffector = true;
     }
