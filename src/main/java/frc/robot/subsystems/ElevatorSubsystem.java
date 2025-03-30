@@ -34,6 +34,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   private boolean ifChange_High;
   private boolean ifChange_Low;
 
+  private String elevatorState = "IDLE";
+
   public ElevatorSubsystem() {
     // Motors
     elevator_FirstMotor = new TalonFX(ElevatorConstants.elevator_FirstMotor_ID);
@@ -76,29 +78,56 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void intakeCoral() {
+
     goalPosition = ElevatorConstants.coralStationPosition; 
   }
 
-  public void outCoral_L1() {goalPosition = ElevatorConstants.coralL1Position;}
-  public void outCoral_L2() {goalPosition = ElevatorConstants.coralL2Position;}
-  public void outCoral_L3() {goalPosition = ElevatorConstants.coralL3Position;}
-  public void outCoral_L4() {goalPosition = ElevatorConstants.coralL4Position;}
+  public void outCoral_L1() {
+    elevatorState = "OUTCORAL_L1";
+    goalPosition = ElevatorConstants.coralL1Position;
+  }
+  public void outCoral_L2() {
+    elevatorState = "OUTCORAL_L2";
+    goalPosition = ElevatorConstants.coralL2Position;
+  }
+  public void outCoral_L3() {
+    elevatorState = "OUTCORAL_L3";
+    goalPosition = ElevatorConstants.coralL3Position;
+  }
+  public void outCoral_L4() {
+    elevatorState = "OUTCORAL_L4";
+    goalPosition = ElevatorConstants.coralL4Position;
+  }
 
   public void shootNet() {
+    elevatorState = "NET";
     goalPosition = ElevatorConstants.algaeNetPosition;
   }
 
   public void shootProcessor() {
+    elevatorState = "PROCESSOR";
     goalPosition = ElevatorConstants.algaeProccesorPosition;
   }
 
-  public void intakeAlgae_Floor() {goalPosition = ElevatorConstants.algaeFloorPosition;}
-  public void intakeAlgae_Low() {goalPosition = ElevatorConstants.algaeL2Position;}
-  public void intakeAlgae_High() {goalPosition = ElevatorConstants.algaeL3Position;}
+  public void intakeAlgae_Floor() {
+    elevatorState = "ALGAE_FLOOR";
+    goalPosition = ElevatorConstants.algaeFloorPosition;
+  }
+  public void intakeAlgae_Low() {
+    elevatorState = "ALGAE_LOW";
+    goalPosition = ElevatorConstants.algaeL2Position;
+  }
+  public void intakeAlgae_High() {
+    elevatorState = "ALGAE_HIGH";
+    goalPosition = ElevatorConstants.algaeL3Position;
+  }
 
-  public void toPrimitive() {goalPosition = ElevatorConstants.primitivePosition;}
+  public void toPrimitive() {
+    elevatorState = "HOME";
+    goalPosition = ElevatorConstants.primitivePosition;}
 
   public void prepareForScore() {
+    elevatorState = "PREPARE";
     goalPosition = ElevatorConstants.prepareForScorePosition;
   }
 
@@ -180,5 +209,6 @@ public class ElevatorSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Elevator/ArriveSetpoint", arriveSetpoint());
     SmartDashboard.putNumber("Elevator/VelocityMeter", getVelocity()); // Meter per second
     SmartDashboard.putNumber("Elevator/PositionMeter",  getPositionMeter()); // Meter
+    SmartDashboard.putString("Elevator/State", elevatorState);
   }
 }
