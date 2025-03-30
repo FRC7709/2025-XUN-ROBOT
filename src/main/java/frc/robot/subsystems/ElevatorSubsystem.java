@@ -34,10 +34,15 @@ public class ElevatorSubsystem extends SubsystemBase {
   private boolean ifChange_High;
   private boolean ifChange_Low;
 
+  private String elevatorState = "IDLE";
+
   public ElevatorSubsystem() {
+    // Motors
     elevator_FirstMotor = new TalonFX(ElevatorConstants.elevator_FirstMotor_ID);
     elevator_SecondMotor = new TalonFX(ElevatorConstants.elevator_SecondMotor_ID);
+    // Motor Followers
     elevator_SecondMotor.setControl(new Follower(ElevatorConstants.elevator_FirstMotor_ID, true));
+    // Set the goal position to the primitive position
     goalPosition = ElevatorConstants.primitivePosition;
 
     // Motor Configurations
@@ -73,71 +78,97 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void intakeCoral() {
+
     goalPosition = ElevatorConstants.coralStationPosition; 
   }
 
-  public void outCoral_L1() {goalPosition = ElevatorConstants.coralL1Position;}
-  public void outCoral_L2() {goalPosition = ElevatorConstants.coralL2Position;}
-  public void outCoral_L3() {goalPosition = ElevatorConstants.coralL3Position;}
-  public void outCoral_L4() {goalPosition = ElevatorConstants.coralL4Position;}
+  public void outCoral_L1() {
+    elevatorState = "OUTCORAL_L1";
+    goalPosition = ElevatorConstants.coralL1Position;
+  }
+  public void outCoral_L2() {
+    elevatorState = "OUTCORAL_L2";
+    goalPosition = ElevatorConstants.coralL2Position;
+  }
+  public void outCoral_L3() {
+    elevatorState = "OUTCORAL_L3";
+    goalPosition = ElevatorConstants.coralL3Position;
+  }
+  public void outCoral_L4() {
+    elevatorState = "OUTCORAL_L4";
+    goalPosition = ElevatorConstants.coralL4Position;
+  }
 
   public void shootNet() {
+    elevatorState = "NET";
     goalPosition = ElevatorConstants.algaeNetPosition;
   }
 
   public void shootProcessor() {
+    elevatorState = "PROCESSOR";
     goalPosition = ElevatorConstants.algaeProccesorPosition;
   }
 
+  public void intakeAlgae_Floor() {
+    elevatorState = "ALGAE_FLOOR";
+    goalPosition = ElevatorConstants.algaeFloorPosition;
+  }
   public void intakeAlgae_Low() {
+    elevatorState = "ALGAE_LOW";
     goalPosition = ElevatorConstants.algaeL2Position;
   }
-
   public void intakeAlgae_High() {
+    elevatorState = "ALGAE_HIGH";
     goalPosition = ElevatorConstants.algaeL3Position;
   }
 
-  public void intakeAlgae_Floor() {
-    goalPosition = ElevatorConstants.algaeFloorPosition;
-  }
-
   public void toPrimitive() {
-    goalPosition = ElevatorConstants.primitivePosition;
-  }
+    elevatorState = "HOME";
+    goalPosition = ElevatorConstants.primitivePosition;}
 
   public void prepareForScore() {
+    elevatorState = "PREPARE";
     goalPosition = ElevatorConstants.prepareForScorePosition;
   }
 
-  public double getCurrentPosition() {
+  public double getPositionRot() {
     return elevator_FirstMotor.getPosition().getValueAsDouble();
   }
 
-  public boolean arriveSetPoint() {
-    return (Math.abs(goalPosition - getCurrentPosition()) <= 2);
+  public double getPositionMeter(){
+    return elevator_FirstMotor.getPosition().getValueAsDouble()*0.02872; // Meter
+  }
+
+  public double getVelocity() {
+    return elevator_FirstMotor.getVelocity().getValueAsDouble()*0.02872; // Meter per second
+  }
+
+  public boolean arriveSetpoint() {
+    return (Math.abs(goalPosition - getPositionRot()) <= 2);
   }
 
   public boolean arrivePrimition() {
-    return (Math.abs(ElevatorConstants.primitivePosition - getCurrentPosition()) <= 1);
+    return (Math.abs(ElevatorConstants.primitivePosition - getPositionRot()) <= 1);
   }
 
-  public double getGoalPosition() {
+  public double getSetpoint() {
     return goalPosition;
   }
 
   @Override
   public void periodic() {
+    // Elevator control loop
     elevator_FirstMotor.setControl(request_Elevator.withPosition(goalPosition));
 
-    if (getCurrentPosition() <= 30) {
+    if (getPositionRot() <= 30) {
       ElevatorConstants.arriveLow = true;
     }else{
       ElevatorConstants.arriveLow = false;
     }
 
-    if ((getCurrentPosition() < 8 && lastPosition > 8)) {
+    if ((getPositionRot() < 8 && lastPosition > 8)) {
       ifChange_Low = true;
-    }else if((getCurrentPosition() > 8 && lastPosition < 8)){
+    }else if((getPositionRot() > 8 && lastPosition < 8)){
       ifChange_High = true;
     }
 
@@ -170,11 +201,14 @@ public class ElevatorSubsystem extends SubsystemBase {
       System.out.println("sethigh");
     }
 
-    lastPosition = getCurrentPosition();
+    lastPosition = getPositionRot();
 
-    //SmartDashboard
-    SmartDashboard.putNumber("Elevator/GoalPosition", goalPosition);
-    SmartDashboard.putNumber("Elevator/CurrentPosition", getCurrentPosition());
-    SmartDashboard.putBoolean("Elevator/ArrivePosition", arriveSetPoint());
+    // Log
+    SmartDashboard.putNumber("Elevator/GoalPositionRot", goalPosition);
+    SmartDashboard.putNumber("Elevator/CurrentPositionRot", getPositionRot());
+    SmartDashboard.putBoolean("Elevator/ArriveSetpoint", arriveSetpoint());
+    SmartDashboard.putNumber("Elevator/VelocityMeter", getVelocity()); // Meter per second
+    SmartDashboard.putNumber("Elevator/PositionMeter",  getPositionMeter()); // Meter
+    SmartDashboard.putString("Elevator/State", elevatorState);
   }
 }
