@@ -36,12 +36,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   private final PhotonCamera backRightCamera;
   private final PhotonCamera backLeftCamera;
 
-  private final Transform3d robotToFrontRight;
-  private final Transform3d robotToFrontLeft;
-  private final Transform3d robotTobackRight;
-  private final Transform3d robotTobackLeft;
-
-
   private PhotonPipelineResult frontRightResult;
   private PhotonPipelineResult frontLeftResult;
   private PhotonPipelineResult backRightResult;
@@ -83,11 +77,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     frontLeftCamera = new PhotonCamera("OV9281_FrontLeft");
     backRightCamera = new PhotonCamera("OV9281_backRight");
     backLeftCamera = new PhotonCamera("OV9281_backLeft");
-
-    robotToFrontRight = new Transform3d(0.2555, -0.221, 0.21, new Rotation3d(0, 0, Math.toRadians(-48.964)));
-    robotToFrontLeft = new Transform3d(-0.2555, -0.221, 0.21, new Rotation3d(new Rotation2d(Units.degreesToRadians(48.964))));
-    robotTobackRight = new Transform3d(0, 0, 0, new Rotation3d(new Rotation2d(0)));
-    robotTobackLeft = new Transform3d(0, 0, 0, new Rotation3d(new Rotation2d(0)));
 
     aprilTagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
@@ -173,21 +162,21 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     return backLeftTarget.getBestCameraToTarget();
   }
 
-  public Optional<Matrix<N3, N3>> getCameraMatrix(String camera) {
-    if(camera == "FrontRight") return frontRightCamera.getCameraMatrix();
-    if(camera == "FrontLeft") return frontLeftCamera.getCameraMatrix();
-    if(camera == "backRight") return backRightCamera.getCameraMatrix();
-    if(camera == "backLeft") return backLeftCamera.getCameraMatrix();
-    return null;
-  }
+  // public Optional<Matrix<N3, N3>> getCameraMatrix(String camera) {
+  //   if(camera == "FrontRight") return frontRightCamera.getCameraMatrix();
+  //   if(camera == "FrontLeft") return frontLeftCamera.getCameraMatrix();
+  //   if(camera == "backRight") return backRightCamera.getCameraMatrix();
+  //   if(camera == "backLeft") return backLeftCamera.getCameraMatrix();
+  //   return null;
+  // }
 
-  public Optional<Matrix<N8, N1>> getCameraDistCoeffs(String camera) {
-    if(camera == "FrontRight") return frontRightCamera.getDistCoeffs();
-    if(camera == "FrontLeft") return frontLeftCamera.getDistCoeffs();
-    if(camera == "backRight") return backRightCamera.getDistCoeffs();
-    if(camera == "backLeft") return backLeftCamera.getDistCoeffs();
-    return null;
-  }
+  // public Optional<Matrix<N8, N1>> getCameraDistCoeffs(String camera) {
+  //   if(camera == "FrontRight") return frontRightCamera.getDistCoeffs();
+  //   if(camera == "FrontLeft") return frontLeftCamera.getDistCoeffs();
+  //   if(camera == "backRight") return backRightCamera.getDistCoeffs();
+  //   if(camera == "backLeft") return backLeftCamera.getDistCoeffs();
+  //   return null;
+  // }
 
   public double getXMeasurements_FrontRight() {
     return botXMeasurements_FrontRight;
@@ -275,6 +264,7 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   public double getRotationError_Processor() {
     return Math.abs(getRotationMeasurements_BackRight() - PhotonConstants.rotationPidSetPoint_Processor_BackRight);
   }
+  
   public double getXError_CoralStation(String camera, String station) {
     if(camera == "BackRight") {
       if(station == "RightCoralStation") {
@@ -433,6 +423,9 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     backRightResult = backRightCamera.getLatestResult();
     backRightTarget = backRightResult.getBestTarget();
 
+    SmartDashboard.putBoolean("Photon/FR_hasTarget", hasFrontRightTarget());
+    SmartDashboard.putBoolean("Photon/FL_hasTarget", hasFrontLeftTarget());
+
 
     // backRightTargets = backRightResult.getTargets();
     if(hasFrontRightTarget()) {
@@ -470,17 +463,15 @@ public class PhotonVisionSubsystem extends SubsystemBase {
       // botYMeasurements_FrontRight = robotToTagTranslation.getY();
       // botRotationMeasurements_FrontRight = Math.toDegrees(robotToTagRotation.getAngle());
       
-
       frontRightTarget_ID = frontRightTarget.getFiducialId();
       
-
-      SmartDashboard.putNumber("Photon/botXMeasurements_FrontRight", botXMeasurements_FrontRight);
-      SmartDashboard.putNumber("Photon/botYMeasurements_FrontRight", botYMeasurements_FrontRight);
-      SmartDashboard.putNumber("Photon/botRotationMeasurements_FrontRight", botRotationMeasurements_FrontRight);
-      SmartDashboard.putNumber("Photon/FrontRightTarget_ID", frontRightTarget_ID);
-      SmartDashboard.putNumber("Photon/botXError_FrontRight", getXError_Reef("LeftReef"));
-      SmartDashboard.putNumber("Photon/botYError_FrontRight", getYError_Reef("LeftReef"));
-      SmartDashboard.putNumber("Photon/botRotationError_FrontRight", getRotationError_Reef("LeftReef"));
+      SmartDashboard.putNumber("Photon/FR_TargetID", frontRightTarget_ID);
+      SmartDashboard.putNumber("Photon/FR_xMeasurement", botXMeasurements_FrontRight);
+      SmartDashboard.putNumber("Photon/FR_yMeasurement", botYMeasurements_FrontRight);
+      SmartDashboard.putNumber("Photon/FR_rotationMeasurement", botRotationMeasurements_FrontRight);
+      SmartDashboard.putNumber("Photon/FR_xError", getXError_Reef("LeftReef"));
+      SmartDashboard.putNumber("Photon/FR_yError", getYError_Reef("LeftReef"));
+      SmartDashboard.putNumber("Photon/FR_rotationError", getRotationError_Reef("LeftReef"));
 
     }else {
       botXMeasurements_FrontRight = 0;
@@ -488,6 +479,7 @@ public class PhotonVisionSubsystem extends SubsystemBase {
       botRotationMeasurements_FrontRight = 0;
       frontRightTarget_ID = 0;
     }
+    // If the camera has a target, get the target pose
     if(hasFrontLeftTarget()) {
       botXMeasurements_FrontLeft = getRobotToTargetPose_FrontLeft().getX();
       botYMeasurements_FrontLeft = getRobotToTargetPose_FrontLeft().getY();
@@ -495,20 +487,20 @@ public class PhotonVisionSubsystem extends SubsystemBase {
 
       frontLeftTarget_ID = frontLeftTarget.getFiducialId();
       
-      SmartDashboard.putNumber("Photon/botXMeasurements_FrontLeft", botXMeasurements_FrontLeft);
-      SmartDashboard.putNumber("Photon/botYMeasurements_FrontLeft", botYMeasurements_FrontLeft);
-      SmartDashboard.putNumber("Photon/botRotationMeasurements_FrontLeft", botRotationMeasurements_FrontLeft);
-      SmartDashboard.putNumber("Photon/botXError_FrontLeft", getXError_Reef("RightReef"));
-      SmartDashboard.putNumber("Photon/botYError_FrontLeft", getYError_Reef("RightReef"));
-      SmartDashboard.putNumber("Photon/botRotationError_FrontLeft", getRotationError_Reef("RightReef"));
-      SmartDashboard.putNumber("Photon/FrontLeftTarget_ID", frontLeftTarget_ID);
-
+      SmartDashboard.putNumber("Photon/FL_TargetID", frontLeftTarget_ID);
+      SmartDashboard.putNumber("Photon/FL_xMeasurement", botXMeasurements_FrontLeft);
+      SmartDashboard.putNumber("Photon/FL_yMeasurement", botYMeasurements_FrontLeft);
+      SmartDashboard.putNumber("Photon/FL_rotationMeasurement", botRotationMeasurements_FrontLeft);
+      SmartDashboard.putNumber("Photon/FL_xError", getXError_Reef("RightReef"));
+      SmartDashboard.putNumber("Photon/FL_yError", getYError_Reef("RightReef"));
+      SmartDashboard.putNumber("Photon/FL_rotationError", getRotationError_Reef("RightReef"));
     }else {
       botXMeasurements_FrontLeft = 0;
       botYMeasurements_FrontLeft = 0;
       botRotationMeasurements_FrontLeft = 0;
       frontLeftTarget_ID = 0;
     }
+
     if(hasBackRightTarget()) {
       botXMeasurements_BackRight = getRobotToTargetPose_BackRight().getX();
       botYMeasurements_BackRight = getRobotToTargetPose_BackRight().getY();
@@ -528,6 +520,7 @@ public class PhotonVisionSubsystem extends SubsystemBase {
       botRotationMeasurements_BackRight = 0;
       backRightTarget_ID = 0;
     }
+    
     if(hasBackLeftTarget()) {
       botXMeasurements_BackLeft = getRobotToTargetPose_BackLeft().getX();
       botYMeasurements_BackLeft = getRobotToTargetPose_BackLeft().getY();

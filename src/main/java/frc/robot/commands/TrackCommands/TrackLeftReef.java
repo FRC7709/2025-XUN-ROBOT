@@ -4,21 +4,15 @@
 
 package frc.robot.commands.TrackCommands;
 
-import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.LEDConstants;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.PhotonConstants;
-import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PhotonVisionSubsystem;
-import frc.robot.subsystems.SwerveSubsystem_Kraken;
 import frc.robot.subsystems.SwerveSubsystem_Kraken;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -32,8 +26,8 @@ public class TrackLeftReef extends Command {
   private PIDController yPidController;
 
   private double xPidMeasurements;
-  private double yPidMeasurements;
-  private double rotationPidMeasurements;
+  private double yMeasurement;
+  private double rotationMeasurement;
 
   private double xPidError;
   private double yPidError;
@@ -55,10 +49,6 @@ public class TrackLeftReef extends Command {
     xPidController = new PIDController(PhotonConstants.xPidController_Kp, PhotonConstants.xPidController_Ki, PhotonConstants.xPidController_Kd);
     yPidController = new PIDController(PhotonConstants.yPidController_Kp, PhotonConstants.yPidController_Ki, PhotonConstants.yPidController_Kd);
     rotationPidController = new PIDController(PhotonConstants.rotationPidController_Kp, PhotonConstants.rotationPidController_Ki, PhotonConstants.rotationPidController_Kd);
-    // Set limits
-    // xPidController.setIntegratorRange(PhotonConstants.xPidMinOutput_Reef, PhotonConstants.xPidMaxOutput_Reef);
-    // yPidController.setIntegratorRange(PhotonConstants.yPidMaxOutput_Reef, PhotonConstants.yPidMaxOutput_Reef);
-    // rotationPidController.setIntegratorRange(PhotonConstants.rotationPidMaxOutput_Reef, PhotonConstants.rotationPidMaxOutput_Reef);
   }
 
   // Called when the command is initially scheduled.
@@ -76,16 +66,16 @@ public class TrackLeftReef extends Command {
   public void execute() {
     if(m_PhotonVisionSubsystem.hasFrontRightTarget()) {
       // Rotation-PID calculations
-      rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_FrontRight();
+      rotationMeasurement = m_PhotonVisionSubsystem.getRotationMeasurements_FrontRight();
       rotationPidError = m_PhotonVisionSubsystem.getRotationError_Reef("LeftReef");
-      rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_LeftReef;
-      rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_LeftReef);
+      rotationMeasurement = (rotationPidError > 0.5) ? rotationMeasurement : PhotonConstants.rotationPidSetPoint_LeftReef;
+      rotationPidOutput = rotationPidController.calculate(rotationMeasurement, PhotonConstants.rotationPidSetPoint_LeftReef);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Reef);
       // Y-PID calculations
-      yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_FrontRight();
+      yMeasurement = m_PhotonVisionSubsystem.getYMeasurements_FrontRight();
       yPidError = m_PhotonVisionSubsystem.getYError_Reef("LeftReef");
-      yPidMeasurements = (yPidError > 0.02) ? yPidMeasurements : PhotonConstants.yPidSetPoint_LeftReef;
-      yPidOutput = -yPidController.calculate(yPidMeasurements, PhotonConstants.yPidSetPoint_LeftReef);
+      yMeasurement = (yPidError > 0.02) ? yMeasurement : PhotonConstants.yPidSetPoint_LeftReef;
+      yPidOutput = -yPidController.calculate(yMeasurement, PhotonConstants.yPidSetPoint_LeftReef);
       yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Reef);
       // X-PID calculations
       xPidMeasurements = m_PhotonVisionSubsystem.getXMeasurements_FrontRight();
@@ -93,8 +83,6 @@ public class TrackLeftReef extends Command {
       xPidMeasurements = (xPidError > 0.02) ? xPidMeasurements : PhotonConstants.xPidSetPoint_LeftReef;
       xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_LeftReef);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidSetPoint_LeftReef);
-      // if(xPidController.getError()<0.05) SmartDashboard.putBoolean("Align/LeftReefAlign", true);
-      // else SmartDashboard.putBoolean("Align/LeftReefAlign", false);
 
       if(m_PhotonVisionSubsystem.isArrive_Reef("LeftReef")) {
         LEDConstants.arrivePosition_Base = true;
