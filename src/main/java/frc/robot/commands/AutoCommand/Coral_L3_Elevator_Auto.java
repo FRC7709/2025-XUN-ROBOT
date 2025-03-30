@@ -48,7 +48,7 @@ public class Coral_L3_Elevator_Auto extends Command {
       arriveEndEffectorPrimition = true;
     }
 
-    if(arriveEndEffectorPrimition && m_EndEffectorSubsystem.coralReady()) {
+    if(arriveEndEffectorPrimition && m_EndEffectorSubsystem.canMoveUp()) {
       m_ElevatorSubsystem.outCoral_L3();
       m_EndEffectorSubsystem.Arm_shootCoral_L3();
       if(m_ElevatorSubsystem.arriveSetPoint()) {

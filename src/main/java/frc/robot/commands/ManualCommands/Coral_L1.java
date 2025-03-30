@@ -36,7 +36,7 @@ public class Coral_L1 extends Command {
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
     // Move to the position
-    if(m_EndEffectorSubsystem.coralReady()) {
+    if(m_EndEffectorSubsystem.canMoveUp()) {
       m_ElevatorSubsystem.outCoral_L1();
       m_EndEffectorSubsystem.Arm_shootCoral_L1();
     }

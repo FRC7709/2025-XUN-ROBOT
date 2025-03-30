@@ -203,7 +203,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       return !getFirstIR() && !getSecondIR();
     }
 
-    public boolean coralReady() {
+    public boolean canMoveUp() {
       return getFirstIR();
     }
 

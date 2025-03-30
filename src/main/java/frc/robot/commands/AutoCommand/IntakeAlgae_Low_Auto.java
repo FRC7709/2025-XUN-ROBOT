@@ -35,7 +35,7 @@ public class IntakeAlgae_Low_Auto extends Command {
   @Override
   public void execute() {
     if(!LEDConstants.hasAlgae) {
-      if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.coralReady() && !m_EndEffectorSubsystem.hasAlgae()) {
+      if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp() && !m_EndEffectorSubsystem.hasAlgae()) {
         m_ElevatorSubsystem.intakeAlgae_Low();
         m_EndEffectorSubsystem.Arm_intakeAlgae_Low();
         m_EndEffectorSubsystem.intakeAlgae_Low_Wheel();

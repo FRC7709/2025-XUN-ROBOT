@@ -45,7 +45,7 @@ public class Coral_L4 extends Command {
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
     // 
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.coralReady()) {
+    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp()) {
       m_ElevatorSubsystem.outCoral_L4();    
       ifArrive_EndEffector = true;
     }

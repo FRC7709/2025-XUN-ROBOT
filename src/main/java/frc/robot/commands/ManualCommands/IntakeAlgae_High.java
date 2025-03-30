@@ -56,7 +56,7 @@ public class IntakeAlgae_High extends Command {
   @Override
   public void execute() {
     if(!LEDConstants.hasAlgae) {
-      if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.coralReady() && !m_EndEffectorSubsystem.hasAlgae()) {
+      if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp() && !m_EndEffectorSubsystem.hasAlgae()) {
         m_ElevatorSubsystem.intakeAlgae_High();
 
         if(m_ElevatorSubsystem.arriveSetPoint()) {

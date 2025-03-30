@@ -31,7 +31,7 @@ public class Coral_L1_Elevator_Auto extends Command {
   @Override
   public void execute() {
     // Move to the position
-    if(m_EndEffectorSubsystem.coralReady()) {
+    if(m_EndEffectorSubsystem.canMoveUp()) {
       m_ElevatorSubsystem.outCoral_L1();
       m_EndEffectorSubsystem.Arm_shootCoral_L1();
     }
