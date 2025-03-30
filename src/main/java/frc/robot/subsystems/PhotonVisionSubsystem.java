@@ -275,13 +275,52 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   public double getRotationError_Processor() {
     return Math.abs(getRotationMeasurements_BackRight() - PhotonConstants.rotationPidSetPoint_Processor_BackRight);
   }
-
-  public double getRotationError_CoralStation(String station) {
-    if(station == "RightCoralStation") {
-      return Math.abs(getRotationMeasurements_BackLeft() - PhotonConstants.rotationPidSetPoint_RightCoralStation_BackLeft);
+  public double getXError_CoralStation(String camera, String station) {
+    if(camera == "BackRight") {
+      if(station == "RightCoralStation") {
+        return Math.abs(getXMeasurements_BackRight() - PhotonConstants.xPidSetPoint_RightCoralStation_BackRight);
+      }else {
+        return Math.abs(getXMeasurements_BackRight() - PhotonConstants.xPidSetPoint_LeftCoralStation_BackRight);
+      }
     }else {
-      return Math.abs(getRotationMeasurements_BackLeft() - PhotonConstants.rotationPidSetPoint_LeftCoralStation_BackLeft);
-    }
+      if(station == "RightCoralStation") {
+        return Math.abs(getXMeasurements_BackLeft() - PhotonConstants.xPidSetPoint_RightCoralStation_BackLeft);
+      }else {
+        return Math.abs(getXMeasurements_BackLeft() - PhotonConstants.xPidSetPoint_LeftCoralStation_BackLeft);
+      }
+   }
+  }
+
+  public double getYError_CoralStation(String camera, String station) {
+    if(camera == "BackRight") {
+      if(station == "RightCoralStation") {
+        return Math.abs(getYMeasurements_BackRight() - PhotonConstants.yPidSetPoint_RightCoralStation_BackRight);
+      }else {
+        return Math.abs(getYMeasurements_BackRight() - PhotonConstants.yPidSetPoint_LeftCoralStation_BackRight);
+      }
+    }else {
+      if(station == "RightCoralStation") {
+        return Math.abs(getYMeasurements_BackLeft() - PhotonConstants.yPidSetPoint_RightCoralStation_BackLeft);
+      }else {
+        return Math.abs(getYMeasurements_BackLeft() - PhotonConstants.yPidSetPoint_LeftCoralStation_BackLeft);
+      }
+  }
+  }
+
+  public double getRotationError_CoralStation(String camera, String station) {
+    if(camera == "BackRight") {
+      if(station == "RightCoralStation") {
+        return Math.abs(getRotationMeasurements_BackRight() - PhotonConstants.rotationPidSetPoint_RightCoralStation_BackRight);
+      }else {
+        return Math.abs(getRotationMeasurements_BackRight() - PhotonConstants.rotationPidSetPoint_LeftCoralStation_BackRight);
+      }
+    }else {
+      if(station == "RightCoralStation") {
+        return Math.abs(getRotationMeasurements_BackLeft() - PhotonConstants.rotationPidSetPoint_RightCoralStation_BackLeft);
+      }else {
+        return Math.abs(getRotationMeasurements_BackLeft() - PhotonConstants.rotationPidSetPoint_LeftCoralStation_BackLeft);
+      }
+  }
   }
   
   public double getXError_Reef(String reef) {
@@ -335,6 +374,26 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     }else {
       if(getXError_Net("BackLeft", "ID13_ID1") <= 0.03 && getYError_Net("BackLeft", "ID13_ID1") <= 0.03 && getRotationError_Net("BackLeft", "ID13_ID1") <= 0.5) return true;
       else return false;
+    }
+  }
+
+  public boolean isArrive_CoralStation(String camera, String station) {
+    if(camera == "BackRight") {
+      if(station == "RightCoralStation") {
+        if(getXError_CoralStation("BackRight", "RightCoralStation") <= 0.03 && getYError_CoralStation("BackRight", "RightCoralStation") <= 0.03 && getRotationError_CoralStation("BackRight", "RightCoralStation") <= 0.5) return true;
+        else return false;
+      }else {
+        if(getXError_CoralStation("BackRight", "LeftCoralStation") <= 0.03 && getYError_CoralStation("BackRight", "LeftCoralStation") <= 0.03 && getRotationError_CoralStation("BackRight", "LeftCoralStation") <= 0.5) return true;
+        else return false;
+      }
+    }else {
+      if(station == "RightCoralStation") {
+        if(getXError_CoralStation("BackLeft", "RightCoralStation") <= 0.03 && getYError_CoralStation("BackLeft", "RightCoralStation") <= 0.03 && getRotationError_CoralStation("BackLeft", "RightCoralStation") <= 0.5) return true;
+        else return false;
+      }else {
+        if(getXError_CoralStation("BackLeft", "LeftCoralStation") <= 0.03 && getYError_CoralStation("BackLeft", "LeftCoralStation") <= 0.03 && getRotationError_CoralStation("BackLeft", "LeftCoralStation") <= 0.5) return true;
+        else return false;
+      }
     }
   }
 

@@ -143,7 +143,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     return elevator_FirstMotor.getVelocity().getValueAsDouble()*0.02872; // Meter per second
   }
 
-  public boolean arriveSetpoint() {
+  public boolean arriveSetPoint() {
     return (Math.abs(goalPosition - getPositionRot()) <= 2);
   }
 
@@ -206,7 +206,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     // Log
     SmartDashboard.putNumber("Elevator/GoalPositionRot", goalPosition);
     SmartDashboard.putNumber("Elevator/CurrentPositionRot", getPositionRot());
-    SmartDashboard.putBoolean("Elevator/ArriveSetpoint", arriveSetpoint());
+    SmartDashboard.putBoolean("Elevator/ArriveSetpoint", arriveSetPoint());
     SmartDashboard.putNumber("Elevator/VelocityMeter", getVelocity()); // Meter per second
     SmartDashboard.putNumber("Elevator/PositionMeter",  getPositionMeter()); // Meter
     SmartDashboard.putString("Elevator/State", elevatorState);

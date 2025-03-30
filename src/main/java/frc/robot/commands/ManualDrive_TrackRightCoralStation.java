@@ -90,7 +90,7 @@ public class ManualDrive_TrackRightCoralStation extends Command {
       if(backLeftTarget_ID == 12 || backLeftTarget_ID == 2) {
         // Rotation-PID calculations
         rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_BackLeft();
-        rotationPidError = m_PhotonVisionSubsystem.getRotationError_CoralStation("RightCoralStation");
+        rotationPidError = m_PhotonVisionSubsystem.getRotationError_CoralStation("BackLeft", "RightCoralStation");
         rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_RightCoralStation_BackLeft;
         rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_RightCoralStation_BackLeft);
         rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_CoralStation);

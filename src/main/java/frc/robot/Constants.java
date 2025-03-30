@@ -232,6 +232,14 @@ public final class Constants {
     public static final double yPidSetPoint_RightCoralStation_BackLeft = 0;
     public static final double rotationPidSetPoint_RightCoralStation_BackLeft = 0;
 
+    public static final double xPidSetPoint_LeftCoralStation_BackRight = 0;
+    public static final double yPidSetPoint_LeftCoralStation_BackRight = 0;
+    public static final double rotationPidSetPoint_LeftCoralStation_BackRight = 0;
+
+    public static final double xPidSetPoint_RightCoralStation_BackRight = 0;
+    public static final double yPidSetPoint_RightCoralStation_BackRight = 0;
+    public static final double rotationPidSetPoint_RightCoralStation_BackRight = 0;
+
     public static final double xPidSetPoint_Cage_FrontRight = 0;
     public static final double yPidSetPoint_Cage_FrontRight = 0;
     public static final double rotationPidSetPoint_Cage_FrontRight = 0;

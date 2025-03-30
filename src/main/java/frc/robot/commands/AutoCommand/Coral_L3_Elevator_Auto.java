@@ -50,16 +50,10 @@ public class Coral_L3_Elevator_Auto extends Command {
 
     if(arriveEndEffectorPrimition && m_EndEffectorSubsystem.canUp()) {
       m_ElevatorSubsystem.outCoral_L3();
+      m_EndEffectorSubsystem.Arm_shootCoral_L3();
       if(m_ElevatorSubsystem.arriveSetPoint()) {
-        m_EndEffectorSubsystem.Arm_shootCoral_L3();
-        
-        if(m_ElevatorSubsystem.arriveSetPoint()) {
-          LEDConstants.arrivePosition_Intake = true;
-          LEDConstants.LEDFlag = true;
-        }else {
-          LEDConstants.arrivePosition_Intake = false;
-          LEDConstants.LEDFlag = true;
-        }
+        LEDConstants.arrivePosition_Intake = true;
+        LEDConstants.LEDFlag = true;
       } 
     }
 
