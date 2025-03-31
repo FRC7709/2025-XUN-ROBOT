@@ -29,10 +29,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   private final MotionMagicVoltage request_Elevator;
 
   private double goalPosition;
-  private double lastPosition;
-  
-  private boolean ifChange_High;
-  private boolean ifChange_Low;
+
+  private boolean upper = true;
 
   private String elevatorState = "IDLE";
 
@@ -72,13 +70,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevator_SecondMotor.getConfigurator().apply(elevatorSlot0Config);
     elevator_FirstMotor.getConfigurator().apply(elevatorMotionMagicConfig);
     elevator_SecondMotor.getConfigurator().apply(elevatorMotionMagicConfig);
-
-    ifChange_High = false;
-    ifChange_Low = false;
   }
 
   public void intakeCoral() {
-
+    elevatorState = "INTAKECORAL";
     goalPosition = ElevatorConstants.coralStationPosition; 
   }
 
@@ -166,13 +161,9 @@ public class ElevatorSubsystem extends SubsystemBase {
       ElevatorConstants.arriveLow = false;
     }
 
-    if ((getPositionRot() < 8 && lastPosition > 8)) {
-      ifChange_Low = true;
-    }else if((getPositionRot() > 8 && lastPosition < 8)){
-      ifChange_High = true;
-    }
-
-    if(ifChange_Low) {
+    if ((getPositionRot() < 8 && upper==true)) {
+      upper = false;
+      // Config
       elevatorSlot0Config.kS = 0;
       elevatorSlot0Config.kG = 0.35;
       elevatorSlot0Config.kV = 0;
@@ -180,12 +171,12 @@ public class ElevatorSubsystem extends SubsystemBase {
       elevatorSlot0Config.kP = 0.9;
       elevatorSlot0Config.kI = 0;
       elevatorSlot0Config.kD = 0;
-
+      // Apply Config
       elevator_FirstMotor.getConfigurator().apply(elevatorSlot0Config);
       elevator_SecondMotor.getConfigurator().apply(elevatorSlot0Config);
-      System.out.println("setlow");
-      ifChange_Low = false;
-    }else if(ifChange_High) {
+    }else if((getPositionRot() > 8 && upper==false)){
+      upper = true;
+      // Config
       elevatorSlot0Config.kS = 0;
       elevatorSlot0Config.kG = 0.44;
       elevatorSlot0Config.kV = 0;
@@ -193,15 +184,10 @@ public class ElevatorSubsystem extends SubsystemBase {
       elevatorSlot0Config.kP = 0.9;
       elevatorSlot0Config.kI = 0;
       elevatorSlot0Config.kD = 0;
-
+      // Apply Config
       elevator_FirstMotor.getConfigurator().apply(elevatorSlot0Config);
       elevator_SecondMotor.getConfigurator().apply(elevatorSlot0Config);
-
-      ifChange_High = false;
-      System.out.println("sethigh");
     }
-
-    lastPosition = getPositionRot();
 
     // Log
     SmartDashboard.putNumber("Elevator/GoalPositionRot", goalPosition);
