@@ -169,10 +169,14 @@ public class TrackCoralStation extends Command {
         LEDConstants.LEDFlag = true;
     }
     // impl
-    if(ElevatorConstants.arriveLow == false) {
-      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_CoralStation);
-      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_CoralStation);
-      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_CoralStation);
+    if(ElevatorConstants.arriveLevel == 1) {
+      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level1_CoralStation);
+      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level1_CoralStation);
+      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level1_CoralStation);
+    }else if(ElevatorConstants.arriveLevel == 2) {
+      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level2_CoralStation);
+      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level2_CoralStation);
+      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level2_CoralStation);
     }
     m_SwerveSubsystem.drive(xPidOutput, yPidOutput, rotationPidOutput, false);
   }

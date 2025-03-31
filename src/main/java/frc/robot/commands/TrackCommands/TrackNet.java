@@ -143,10 +143,14 @@ public class TrackNet extends Command {
       LEDConstants.arrivePosition_Base = true;
       }
   // impl
-  if(ElevatorConstants.arriveLow == false) {
-    xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Net);
-    yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Net);
-    rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Net);
+  if(ElevatorConstants.arriveLevel == 1) {
+    xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level1_Net);
+    yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level1_Net);
+    rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level1_Net);
+  }else if(ElevatorConstants.arriveLevel == 2) {
+    xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level2_Net);
+    yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level2_Net);
+    rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level2_Net);
   }
     m_SwerveSubsystem.drive(xPidOutput, yPidOutput, rotationPidOutput, false);
   }

@@ -13,6 +13,8 @@ public class IntakeAlgae_Low extends Command {
   private final ElevatorSubsystem m_ElevatorSubsystem;
   private final EndEffectorSubsystem m_EndEffectorSubsystem;
 
+  private boolean isArrive_EndEffector;
+
   public IntakeAlgae_Low(ElevatorSubsystem ElevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     this.m_ElevatorSubsystem = ElevatorSubsystem;
     this.m_EndEffectorSubsystem = endEffectorSubsystem;
@@ -25,6 +27,7 @@ public class IntakeAlgae_Low extends Command {
   public void initialize() {
     m_EndEffectorSubsystem.Arm_IDLE();
 
+    isArrive_EndEffector = false;
     LEDConstants.intakeGamePiece = true;
     LEDConstants.hasAlgae = false;
     LEDConstants.hasGamePiece = false;
@@ -37,11 +40,12 @@ public class IntakeAlgae_Low extends Command {
     if(!LEDConstants.hasAlgae) {
       if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp() && !m_EndEffectorSubsystem.hasAlgae()) {
         m_ElevatorSubsystem.intakeAlgae_Low();
-        
-        if(m_ElevatorSubsystem.arriveSetPoint()) {
-          m_EndEffectorSubsystem.Arm_intakeAlgae_Low();
-          m_EndEffectorSubsystem.intakeAlgae_Low_Wheel();
-        }
+        isArrive_EndEffector = true;
+      }
+
+      if(m_ElevatorSubsystem.arriveSetPoint() && isArrive_EndEffector) {
+        m_EndEffectorSubsystem.Arm_intakeAlgae_Low();
+        m_EndEffectorSubsystem.intakeAlgae_Low_Wheel();
       }
 
       if(m_EndEffectorSubsystem.hasAlgae()) {

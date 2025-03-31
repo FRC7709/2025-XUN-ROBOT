@@ -56,9 +56,11 @@ public class AprilTagX extends Command {
 
     SmartDashboard.putNumber("AprilTagX/ pidOutput", xPidOutput);
 
-    if(ElevatorConstants.arriveLow == false) {
-      Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow);
-    }
+    if(ElevatorConstants.arriveLevel == 2) {
+      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level2);
+     }else if(ElevatorConstants.arriveLevel == 1) {
+      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level1);
+     }
 
     m_SwerveSubsystem.drive(xPidOutput, 0, 0, false);
   }

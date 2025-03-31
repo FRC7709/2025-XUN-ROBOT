@@ -51,8 +51,10 @@ public class AprilTagRotation extends Command {
       rotationPidOutput = 0;
    }
 
-   if(ElevatorConstants.arriveLow == false) {
-    Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow);
+   if(ElevatorConstants.arriveLevel == 2) {
+    rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level2);
+   }else if(ElevatorConstants.arriveLevel == 1) {
+    rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level1);
    }
 
     m_SwerveSubsystem.drive(0, 0, rotationPidOutput, false);

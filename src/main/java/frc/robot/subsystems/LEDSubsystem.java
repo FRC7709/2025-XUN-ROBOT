@@ -82,6 +82,12 @@ public class LEDSubsystem extends SubsystemBase {
     LEDConstants.LEDFlag = false;
   }
 
+  public void canTrackMiddle() {
+    ledAnimation = new StrobeAnimation(ledNum, ledNum, ledNum);
+    candle.animate(ledAnimation);
+    LEDConstants.LEDFlag = false;
+  }
+
   public void noTarget() {
     ledAnimation = new FireAnimation(0.01, 0.2, ledNum, 1, 0);
     candle.animate(ledAnimation);
@@ -146,6 +152,7 @@ public class LEDSubsystem extends SubsystemBase {
       else if(LEDConstants.tracking) tracking();
       else if(LEDConstants.canTrackRight) canTrackLeft();
       else if(LEDConstants.canTrackLeft) canTrackRight();
+      else if(LEDConstants.canTrackMiddle) canTrackMiddle();
       else if(LEDConstants.arrivePosition_Intake) arrivePosition_Intake();
       else if(LEDConstants.intakeArriving) intakeArriving();
       else if(LEDConstants.hasGamePiece) hasGamePiece();

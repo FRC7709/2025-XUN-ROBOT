@@ -101,10 +101,14 @@ public class ManualDrive_TrackRightCoralStation extends Command {
       rotationPidOutput = 0;
     }
 
-    if(isSlow || ElevatorConstants.arriveLow == false) {
+    if((isSlow && ElevatorConstants.arriveLevel == 2) || ElevatorConstants.arriveLevel == 2) {
+      xSpeed = xSpeed*Math.abs(xSpeed)*0.1;
+      ySpeed = ySpeed*Math.abs(ySpeed)*0.1;
+      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level2);
+    }else if(ElevatorConstants.arriveLevel == 1 || isSlow) {
       xSpeed = xSpeed*Math.abs(xSpeed)*0.2;
       ySpeed = ySpeed*Math.abs(ySpeed)*0.2;
-      rotationPidOutput = Constants.setMaxOutput(rotationPidError, PhotonConstants.rotationPidMaxOutput_NeedSlow);
+      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level1);
     }else {
       xSpeed = xSpeed*Math.abs(xSpeed)*0.8;
       ySpeed = ySpeed*Math.abs(ySpeed)*0.8;

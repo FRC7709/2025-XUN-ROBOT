@@ -155,10 +155,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     // Elevator control loop
     elevator_FirstMotor.setControl(request_Elevator.withPosition(goalPosition));
 
-    if (getPositionRot() <= 30) {
-      ElevatorConstants.arriveLow = true;
-    }else{
-      ElevatorConstants.arriveLow = false;
+    if (getPositionRot() <= 25) {
+      ElevatorConstants.arriveLevel = 0;
+    }else if(25 <= getPositionRot() && getPositionRot() <= 40){
+      ElevatorConstants.arriveLevel = 1;
+    }else {
+      ElevatorConstants.arriveLevel = 2;
     }
 
     if ((getPositionRot() < 8 && upper==true)) {

@@ -22,6 +22,8 @@ public class IntakeAlgae_High extends Command {
 
   private boolean hasAlgae;
 
+  private boolean isArrive_EndEffector;
+
   public IntakeAlgae_High(ElevatorSubsystem ElevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_ElevatorSubsystem = ElevatorSubsystem;
@@ -45,7 +47,7 @@ public class IntakeAlgae_High extends Command {
     m_EndEffectorSubsystem.Arm_IDLE();
 
     // arriveEndEffectorPrimition = false;
-
+    isArrive_EndEffector = false;
     LEDConstants.intakeGamePiece = true;
     LEDConstants.hasAlgae = false;
     LEDConstants.hasGamePiece = false;
@@ -58,11 +60,12 @@ public class IntakeAlgae_High extends Command {
     if(!LEDConstants.hasAlgae) {
       if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp() && !m_EndEffectorSubsystem.hasAlgae()) {
         m_ElevatorSubsystem.intakeAlgae_High();
+        isArrive_EndEffector = true;
+      }
 
-        if(m_ElevatorSubsystem.arriveSetPoint()) {
-          m_EndEffectorSubsystem.Arm_intakeAlgae_High();
-          m_EndEffectorSubsystem.intakeAlgae_High_Wheel();
-        }
+      if(m_ElevatorSubsystem.arriveSetPoint() && isArrive_EndEffector) {
+        m_EndEffectorSubsystem.Arm_intakeAlgae_High();
+        m_EndEffectorSubsystem.intakeAlgae_High_Wheel();
       }
 
       if(m_EndEffectorSubsystem.hasAlgae()) {

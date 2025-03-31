@@ -75,7 +75,11 @@ public class ManualDrive_Kraken extends Command {
     this.isSlow = isSlowFunc.getAsBoolean();
     // this.needSlow = needSlowFunc.getAsBoolean();
 
-    if(isSlow || ElevatorConstants.arriveLow == false) {
+    if((isSlow && ElevatorConstants.arriveLevel == 2) || ElevatorConstants.arriveLevel == 2) {
+      xSpeed = xSpeed*Math.abs(xSpeed)*0.1;
+      ySpeed = ySpeed*Math.abs(ySpeed)*0.1;
+      zSpeed = zSpeed*Math.abs(zSpeed)*0.05;
+    }else if(ElevatorConstants.arriveLevel == 1 || isSlow) {
       xSpeed = xSpeed*Math.abs(xSpeed)*0.2;
       ySpeed = ySpeed*Math.abs(ySpeed)*0.2;
       zSpeed = zSpeed*Math.abs(zSpeed)*0.1;

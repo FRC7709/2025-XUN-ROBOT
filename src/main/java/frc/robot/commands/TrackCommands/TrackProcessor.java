@@ -98,10 +98,14 @@ public class TrackProcessor extends Command {
       LEDConstants.LEDFlag = true;
     }
     // impl
-    if(ElevatorConstants.arriveLow == false) {
-      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Processor);
-      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Processor);
-      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Processor);
+    if(ElevatorConstants.arriveLevel == 1) {
+      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level1_Processor);
+      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level1_Processor);
+      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level1_Processor);
+    }else if(ElevatorConstants.arriveLevel == 2) {
+      xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level2_Processor);
+      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level2_Processor);
+      rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level2_Processor);
     }
     m_SwerveSubsystem.drive(xPidOutput, yPidOutput, rotationPidOutput, false);
   }

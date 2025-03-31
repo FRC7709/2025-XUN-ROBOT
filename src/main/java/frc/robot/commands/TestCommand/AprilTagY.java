@@ -49,9 +49,11 @@ public class AprilTagY extends Command {
     }else {
       yPidOutput = 0;
     }
-    if(ElevatorConstants.arriveLow == false) {
-      Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow);
-    }
+    if(ElevatorConstants.arriveLevel == 2) {
+      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level2);
+     }else if(ElevatorConstants.arriveLevel == 1) {
+      yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_NeedSlow_Level1);
+     }
     m_SwerveSubsystem.drive(0, yPidOutput, 0, false);
   }
 

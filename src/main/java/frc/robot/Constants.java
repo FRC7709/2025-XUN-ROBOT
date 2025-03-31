@@ -169,44 +169,62 @@ public final class Constants {
     public static final double xPidMaxOutput = 0.4;
     public static final double yPidMaxOutput = 0.4;
     public static final double rotationPidMaxOutput = 0.4;
-    public static final double xPidMaxOutput_NeedSlow = 0.2;
-    public static final double yPidMaxOutput_NeedSlow = 0.2;
-    public static final double rotationPidMaxOutput_NeedSlow = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level1 = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1 = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1 = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level2 = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level2 = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2 = 0.2;
 
-    public static final double xPidMaxOutput_Reef = 0.3;
-    public static final double yPidMaxOutput_Reef = 0.3;
-    public static final double rotationPidMaxOutput_Reef = 0.3;
-    public static final double xPidMaxOutput_NeedSlow_Reef= 0.1;
-    public static final double yPidMaxOutput_NeedSlow_Reef = 0.1;
-    public static final double rotationPidMaxOutput_NeedSlow_Reef = 0.05;
+    public static final double xPidMaxOutput_Reef = 0.4;
+    public static final double yPidMaxOutput_Reef = 0.4;
+    public static final double rotationPidMaxOutput_Reef = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level1_Reef= 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_Reef = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_Reef = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_Reef= 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_Reef = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_Reef = 0.05;
 
     public static final double xPidMaxOutput_CoralStation = 0.4;
     public static final double yPidMaxOutput_CoralStation = 0.4;
     public static final double rotationPidMaxOutput_CoralStation = 0.4;
-    public static final double xPidMaxOutput_NeedSlow_CoralStation = 0.2;
-    public static final double yPidMaxOutput_NeedSlow_CoralStation = 0.2;
-    public static final double rotationPidMaxOutput_NeedSlow_CoralStation = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level1_CoralStation = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_CoralStation = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_CoralStation = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_CoralStation = 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_CoralStation = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_CoralStation = 0.05;
 
     public static final double xPidMaxOutput_Cage = 0.4;
     public static final double yPidMaxOutput_Cage = 0.4;
     public static final double rotationPidMaxOutput_Cage = 0.4;
-    public static final double xPidMaxOutput_NeedSlow_Cage = 0.2;
-    public static final double yPidMaxOutput_NeedSlow_Cage = 0.2;
-    public static final double rotationPidMaxOutput_NeedSlow_Cage = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level1_Cage = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_Cage = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_Cage = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_Cage = 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_Cage = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_Cage = 0.05;
 
     public static final double xPidMaxOutput_Net = 0.4;
     public static final double yPidMaxOutput_Net = 0.4;
     public static final double rotationPidMaxOutput_Net = 0.4;
-    public static final double xPidMaxOutput_NeedSlow_Net = 0.2;
-    public static final double yPidMaxOutput_NeedSlow_Net = 0.2;
-    public static final double rotationPidMaxOutput_NeedSlow_Net = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level1_Net = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_Net = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_Net = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_Net = 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_Net = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_Net = 0.05;
 
     public static final double xPidMaxOutput_Processor = 0.4;
     public static final double yPidMaxOutput_Processor = 0.4;
-    public static final double rotationPidMaxOutput_Processor = 0.4;
-    public static final double xPidMaxOutput_NeedSlow_Processor = 0.2;
-    public static final double yPidMaxOutput_NeedSlow_Processor = 0.2;
-    public static final double rotationPidMaxOutput_NeedSlow_Processor = 0.2;
+    public static final double rotationPidMaxOutput_Processor = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level1_Processor = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_Processor = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_Processor = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_Processor = 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_Processor = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_Processor = 0.05;
 
     public static final double xPidSetPoint_RightReef = 0.479; 
     public static final double yPidSetPoint_RightReef = -0.0947;
@@ -309,7 +327,7 @@ public final class Constants {
 
     public static final double algaeProccesorPosition = -0.2;//0.12
 
-    public static boolean arriveLow = false;
+    public static int arriveLevel = 0;
   }
 
   public static class Mode{
@@ -439,6 +457,7 @@ public final class Constants {
     public static boolean hasFrontLeftTarget = false;
     public static boolean canTrackLeft = false;
     public static boolean canTrackRight = false;
+    public static boolean canTrackMiddle = false;
     public static boolean noTarget = false;
     public static boolean intakeArriving = false;
     public static boolean arrivePosition_Base = false;
