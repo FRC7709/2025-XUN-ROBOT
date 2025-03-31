@@ -418,10 +418,10 @@ public final class Constants {
     public static final double algaeRemoveVol = -6;
   }
 
-  public static class ClimberConstants {
-    public static final int climbMotor_ID = 0;
+  public static class ClimberConstants { 
+    public static final int climbMotor_ID = 23;
 
-    public static final int absolutedEncoder_ID = 0;
+    public static final int absolutedEncoder_ID = 40;
 
     public static final boolean firstMotorReverse = false;
 
