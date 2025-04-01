@@ -142,6 +142,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     return (Math.abs(goalPosition - getPositionRot()) <= 2);
   }
 
+  // Good
   public boolean arrivePrimition() {
     return (Math.abs(ElevatorConstants.primitivePosition - getPositionRot()) <= 1);
   }
