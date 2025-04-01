@@ -13,12 +13,9 @@ public class ClimbCommand extends Command {
   /** Creates a new ClimbCommand. */
   private final ClimberSubsystem m_ClimberSubsystem;
 
-  private Timer timer;
   public ClimbCommand(ClimberSubsystem climberSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_ClimberSubsystem = climberSubsystem;
-
-    timer = new Timer();
 
     addRequirements(m_ClimberSubsystem);
   }
@@ -27,13 +24,12 @@ public class ClimbCommand extends Command {
   @Override
   public void initialize() {
     m_ClimberSubsystem.setOutAngle();
-    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(timer.get() >= 2) {
+    if(m_ClimberSubsystem.arriveSetPoint()) {
       m_ClimberSubsystem.setClimbAngle();
     }
   }
