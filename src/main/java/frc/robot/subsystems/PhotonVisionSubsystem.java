@@ -422,6 +422,9 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     // frontLeftTargets = frontLeftResult.getTargets();
     backRightResult = backRightCamera.getLatestResult();
     backRightTarget = backRightResult.getBestTarget();
+    
+    backLeftResult = backLeftCamera.getLatestResult();
+    backLeftTarget = backLeftResult.getBestTarget();
 
     SmartDashboard.putBoolean("Photon/FR_hasTarget", hasFrontRightTarget());
     SmartDashboard.putBoolean("Photon/FL_hasTarget", hasFrontLeftTarget());

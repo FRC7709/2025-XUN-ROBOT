@@ -108,7 +108,7 @@ public class TrackCage extends Command {
         xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_Cage_FrontLeft);
         xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Cage);
     }
-  }else if(m_PhotonVisionSubsystem.hasBackTarget()) {
+  }else if(m_PhotonVisionSubsystem.hasBackLeftTarget()) {
     if(backTarget_ID == 20 || backTarget_ID == 11) {
       // Rotation-PID calculations
       rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_BackLeft();

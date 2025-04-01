@@ -39,10 +39,6 @@ public class IntakeAlgae_Floor extends Command {
 
     hasAlgae = false;
     isStartTimer = false;
-
-    // LEDConstants.intakeGamePiece = true;
-    // LEDConstants.hasGamePiece = false;
-    // LEDConstants.LEDFlag = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -53,7 +49,7 @@ public class IntakeAlgae_Floor extends Command {
       timer.start();
       isStartTimer = true;
 
-      if(timer.get() > 0.02) {
+      if(timer.get() > 0.2) {
         hasAlgae = true;
       }else {
         hasAlgae = false;
@@ -73,12 +69,10 @@ public class IntakeAlgae_Floor extends Command {
     m_EndEffectorSubsystem.holdAlgae(); 
     if(m_EndEffectorSubsystem.hasAlgae()) {
       LEDConstants.hasGamePiece = true;
-      LEDConstants.hasAlgae = true;
       LEDConstants.intakeGamePiece = false;
       LEDConstants.LEDFlag = true;
     }else {
       LEDConstants.hasGamePiece = false;
-      LEDConstants.hasAlgae = false;
       LEDConstants.intakeGamePiece = false;
       LEDConstants.LEDFlag = true;
     }

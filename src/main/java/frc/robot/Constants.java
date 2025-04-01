@@ -330,27 +330,6 @@ public final class Constants {
     public static int arriveLevel = 0;
   }
 
-  public static class Mode{
-    public static BooleanSupplier changeModeFunc = () -> nowModeIsCoral();
-    public static String nowMode = "coralMode";
-
-    public static void changeMode(){
-      if (nowMode == "coralMode") {
-        nowMode = "algaeMode";
-      }else{
-        nowMode = "coralMode";
-      }
-    }
-
-    public static boolean nowModeIsCoral(){
-      return nowMode == "coralMode";
-    }
-
-    public static boolean nowModeIsAlgae() {
-      return nowMode == "algaeMode";
-    }
-  }
-
   public static class EndEffectorConstants {
     public static final int intakeWheel_ID = 13;
     public static final int intakeArm_ID = 14;
@@ -361,7 +340,7 @@ public final class Constants {
 
     public static final double absolutedEncoderOffset = 0.140625;
 
-    public static final double armPID_Kp = 0.0051;//0.0048  
+    public static final double armPID_Kp = 0.007;//0.0048  
     public static final double armPID_Ki = 0;
     public static final double armPID_Kd = 0.0001;//0.0001
     public static final double armPIDMinOutput = 0;
