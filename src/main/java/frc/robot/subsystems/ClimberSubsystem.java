@@ -44,7 +44,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     climbMotorConfig = new SparkMaxConfig();
     
-    climbMotorConfig.idleMode(IdleMode.kBrake);
+    climbMotorConfig.idleMode(IdleMode.kCoast);
     climbMotorConfig.inverted(ClimberConstants.firstMotorReverse);
 
     climbMotor.configure(climbMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
@@ -63,7 +63,7 @@ public class ClimberSubsystem extends SubsystemBase {
     climbPID = new PIDController(ClimberConstants.climbPID_Kp, ClimberConstants.climbPID_Ki, ClimberConstants.climbPID_Kd);
 
 
-    goalAngle = ClimberConstants.climbInAngle;
+    goalAngle = ClimberConstants.primitiveAngle;
   }
 
   public double getAngle() {
@@ -72,6 +72,10 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public double getAbsolutedPosition() {
     return absolutedEncoder.getAbsolutePosition().getValueAsDouble();
+  }
+
+  public boolean arriveSetPoint() {
+    return Math.abs(getAngle() - goalAngle) < 2;
   }
 
   public double getRelativePosition() {
