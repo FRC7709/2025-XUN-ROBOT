@@ -38,6 +38,7 @@ import frc.robot.commands.ManualCommands.ShootProcessor;
 import frc.robot.commands.ManualCommands.TurnMore;
 import frc.robot.commands.TrackCommands.TrackLeftReef;
 import frc.robot.commands.TrackCommands.TrackRightReef;
+import frc.robot.commands.TrackCommands.transformCalculation;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
@@ -141,6 +142,9 @@ public class RobotContainer {
     driverController.a().toggleOnTrue(new ResetClimber(m_ClimberSubsystem));
     driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem));
     driverController.x().toggleOnTrue(new Climb(m_ClimberSubsystem));
+
+    // Test
+    driverController.pov(0).toggleOnTrue(new transformCalculation(m_PhotonVisionSubsystem));
 
     driverController.y().whileTrue(
       Commands.runOnce(()->{
