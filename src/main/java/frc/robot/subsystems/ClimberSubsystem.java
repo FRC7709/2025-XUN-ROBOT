@@ -100,6 +100,7 @@ public class ClimberSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Climber/AbsolutedPosition", getAbsolutedPosition());
     SmartDashboard.putNumber("Climber/GoalAngle", goalAngle);
     SmartDashboard.putNumber("Climber/CurrentAngle", getAngle());
-    SmartDashboard.putNumber("Climber/RelativePositon", getRelativePosition());
+    SmartDashboard.putNumber("MotorOutput", pidOutput);
+    // SmartDashboard.putNumber("Climber/RelativePositon", getRelativePosition());
   }
 }
