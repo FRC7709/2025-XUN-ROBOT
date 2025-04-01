@@ -244,12 +244,6 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "PrimitiveIntake"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
                   "pathName": "Left1_Algae"
@@ -259,6 +253,12 @@
                 "type": "sequential",
                 "data": {
                   "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PrimitiveIntake"
+                      }
+                    },
                     {
                       "type": "wait",
                       "data": {

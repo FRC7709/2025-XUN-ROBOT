@@ -406,7 +406,7 @@ public final class Constants {
 
     public static final double absolutedEncoderOffset = 0;
 
-    public static final double climbPID_Kp = 0;
+    public static final double climbPID_Kp = 0.01;
     public static final double climbPID_Ki = 0;
     public static final double climbPID_Kd = 0;
 
@@ -416,9 +416,9 @@ public final class Constants {
     public static final double climbPIDMinOutput = 0;
     public static final double climbPIDMaxOutput = 0.4;
 
-    public static final double climbOutAngle = 0;
-    public static final double climbAngle = 0; 
-    public static final double climbInAngle = 0;
+    public static final double climbOutAngle = -67.8;
+    public static final double climbAngle = -0.80; 
+    public static final double climbInAngle = 66.9;
   }
 
   public class LEDConstants {
