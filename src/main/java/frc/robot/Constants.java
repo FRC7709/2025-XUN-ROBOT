@@ -406,7 +406,7 @@ public final class Constants {
 
     public static final double absolutedEncoderOffset = -0.31762;
 
-    public static final double climbPID_Kp = 0.06;
+    public static final double climbPID_Kp = 0.6;
     public static final double climbPID_Ki = 0;
     public static final double climbPID_Kd = 0;
 

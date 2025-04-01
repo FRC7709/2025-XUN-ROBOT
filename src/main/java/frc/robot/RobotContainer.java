@@ -19,7 +19,7 @@ import frc.robot.commands.AutoCommand.ShootCoral_Auto;
 import frc.robot.commands.AutoCommand.TrackLeftReef_Auto;
 import frc.robot.commands.AutoCommand.TrackMiddleReef_Auto;
 import frc.robot.commands.AutoCommand.TrackRightReef_Auto;
-import frc.robot.commands.ManualCommands.ClimbCommand;
+import frc.robot.commands.ClimbCommand.ResetClimber;
 import frc.robot.commands.ManualCommands.Coral_L1;
 import frc.robot.commands.ManualCommands.Coral_L2;
 import frc.robot.commands.ManualCommands.Coral_L3;
@@ -136,7 +136,7 @@ public class RobotContainer {
     // driverController.leftTrigger(0.4).toggleOnTrue(new TrackMiddleReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.rightBumper().whileTrue(new TrackRightReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.a().toggleOnTrue(new TrackCage(m_SwerveSubsystem, m_PhotonVisionSubsystem));
-    driverController.a().whileTrue(new ClimbCommand(m_ClimberSubsystem));
+    driverController.a().toggleOnTrue(new ResetClimber(m_ClimberSubsystem));
 
     driverController.y().whileTrue(
       Commands.runOnce(()->{

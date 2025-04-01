@@ -37,6 +37,8 @@ public class ClimberSubsystem extends SubsystemBase {
   private double pidOutput;
   private double goalAngle;
 
+  private String climberState;
+
   public ClimberSubsystem() {
     goalAngle = ClimberConstants.climbInAngle;
     //Climber Motor
@@ -62,8 +64,8 @@ public class ClimberSubsystem extends SubsystemBase {
     // PID and Feedforward
     climbPID = new PIDController(ClimberConstants.climbPID_Kp, ClimberConstants.climbPID_Ki, ClimberConstants.climbPID_Kd);
 
-
     goalAngle = ClimberConstants.primitiveAngle;
+    climberState = "Primitive";
   }
 
   public double getAngle() {
@@ -82,15 +84,23 @@ public class ClimberSubsystem extends SubsystemBase {
     return motorEncoder.getPosition();
   }
 
-  public void setOutAngle(){
+  public void ResetClimber(){
+    climberState = "Reset";
+    goalAngle = ClimberConstants.primitiveAngle;
+  }
+
+  public void Release(){
+    climberState = "Release";
     goalAngle = ClimberConstants.climbOutAngle;
   }
 
-  public void setClimbAngle() {
+  public void PrepClimb() {
+    climberState = "PrepClimb";
     goalAngle = ClimberConstants.climbAngle;
   }
 
-  public void setInAngle(){
+  public void Climb(){
+    climberState = "Climb";
     goalAngle = ClimberConstants.climbInAngle;
   }
 
@@ -98,13 +108,14 @@ public class ClimberSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     pidOutput = climbPID.calculate(getAngle(), goalAngle);
-    Constants.setMaxOutput(pidOutput, ClimberConstants.climbPIDMaxOutput);
-    climbMotor.set(pidOutput);
+    // pidOutput = Constants.setMaxOutput(pidOutput, ClimberConstants.climbPIDMaxOutput);
+    climbMotor.setVoltage(pidOutput);
 
     SmartDashboard.putNumber("Climber/AbsolutedPosition", getAbsolutedPosition());
     SmartDashboard.putNumber("Climber/GoalAngle", goalAngle);
     SmartDashboard.putNumber("Climber/CurrentAngle", getAngle());
-    SmartDashboard.putNumber("MotorOutput", pidOutput);
+    SmartDashboard.putNumber("Climber/MotorOutputVolt", pidOutput);
+    SmartDashboard.putString("Climber/State", climberState);
     // SmartDashboard.putNumber("Climber/RelativePositon", getRelativePosition());
   }
 }
