@@ -150,6 +150,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     return goalPosition;
   }
 
+  public double getSetpointMeter(){
+    return goalPosition * 0.02872; // Convert Rotations to Meters
+  }
+
   @Override
   public void periodic() {
     // Elevator control loop

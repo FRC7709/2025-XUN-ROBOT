@@ -176,8 +176,8 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Level2 = 0.2;
     public static final double rotationPidMaxOutput_NeedSlow_Level2 = 0.2;
 
-    public static final double xPidMaxOutput_Reef = 0.4;
-    public static final double yPidMaxOutput_Reef = 0.4;
+    public static final double xPidMaxOutput_Reef = 0.3;
+    public static final double yPidMaxOutput_Reef = 0.3;
     public static final double rotationPidMaxOutput_Reef = 0.2;
     public static final double xPidMaxOutput_NeedSlow_Level1_Reef= 0.2;
     public static final double yPidMaxOutput_NeedSlow_Level1_Reef = 0.2;
@@ -369,7 +369,7 @@ public final class Constants {
     public static final double coralL2Angle = 75;
     public static final double coralL3Angle = 82;
     public static final double coralL4Angle = 56;//not yet
-    public static final double coralStationAngle = 82;
+    public static final double coralStationAngle = 75;
     public static final double coralL4UpAngle = 70;
     public static final double algaeFloorAngle = 7;
     public static final double algaeNetAngle = 100;//not yet

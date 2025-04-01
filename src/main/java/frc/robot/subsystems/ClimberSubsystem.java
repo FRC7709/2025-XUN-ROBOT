@@ -64,7 +64,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public double getAngle() {
-    return absolutedEncoder.getAbsolutePosition().getValueAsDouble();
+    return absolutedEncoder.getAbsolutePosition().getValueAsDouble()*180;
   }
 
   public double getAbsolutedPosition() {

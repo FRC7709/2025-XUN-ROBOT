@@ -338,16 +338,16 @@ public class PhotonVisionSubsystem extends SubsystemBase {
 
   public boolean isArrive_Reef(String reef) {
     if(reef == "RightReef") {
-      if((getXError_Reef("RightReef")) <= 0.03 && (getYError_Reef("RightReef") <= 0.03) && (getRotationError_Reef("RightReef") <= 0.75) && hasFrontLeftTarget()) return true;
+      if((getXError_Reef("RightReef")) <= 0.06 && (getYError_Reef("RightReef") <= 0.06) && (getRotationError_Reef("RightReef") <= 0.75) && hasFrontLeftTarget()) return true;
       else return false;
     }else if(reef == "LeftReef") {
-      if((getXError_Reef("LeftReef")) <= 0.02 && (getYError_Reef("LeftReef") <= 0.02) && (getRotationError_Reef("LeftReef") <= 0.5) && hasFrontRightTarget()) return true;
+      if((getXError_Reef("LeftReef")) <= 0.06 && (getYError_Reef("LeftReef") <= 0.06) && (getRotationError_Reef("LeftReef") <= 0.5) && hasFrontRightTarget()) return true;
       else return false;
     }else if(reef == "MiddleReef_FrontRight") {
-      if((getXError_Reef("MiddleReef_FrontRight") <= 0.02) && (getYError_Reef("MiddleReef_FrontRight") <= 0.02) && (getRotationError_Reef("MiddleReef_FrontRight") <= 0.5)) return true;
+      if((getXError_Reef("MiddleReef_FrontRight") <= 0.06) && (getYError_Reef("MiddleReef_FrontRight") <= 0.06) && (getRotationError_Reef("MiddleReef_FrontRight") <= 0.5)) return true;
       else return false;
     }else {
-      if((getXError_Reef("MiddleReef_FrontLeft") <= 0.02) && (getYError_Reef("MiddleReef_FrontLeft") <= 0.02) && (getRotationError_Reef("MiddleReef_FrontLeft") <= 0.5)) return true;
+      if((getXError_Reef("MiddleReef_FrontLeft") <= 0.06) && (getYError_Reef("MiddleReef_FrontLeft") <= 0.06) && (getRotationError_Reef("MiddleReef_FrontLeft") <= 0.5)) return true;
       else return false;
     } 
   }

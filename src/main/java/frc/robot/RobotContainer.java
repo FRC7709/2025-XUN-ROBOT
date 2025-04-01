@@ -35,6 +35,7 @@ import frc.robot.commands.ManualCommands.ShootProcessor;
 import frc.robot.commands.ManualCommands.TurnMore;
 import frc.robot.commands.TrackCommands.TrackLeftReef;
 import frc.robot.commands.TrackCommands.TrackRightReef;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
@@ -61,7 +62,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem();
+  private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem();
   private final PhotonVisionSubsystem m_PhotonVisionSubsystem = new PhotonVisionSubsystem();
   private final SwerveSubsystem_Kraken m_SwerveSubsystem = new SwerveSubsystem_Kraken();
   private final ElevatorSubsystem m_ElevatorSubsystem = new ElevatorSubsystem();

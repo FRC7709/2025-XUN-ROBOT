@@ -56,6 +56,9 @@ public class EndEffectorSubsystem extends SubsystemBase {
   private Debouncer m_Debouncer_first;
   private Debouncer m_Debouncer_second;
 
+  private String pivotState = "IDLE"; // State of the end effector subsystem
+  private String wheelState = "STOP"; // State of the motor (wheel or pivot)
+
     public EndEffectorSubsystem() {
       // Motor controller
       wheelMotor = new TalonFX(EndEffectorConstants.intakeWheel_ID);
@@ -68,7 +71,6 @@ public class EndEffectorSubsystem extends SubsystemBase {
       irSensor_Algae = new DigitalInput(EndEffectorConstants.irSensor_Algae_ID);
       // Init goal angle
       goalAngle = EndEffectorConstants.primitiveAngle;
-      
   
       // Motor Configurations
       wheelConfig = new TalonFXConfiguration();
@@ -122,49 +124,110 @@ public class EndEffectorSubsystem extends SubsystemBase {
   
     // ======== Arm ========
     // Intake coral
-    public void intakeCoral_Arm() {goalAngle = EndEffectorConstants.coralStationAngle;}
-    // Shoot Reef
-    public void Arm_IDLE() {goalAngle = EndEffectorConstants.primitiveAngle;}
-    public void Arm_shootCoral_L1() {goalAngle = EndEffectorConstants.coralL1Angle;}
-    public void Arm_shootCoral_L2() {goalAngle = EndEffectorConstants.coralL2Angle;}
-    public void Arm_shootCoral_L3() {goalAngle = EndEffectorConstants.coralL3Angle;}
-    public void Arm_shootCoral_L4() {goalAngle = EndEffectorConstants.coralL4Angle;}
-    public void coralL4Primitive_Arm(){goalAngle = EndEffectorConstants.coralL4UpAngle;}
+    public void intakeCoral_Arm() {
+      pivotState = "ARM_INTAKECORAL";
+      goalAngle = EndEffectorConstants.coralStationAngle;}
+    public void Arm_IDLE() {
+      pivotState = "ARM_IDLE";
+      goalAngle = EndEffectorConstants.primitiveAngle;}
+    public void Arm_shootCoral_L1() {
+      pivotState = "ARM_SHOOTCORAL_L1"; // Update state for logging
+      goalAngle = EndEffectorConstants.coralL1Angle;}
+    public void Arm_shootCoral_L2() {
+      pivotState = "ARM_SHOOTCORAL_L2"; // Update state for logging
+      goalAngle = EndEffectorConstants.coralL2Angle;}
+    public void Arm_shootCoral_L3() {
+      pivotState = "ARM_SHOOTCORAL_L3"; // Update state for logging
+      goalAngle = EndEffectorConstants.coralL3Angle;}
+    public void Arm_shootCoral_L4() {
+      pivotState = "ARM_SHOOTCORAL_L4"; // Update state for logging
+      goalAngle = EndEffectorConstants.coralL4Angle;}
+    public void coralL4Primitive_Arm(){
+      pivotState = "ARM_CORAL_L4_PRIMITIVE"; // Update state for logging
+      goalAngle = EndEffectorConstants.coralL4UpAngle;}
 
-    public void Arm_NET_IDLE() {goalAngle = EndEffectorConstants.netUpAngle;}
-    public void Arm_shootAlgae_NET() {goalAngle = EndEffectorConstants.algaeNetAngle;}
-    public void Arm_shootAlgae_Processor() {goalAngle = EndEffectorConstants.algaeProccesorAngle;}
+    public void Arm_NET_IDLE() {
+      pivotState = "ARM_NET_IDLE"; // Update state for logging
+      goalAngle = EndEffectorConstants.netUpAngle;}
+    public void Arm_shootAlgae_NET() {
+      pivotState = "ARM_SHOOTALGAE_NET"; // Update state for logging
+      goalAngle = EndEffectorConstants.algaeNetAngle;}
+    public void Arm_shootAlgae_Processor() {
+      pivotState = "ARM_SHOOTALGAE_PROCESSOR"; // Update state for logging
+      goalAngle = EndEffectorConstants.algaeProccesorAngle;}
     // Intake algae
-    public void Arm_intakeAlgae_Low() {goalAngle = EndEffectorConstants.algaeLowInAngle;}
-    public void Arm_intakeAlgae_High() {goalAngle = EndEffectorConstants.algaeHighInAngle;}
-    public void Arm_intakeAlgae_Floor() {goalAngle = EndEffectorConstants.algaeFloorAngle;}
+    public void Arm_intakeAlgae_Low() {
+      pivotState = "ARM_INTAKEALGAE_LOW"; // Update state for logging
+      goalAngle = EndEffectorConstants.algaeLowInAngle;}
+    public void Arm_intakeAlgae_High() {
+      pivotState = "ARM_INTAKEALGAE_HIGH"; // Update state for logging
+      goalAngle = EndEffectorConstants.algaeHighInAngle;}
+    public void Arm_intakeAlgae_Floor() {
+      pivotState = "ARM_INTAKEALGAE_FLOOR"; // Update state for logging
+      goalAngle = EndEffectorConstants.algaeFloorAngle;}
 
-    public void primitiveArm_HasCoral() {goalAngle = EndEffectorConstants.primitiveAngle_HasCoral;}
-    public void Arm_RemoveAlgae() {goalAngle = EndEffectorConstants.algaeRemoveAngle;}
+    public void primitiveArm_HasCoral() {
+      pivotState = "ARM_PRIMITIVE_HAS_CORAL"; // Update state for logging
+      goalAngle = EndEffectorConstants.primitiveAngle_HasCoral;}
+    public void Arm_RemoveAlgae() {
+      pivotState = "ARM_REMOVEALGAE"; // Update state for logging
+      goalAngle = EndEffectorConstants.algaeRemoveAngle;}
 
     // ======== Wheel ========
     // Inatake coral
-    public void intakeCoral_Wheel() {wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeed_RotionPerSecond));}
-    public void intakeCoralSlow_Wheel() {wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeedSlow_RotationPerSecond));}
+    public void intakeCoral_Wheel() {
+      wheelState = "WHEEL_INTAKECORAL";
+      wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeed_RotionPerSecond));}
+    public void intakeCoralSlow_Wheel() {
+      wheelState = "WHEEL_INTAKECORAL_SLOW"; 
+      wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeedSlow_RotationPerSecond));}
     // Coral
-    public void turnMore_Coral() {wheelMotor.setVoltage(EndEffectorConstants.coralTurnMore);}
+    public void turnMore_Coral() {
+      wheelState = "WHEEL_TURN_MORE_CORAL";
+      wheelMotor.setVoltage(EndEffectorConstants.coralTurnMore);}
     // Shoot coral
-    public void Wheel_shootCoral_L1() {wheelMotor.setVoltage(EndEffectorConstants.coralL1OutVol);}
-    public void Wheel_shootCoral_L2() {wheelMotor.setVoltage(EndEffectorConstants.coralL2OutVol);}
-    public void Wheel_shootCoral_L3() {wheelMotor.setVoltage(EndEffectorConstants.coralL3OutVol);}
-    public void Wheel_shootCoral_L4() {wheelMotor.setVoltage(EndEffectorConstants.coralL4OutVol);}
+    public void Wheel_shootCoral_L1() {
+      wheelState = "WHEEL_SHOOTCORAL_L1"; 
+      wheelMotor.setVoltage(EndEffectorConstants.coralL1OutVol);}
+    public void Wheel_shootCoral_L2() {
+      wheelState = "WHEEL_SHOOTCORAL_L2"; 
+      wheelMotor.setVoltage(EndEffectorConstants.coralL2OutVol);}
+    public void Wheel_shootCoral_L3() {
+      wheelState = "WHEEL_SHOOTCORAL_L3";
+      wheelMotor.setVoltage(EndEffectorConstants.coralL3OutVol);}
+    public void Wheel_shootCoral_L4() {
+      wheelState = "WHEEL_SHOOTCORAL_L4";
+      wheelMotor.setVoltage(EndEffectorConstants.coralL4OutVol);}
     // Intake Algae
-    public void intakeAlgae_Low_Wheel() {wheelMotor.setVoltage(EndEffectorConstants.algaeLowInVol);}
-    public void intakeAlgae_High_Wheel() {wheelMotor.setVoltage(EndEffectorConstants.algaeHighInVol);}
-    public void intakeAlgae_Floor_Wheel() {wheelMotor.setVoltage(EndEffectorConstants.algaeFloorInVol);}
+    public void intakeAlgae_Low_Wheel() {
+      wheelState = "WHEEL_INTAKEALGAE_LOW";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeLowInVol);}
+    public void intakeAlgae_High_Wheel() {
+      wheelState = "WHEEL_INTAKEALGAE_HIGH";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeHighInVol);}
+    public void intakeAlgae_Floor_Wheel() {
+      wheelState = "WHEEL_INTAKEALGAE_FLOOR";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeFloorInVol);}
     // Shoot Algae
-    public void Wheel_shootAlgae_NET() {wheelMotor.setVoltage(EndEffectorConstants.algaeShootNetVol);}
-    public void Wheel_shootAlgae_Processor() {wheelMotor.setVoltage(EndEffectorConstants.algaeShootProcessorVol);}
+    public void Wheel_shootAlgae_NET() {
+      wheelState = "WHEEL_SHOOTALGAE_NET";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeShootNetVol);}
+    public void Wheel_shootAlgae_Processor() {
+      wheelState = "WHEEL_SHOOTALGAE_PROCESSOR";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeShootProcessorVol);}
     // Wheel control
-    public void outAlgae() {wheelMotor.setVoltage(EndEffectorConstants.algaeOutVol);}
-    public void holdAlgae() {wheelMotor.setVoltage(EndEffectorConstants.algaeHoldVol);}
-    public void RemoveAlgae() {wheelMotor.setVoltage(EndEffectorConstants.algaeRemoveVol);}
-    public void stopWheel() {wheelMotor.setControl(requst_wheelSpeed.withVelocity(0));}
+    public void outAlgae() {
+      wheelState = "WHEEL_OUTALGAE";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeOutVol);}
+    public void holdAlgae() {
+      wheelState = "WHEEL_HOLDALGAE";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeHoldVol);}
+    public void RemoveAlgae() {
+      wheelState = "WHEEL_REMOVEALGAE";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeRemoveVol);}
+    public void stopWheel() {
+      wheelState = "WHEEL_STOP";
+      wheelMotor.setControl(requst_wheelSpeed.withVelocity(0));}
 
     
     public double getPosition() {
@@ -255,10 +318,11 @@ public class EndEffectorSubsystem extends SubsystemBase {
       SmartDashboard.putBoolean("EndEffector/AlgaeIR", getAlgaeIR());
       SmartDashboard.putBoolean("EndEffector/hasCoral", hasCoral());
       SmartDashboard.putBoolean("EndEffector/hasAlgae", hasAlgae());
-      // SmartDashboard.putNumber("EndEffector/PivotAbsPosition", getAbsolutePosition());
       SmartDashboard.putNumber("EndEffector/PivotAngle", getAngle());
-      // SmartDashboard.putNumber("EndEffector/PivotPosition", getPosition());
       SmartDashboard.putNumber("EndEffector/PivotSetpoint", goalAngle);
       SmartDashboard.putNumber("EndEffector/WheelCurrent", wheelMotor.getStatorCurrent().getValueAsDouble());
+      SmartDashboard.putString("EndEffector/PivotState", pivotState);
+      SmartDashboard.putString("EndEffector/WheelState", wheelState);
+      
   }
 }
