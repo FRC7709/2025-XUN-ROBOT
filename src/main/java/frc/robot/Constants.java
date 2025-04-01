@@ -416,6 +416,7 @@ public final class Constants {
     public static final double climbPIDMinOutput = 0;
     public static final double climbPIDMaxOutput = 0.4;
 
+    public static final double primitiveAngle = 66.9;
     public static final double climbOutAngle = -67.8;
     public static final double climbAngle = -0.80; 
     public static final double climbInAngle = 66.9;
