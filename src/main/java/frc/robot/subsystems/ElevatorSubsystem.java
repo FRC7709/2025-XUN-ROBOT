@@ -147,7 +147,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     return (Math.abs(ElevatorConstants.primitivePosition - getPositionRot()) <= 1);
   }
 
-  public double getSetpoint() {
+  public double getSetpointRot() {
     return goalPosition;
   }
 
@@ -197,11 +197,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     // Log
-    SmartDashboard.putNumber("Elevator/GoalPositionRot", goalPosition);
-    SmartDashboard.putNumber("Elevator/CurrentPositionRot", getPositionRot());
-    SmartDashboard.putBoolean("Elevator/ArriveSetpoint", arriveSetPoint());
-    SmartDashboard.putNumber("Elevator/VelocityMeter", getVelocity()); // Meter per second
+    SmartDashboard.putNumber("Elevator/GoalPositionRot", getSetpointRot());
+    SmartDashboard.putNumber("Elevator/GoalPositionMeter", getSetpointMeter());
+    SmartDashboard.putNumber("Elevator/PositionRot", getPositionRot());
     SmartDashboard.putNumber("Elevator/PositionMeter",  getPositionMeter()); // Meter
+    SmartDashboard.putNumber("Elevator/VelocityMeter", getVelocity()); // Meter per second
     SmartDashboard.putString("Elevator/State", elevatorState);
+    SmartDashboard.putBoolean("Elevator/ArriveSetpoint", arriveSetPoint());
   }
 }
