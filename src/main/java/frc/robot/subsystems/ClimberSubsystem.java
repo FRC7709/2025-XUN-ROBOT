@@ -61,6 +61,9 @@ public class ClimberSubsystem extends SubsystemBase {
 
     // PID and Feedforward
     climbPID = new PIDController(ClimberConstants.climbPID_Kp, ClimberConstants.climbPID_Ki, ClimberConstants.climbPID_Kd);
+
+
+    goalAngle = ClimberConstants.climbInAngle;
   }
 
   public double getAngle() {
