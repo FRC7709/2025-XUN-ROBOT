@@ -226,21 +226,21 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Level2_Processor = 0.1;
     public static final double rotationPidMaxOutput_NeedSlow_Level2_Processor = 0.05;
 
-    public static final double xPidSetPoint_RightReef = 0.479; 
-    public static final double yPidSetPoint_RightReef = -0.0947;
-    public static final double rotationPidSetPoint_RightReef = 177;
+    public static final double xPidSetPoint_RightReef = 0.406; 
+    public static final double yPidSetPoint_RightReef = -0.138;
+    public static final double rotationPidSetPoint_RightReef = 180;
 
-    public static final double xPidSetPoint_LeftReef = 0.4977;
-    public static final double yPidSetPoint_LeftReef = 0.15;
-    public static final double rotationPidSetPoint_LeftReef = 179.9;
+    public static final double xPidSetPoint_LeftReef = 0.4093;
+    public static final double yPidSetPoint_LeftReef = 0.125;
+    public static final double rotationPidSetPoint_LeftReef = 179.3;
 
-    public static final double xPidSetPoint_MiddleReef_FrontRight = 0;
-    public static final double yPidSetPoint_MiddleReef_FrontRight = 0;
-    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 182;
+    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.417;
+    public static final double yPidSetPoint_MiddleReef_FrontRight = -0.212;
+    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 180.2;
 
-    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0;
-    public static final double yPidSetPoint_MiddleReef_FrontLeft = 0;
-    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 0;
+    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.417;
+    public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.212;
+    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 180.2;
 
     public static final double xPidSetPoint_LeftCoralStation_BackLeft = 0;
     public static final double yPidSetPoint_LeftCoralStation_BackLeft = 0;
@@ -367,7 +367,7 @@ public final class Constants {
     public static final double primitiveAngle_HasCoral = 82;
     public static final double coralL1Angle = 82;
     public static final double coralL2Angle = 75;
-    public static final double coralL3Angle = 82;
+    public static final double coralL3Angle = 75;
     public static final double coralL4Angle = 56;//not yet
     public static final double coralStationAngle = 75;
     public static final double coralL4UpAngle = 70;
@@ -406,7 +406,7 @@ public final class Constants {
 
     public static final double absolutedEncoderOffset = -0.31762;
 
-    public static final double climbPID_Kp = 0.6;
+    public static final double climbPID_Kp = 0.8;
     public static final double climbPID_Ki = 0;
     public static final double climbPID_Kd = 0;
 
@@ -425,7 +425,7 @@ public final class Constants {
   public class LEDConstants {
     public static final int candle_ID = 46;
 
-    public static final int ledNum = 32;
+    public static final int ledNum = 20;
 
     public static boolean LEDFlag = false;
     public static boolean hasGamePiece = false;

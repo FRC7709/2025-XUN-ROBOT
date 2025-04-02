@@ -41,11 +41,12 @@ public class Coral_L4_Elevator_Auto extends Command {
   public void execute() {
     if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp()) {
       m_ElevatorSubsystem.outCoral_L4(); 
-      m_EndEffectorSubsystem.Arm_shootCoral_L4();   
+      // m_EndEffectorSubsystem.Arm_shootCoral_L4();   
       ifArrive_EndEffector = true;
     }
 
     if(m_ElevatorSubsystem.arriveSetPoint() && ifArrive_EndEffector) {
+      m_EndEffectorSubsystem.Arm_shootCoral_L4();   
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
     }

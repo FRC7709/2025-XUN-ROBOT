@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ManualDrive_Kraken;
+import frc.robot.commands.ManualDrive_RotationSpeedUp;
 import frc.robot.commands.AutoCommand.Coral_L1_Elevator_Auto;
 import frc.robot.commands.AutoCommand.Coral_L2_Elevator_Auto;
 import frc.robot.commands.AutoCommand.Coral_L3_Elevator_Auto;
@@ -37,6 +38,7 @@ import frc.robot.commands.ManualCommands.ShootNet;
 import frc.robot.commands.ManualCommands.ShootProcessor;
 import frc.robot.commands.ManualCommands.TurnMore;
 import frc.robot.commands.TrackCommands.TrackLeftReef;
+import frc.robot.commands.TrackCommands.TrackMiddleReef_Right;
 import frc.robot.commands.TrackCommands.TrackRightReef;
 import frc.robot.commands.TrackCommands.transformCalculation;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -93,12 +95,16 @@ public class RobotContainer {
 
     NamedCommands.registerCommand("stopMotor", Commands.runOnce(() -> m_SwerveSubsystem.stopMotor(), m_SwerveSubsystem));
     NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1));
+    NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1));//1
+    NamedCommands.registerCommand("TrackLeftReef_Auto_OneCoral", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("TrackRightReef_Auto_OneCoral", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(3));
     NamedCommands.registerCommand("IntakeCoral_Reef", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.3));
     NamedCommands.registerCommand("IntakeCoral", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(5));
     NamedCommands.registerCommand("PrimitiveIntake", new PrimitiveIntake_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.4));
     NamedCommands.registerCommand("Coral_L4_Intake_WithTrack", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("Coral_L4_Intake", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.8));
+    NamedCommands.registerCommand("Coral_L4_Intake_WithTrack_OneCoral", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(2));
+    NamedCommands.registerCommand("Coral_L4_Intake_OneCoral", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(2));
     NamedCommands.registerCommand("Coral_L2_Intake", new Coral_L2_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.2));
     NamedCommands.registerCommand("Coral_L3_Intake", new Coral_L3_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.3));
     NamedCommands.registerCommand("Coral_L1_Intake", new Coral_L1_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.1));
@@ -139,12 +145,11 @@ public class RobotContainer {
     // driverController.leftTrigger(0.4).toggleOnTrue(new TrackMiddleReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.rightBumper().whileTrue(new TrackRightReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.a().toggleOnTrue(new TrackCage(m_SwerveSubsystem, m_PhotonVisionSubsystem));
+    driverController.pov(90).whileTrue(new ManualDrive_RotationSpeedUp(m_SwerveSubsystem, xSpeedFunc, ySpeedFunc, zSpeedFunc, isSlowFunc));
     driverController.a().toggleOnTrue(new ResetClimber(m_ClimberSubsystem));
     driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem));
     driverController.x().toggleOnTrue(new Climb(m_ClimberSubsystem));
 
-    // Test
-    driverController.pov(0).toggleOnTrue(new transformCalculation(m_PhotonVisionSubsystem));
 
     driverController.y().whileTrue(
       Commands.runOnce(()->{
@@ -152,7 +157,7 @@ public class RobotContainer {
       })
     );
 
-    
+
     // Operator Controller
     operatorController.pov(180).toggleOnTrue(new Coral_L1(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.pov(0).toggleOnTrue(new Coral_L2(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
@@ -181,7 +186,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    // return autoChooser.getSelected();
-    return null;
+    return autoChooser.getSelected();
   }
 } 

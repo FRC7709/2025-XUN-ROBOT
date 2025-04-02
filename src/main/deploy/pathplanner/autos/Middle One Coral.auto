@@ -25,13 +25,26 @@
         {
           "type": "named",
           "data": {
-            "name": "Coral_L4_Intake"
+            "name": "Coral_L4_Intake_OneCoral"
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "TrackLeftReef_Auto"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "TrackLeftReef_Auto_OneCoral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Coral_L4_Intake_WithTrack_OneCoral"
+                }
+              }
+            ]
           }
         },
         {

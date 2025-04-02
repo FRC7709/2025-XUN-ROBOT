@@ -36,6 +36,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private double pidOutput;
   private double goalAngle;
+  private boolean climbFlag;
 
   private String climberState;
 
@@ -46,7 +47,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     climbMotorConfig = new SparkMaxConfig();
     
-    climbMotorConfig.idleMode(IdleMode.kCoast);
+    climbMotorConfig.idleMode(IdleMode.kBrake);
     climbMotorConfig.inverted(ClimberConstants.firstMotorReverse);
 
     climbMotor.configure(climbMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
@@ -66,6 +67,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     goalAngle = ClimberConstants.primitiveAngle;
     climberState = "Primitive";
+    climbFlag = false;
   }
 
   public double getAngle() {
@@ -86,6 +88,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void ResetClimber(){
     climberState = "Reset";
+    climbFlag = false;
     goalAngle = ClimberConstants.primitiveAngle;
   }
 
@@ -101,21 +104,32 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void Climb(){
     climberState = "Climb";
-    goalAngle = ClimberConstants.climbInAngle;
+    // goalAngle = ClimberConstants.climbInAngle;
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    pidOutput = climbPID.calculate(getAngle(), goalAngle);
-    // pidOutput = Constants.setMaxOutput(pidOutput, ClimberConstants.climbPIDMaxOutput);
-    climbMotor.setVoltage(pidOutput);
-
+    if(climberState == "Climb"){
+      if(getAngle()<-3 && climbFlag==false){
+        climbMotor.setVoltage(0);
+        climbFlag = true;
+      }
+      if(climbFlag==false){
+        climbMotor.setVoltage(-8);
+      }
+    }else{
+      // This method will be called once per scheduler run
+      pidOutput = climbPID.calculate(getAngle(), goalAngle);
+      if(getAngle()<-4) pidOutput = 0;
+      // pidOutput = Constants.setMaxOutput(pidOutput, ClimberConstants.climbPIDMaxOutput);
+      climbMotor.setVoltage(pidOutput);
+    }
     SmartDashboard.putNumber("Climber/AbsolutedPosition", getAbsolutedPosition());
     SmartDashboard.putNumber("Climber/GoalAngle", goalAngle);
     SmartDashboard.putNumber("Climber/CurrentAngle", getAngle());
     SmartDashboard.putNumber("Climber/MotorOutputVolt", pidOutput);
     SmartDashboard.putString("Climber/State", climberState);
+    SmartDashboard.putBoolean("Climber/ArrivedSetpoint", arriveSetPoint());
     // SmartDashboard.putNumber("Climber/RelativePositon", getRelativePosition());
   }
 }

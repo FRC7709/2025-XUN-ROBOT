@@ -152,7 +152,6 @@ public class LEDSubsystem extends SubsystemBase {
       else if(LEDConstants.tracking) tracking();
       else if(LEDConstants.canTrackRight) canTrackLeft();
       else if(LEDConstants.canTrackLeft) canTrackRight();
-      else if(LEDConstants.canTrackMiddle) canTrackMiddle();
       else if(LEDConstants.arrivePosition_Intake) arrivePosition_Intake();
       else if(LEDConstants.intakeArriving) intakeArriving();
       else if(LEDConstants.hasGamePiece) hasGamePiece();
