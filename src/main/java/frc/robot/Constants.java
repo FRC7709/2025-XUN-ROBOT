@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
@@ -28,18 +26,6 @@ public final class Constants {
   public static double setMaxOutput(double output, double maxOutput){
     return Math.min(maxOutput, Math.max(-maxOutput, output));
   }
-
-  // public static Double[] optimate(double currentAngle, double goalAngle, double speedMetersPerSecond){
-  //   Double[] goal = new Double[2];
-  //   double delta = Math.abs(goalAngle - currentAngle);
-  //   if (delta > (Math.PI / 2)) {
-  //     goalAngle = goalAngle - Math.PI;
-  //     speedMetersPerSecond = speedMetersPerSecond * -1;
-  //   }
-  //   goal[0] = goalAngle;
-  //   goal[1] = speedMetersPerSecond;
-  //   return goal;
-  // }
 
   public static class Module_KrakenConstants {
 
@@ -446,8 +432,6 @@ public final class Constants {
     public static boolean climbing = false;
     public static boolean fireAnimation = false;
     public static boolean normal = false;
-
-
   }
 
   public static class Module_NeoConstants {

@@ -24,8 +24,6 @@ public class LEDSubsystem extends SubsystemBase {
   private final int ledNum;
   private Animation ledAnimation;
 
-  private Timer timer;
-
   public LEDSubsystem() {
     candle = new CANdle(LEDConstants.candle_ID);
     candleConfig = new CANdleConfiguration();
@@ -39,8 +37,6 @@ public class LEDSubsystem extends SubsystemBase {
     ledNum = LEDConstants.ledNum;
 
     ledAnimation = null;
-    timer = new Timer();
-
     normal();
   }
 
@@ -53,8 +49,6 @@ public class LEDSubsystem extends SubsystemBase {
   public void hasGamePiece() {
     ledAnimation = new StrobeAnimation(0, 127, 0);
     candle.animate(ledAnimation);
-    timer.reset();
-    timer.start();
     LEDConstants.LEDFlag = false;
   }
 
@@ -138,8 +132,6 @@ public class LEDSubsystem extends SubsystemBase {
     candle.setLEDs(0, 0, 0);
     LEDConstants.LEDFlag = false;
   }
-
-  
 
 
   @Override

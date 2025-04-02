@@ -14,11 +14,9 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
@@ -104,26 +102,27 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void Climb(){
     climberState = "Climb";
-    // goalAngle = ClimberConstants.climbInAngle;
   }
 
   @Override
   public void periodic() {
+    // In climer state, the climber will not move if the angle is less than -3
     if(climberState == "Climb"){
+      // If the angle is less than -3, the climber will stop and set the flag to true
       if(getAngle()<-3 && climbFlag==false){
         climbMotor.setVoltage(0);
         climbFlag = true;
       }
+      // If the angle is greater than -3, the climber will move down
       if(climbFlag==false){
         climbMotor.setVoltage(-8);
       }
     }else{
-      // This method will be called once per scheduler run
       pidOutput = climbPID.calculate(getAngle(), goalAngle);
       if(getAngle()<-4) pidOutput = 0;
-      // pidOutput = Constants.setMaxOutput(pidOutput, ClimberConstants.climbPIDMaxOutput);
       climbMotor.setVoltage(pidOutput);
     }
+    // log
     SmartDashboard.putNumber("Climber/AbsolutedPosition", getAbsolutedPosition());
     SmartDashboard.putNumber("Climber/GoalAngle", goalAngle);
     SmartDashboard.putNumber("Climber/CurrentAngle", getAngle());

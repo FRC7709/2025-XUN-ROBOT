@@ -10,44 +10,31 @@ import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class IntakeAlgae_High_Auto extends Command {
-  /** Creates a new IntakeAlgae_High_Elevator. */
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
-
-  private Timer timer;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
 
   private boolean shouldHold;
 
   private boolean hasAlgae;
 
   public IntakeAlgae_High_Auto(ElevatorSubsystem ElevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.m_ElevatorSubsystem = ElevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
-
-    timer = new Timer();
+    this.m_Elevator = ElevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
 
     shouldHold = false;
-
     hasAlgae = false;
 
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_ElevatorSubsystem.intakeAlgae_High();
-    // m_EndEffectorSubsystem.Arm_intakeAlgae_High();
-    // m_EndEffectorSubsystem.intakeAlgae_High_Wheel();
-    m_EndEffectorSubsystem.Arm_IDLE();
-
-    // arriveEndEffectorPrimition = false;
-
+    // Reset end effector
+    m_EndEffector.Arm_IDLE();
+    // Led 
     LEDConstants.intakeGamePiece = true;
-    LEDConstants.hasAlgae = false;
     LEDConstants.hasGamePiece = false;
     LEDConstants.LEDFlag = true;
   }
@@ -56,39 +43,27 @@ public class IntakeAlgae_High_Auto extends Command {
   @Override
   public void execute() {
     if(!LEDConstants.hasAlgae) {
-      if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp() && !m_EndEffectorSubsystem.hasAlgae()) {
-        m_ElevatorSubsystem.intakeAlgae_High();
+      if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp() && !m_EndEffector.hasAlgae()) {
+        m_Elevator.intakeAlgae_High();
 
-        if(m_ElevatorSubsystem.arriveSetPoint()) {
-          m_EndEffectorSubsystem.Arm_intakeAlgae_High();
-          m_EndEffectorSubsystem.intakeAlgae_High_Wheel();
+        if(m_Elevator.arriveSetPoint()) {
+          m_EndEffector.Arm_intakeAlgae_High();
+          m_EndEffector.intakeAlgae_High_Wheel();
         }
       }
 
-      if(m_EndEffectorSubsystem.hasAlgae()) {
-        m_EndEffectorSubsystem.Arm_IDLE();
-        m_EndEffectorSubsystem.holdAlgae();
+      if(m_EndEffector.hasAlgae()) {
+        m_EndEffector.Arm_IDLE();
+        m_EndEffector.holdAlgae();
 
         LEDConstants.hasGamePiece = true;
-        LEDConstants.hasAlgae = true;
         LEDConstants.LEDFlag = true;
       }
     }
+  }
 
-
-    
-    }
-
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-      // m_EndEffectorSubsystem.holdAlgae();
-      // m_EndEffectorSubsystem.Arm_IDLE();
-      // m_ElevatorSubsystem.toPrimitive();
-
-      // LEDConstants.hasGamePiece = true;
-      // LEDConstants.intakeGamePiece = false;
-      // LEDConstants.LEDFlag = true;
   }
 
   // Returns true when the command should end.
