@@ -50,7 +50,7 @@ public class ManualDrive_TrackLeftCoralStation extends Command {
     this.isSlowFunc = isSlow;
     // this.needSlowFunc = needSlow;
 
-    rotationPidController = new PIDController(PhotonConstants.rotationPidController_Kp, PhotonConstants.rotationPidController_Ki, PhotonConstants.rotationPidController_Kd);
+    rotationPidController = new PIDController(PhotonConstants.rotationPid_Kp, PhotonConstants.rotationPid_Ki, PhotonConstants.rotationPid_Kd);
 
     this.xLimiter = new SlewRateLimiter(5.5);
     this.yLimiter = new SlewRateLimiter(5.5);

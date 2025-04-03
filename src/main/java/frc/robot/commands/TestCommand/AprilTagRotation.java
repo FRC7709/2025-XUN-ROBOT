@@ -30,7 +30,7 @@ public class AprilTagRotation extends Command {
 
     addRequirements(m_PhotonVisionSubsystem, m_SwerveSubsystem);
     // PID
-    rotationPidController = new PIDController(PhotonConstants.rotationPidController_Kp, PhotonConstants.rotationPidController_Ki, PhotonConstants.rotationPidController_Kd);
+    rotationPidController = new PIDController(PhotonConstants.rotationPid_Kp, PhotonConstants.rotationPid_Ki, PhotonConstants.rotationPid_Kd);
   }
 
   // Called when the command is initially scheduled.

@@ -132,17 +132,17 @@ public final class Constants {
   }
 
   public class PhotonConstants {
-    public static final double xPidController_Kp = 0.6;
-    public static final double xPidController_Ki = 0;
-    public static final double xPidController_Kd = 0;
+    public static final double xPid_Kp = 0.6;
+    public static final double xPid_Ki = 0;
+    public static final double xPid_Kd = 0;
 
-    public static final double yPidController_Kp = 0.6;
-    public static final double yPidController_Ki = 0;
-    public static final double yPidController_Kd = 0.0015;
+    public static final double yPid_Kp = 0.6;
+    public static final double yPid_Ki = 0;
+    public static final double yPid_Kd = 0.0015;
 
-    public static final double rotationPidController_Kp = 0.0019;
-    public static final double rotationPidController_Ki = 0;
-    public static final double rotationPidController_Kd = 0.0001;
+    public static final double rotationPid_Kp = 0.0019;
+    public static final double rotationPid_Ki = 0;
+    public static final double rotationPid_Kd = 0.0001;
 
     public static final double xPidMaxOutput = 0.4;
     public static final double yPidMaxOutput = 0.4;

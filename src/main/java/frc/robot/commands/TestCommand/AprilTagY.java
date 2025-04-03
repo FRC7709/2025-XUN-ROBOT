@@ -30,7 +30,7 @@ public class AprilTagY extends Command {
 
     addRequirements(m_PhotonVisionSubsystem, m_SwerveSubsystem);
     // PID
-    yPidController = new PIDController(PhotonConstants.yPidController_Kp, PhotonConstants.yPidController_Ki, PhotonConstants.yPidController_Kd);
+    yPidController = new PIDController(PhotonConstants.yPid_Kp, PhotonConstants.yPid_Ki, PhotonConstants.yPid_Kd);
   }
 
   // Called when the command is initially scheduled.

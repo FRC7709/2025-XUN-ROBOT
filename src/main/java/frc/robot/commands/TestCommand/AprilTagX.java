@@ -33,7 +33,7 @@ public class AprilTagX extends Command {
 
     addRequirements(m_PhotonVisionSubsystem, m_SwerveSubsystem);
     // PID
-    xPidController = new PIDController(PhotonConstants.xPidController_Kp, PhotonConstants.xPidController_Ki, PhotonConstants.xPidController_Kd);
+    xPidController = new PIDController(PhotonConstants.xPid_Kp, PhotonConstants.xPid_Ki, PhotonConstants.xPid_Kd);
   }
 
   // Called when the command is initially scheduled.

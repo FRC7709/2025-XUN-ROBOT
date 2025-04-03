@@ -40,15 +40,14 @@ public class TrackRightReef extends Command {
   private double rotationPidOutput;
 
   public TrackRightReef(PhotonVisionSubsystem photonVisionSubsystem, SwerveSubsystem_Kraken swerveSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.m_PhotonVision = photonVisionSubsystem;
     this.m_Swerve = swerveSubsystem;
 
     addRequirements(m_PhotonVision, m_Swerve);
     // PID
-    xPidController = new PIDController(PhotonConstants.xPidController_Kp, PhotonConstants.xPidController_Ki, PhotonConstants.xPidController_Kd);
-    yPidController = new PIDController(PhotonConstants.yPidController_Kp, PhotonConstants.yPidController_Ki, PhotonConstants.yPidController_Kd);
-    rotationPidController = new PIDController(PhotonConstants.rotationPidController_Kp, PhotonConstants.rotationPidController_Ki, PhotonConstants.rotationPidController_Kd);
+    xPidController = new PIDController(PhotonConstants.xPid_Kp, PhotonConstants.xPid_Ki, PhotonConstants.xPid_Kd);
+    yPidController = new PIDController(PhotonConstants.yPid_Kp, PhotonConstants.yPid_Ki, PhotonConstants.yPid_Kd);
+    rotationPidController = new PIDController(PhotonConstants.rotationPid_Kp, PhotonConstants.rotationPid_Ki, PhotonConstants.rotationPid_Kd);
     rotationPidController.enableContinuousInput(-180, 180);
   }
 
@@ -96,11 +95,9 @@ public class TrackRightReef extends Command {
       yPidOutput = 0;
       rotationPidOutput = 0;
     }
-    // impl
-
-    SmartDashboard.putNumber("TrackRightReef/xPidOutput", xPidOutput);
-    SmartDashboard.putNumber("TrackRightReef/yPidOutput", yPidOutput);
-    SmartDashboard.putNumber("TrackRightReef/rotationPidOutput", rotationPidOutput);
+    // SmartDashboard.putNumber("TrackRightReef/xPidOutput", xPidOutput);
+    // SmartDashboard.putNumber("TrackRightReef/yPidOutput", yPidOutput);
+    // SmartDashboard.putNumber("TrackRightReef/rotationPidOutput", rotationPidOutput);
     SmartDashboard.putNumber("TrackRightReef/xPidError", xPidError);
     SmartDashboard.putNumber("TrackRightReef/yPidError", yPidError);
     SmartDashboard.putNumber("TrackRightReef/rotationPidError", rotationPidError);
