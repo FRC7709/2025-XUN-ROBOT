@@ -8,14 +8,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
 public final class Constants {
   public static class OperatorConstants {
     public static final double kJoystickDeadBand = 0.1;
@@ -316,39 +308,26 @@ public final class Constants {
     public static int arriveLevel = 0;
   }
 
-  public static class EndEffectorConstants {
-    public static final int intakeWheel_ID = 13;
-    public static final int intakeArm_ID = 14;
-    public static final int armAbsolutedEncoder_ID = 45;
-    public static final int irSensor_CoralFirst_ID = 0;
-    public static final int irSensor_CoralSecond_ID = 1;
-    public static final int irSensor_Algae_ID = 2;
-
-    public static final double absolutedEncoderOffset = 0.140625;
-
-    public static final double armPID_Kp = 0.007;//0.0048  
-    public static final double armPID_Ki = 0;
-    public static final double armPID_Kd = 0.0001;//0.0001
-    public static final double armPIDMinOutput = 0;
-    public static final double armPIDMaxOutput = 0.2;
-
-    public static final double armFeedforward_Ks = 0;
-    public static final double armFeedforward_Kg = 0.6;//
-    public static final double armFeedforward_Kv = 0;
-    
-
-    public static final double armFeedforward_Ks2 = 0;
-    public static final double armFeedforward_Kg2 = 0.4;//0.4
-    public static final double armFeedforward_Kv2 = 0;
-
-    public static final double armFeedforward_Ks3 = 0;
-    public static final double armFeedforward_Kg3 = 0.3;//0.3
-    public static final double armFeedforward_Kv3 = 0;
-
-    public static final double armFeedforward_Ks4 = 0;
-    public static final double armFeedforward_Kg4 = 0.6;//0.6
-    public static final double armFeedforward_Kv4 = 0;
-
+  public static class WristConstants{
+    // Motor
+    public static final int wristMotor_ID = 14;
+    // Absoluted Encoder
+    public static final int CANcoder_ID = 45;
+    public static final double encoderOffset = 0.140625;
+    // PID
+    public static final double Kp = 0.007;//0.0048  
+    public static final double Ki = 0;
+    public static final double Kd = 0.0001;//0.0001
+    public static final double PIDMaxOutput = 0.2;
+    // Feedforward
+    public static final double Kg1 = 0.6;//
+    // Feedforward
+    public static final double Kg2 = 0.4;//0.4
+    // Feedforward
+    public static final double Kg3 = 0.3;//0.3
+    // Feedforward
+    public static final double Kg4 = 0.6;//0.6
+    // Setpoint
     public static final double primitiveAngle = 82;
     public static final double primitiveAngle_HasCoral = 82;
     public static final double coralL1Angle = 82;
@@ -364,8 +343,16 @@ public final class Constants {
     public static final double algaeHighInAngle = 64;
     public static final double algaeProccesorAngle = 9;//not yet
     public static final double algaeRemoveAngle = 75;
-    
+  }
 
+  public static class EndEffectorConstants {
+    // Motor
+    public static final int wheelMotor_ID = 13;
+    // IR sensor 
+    public static final int irSensor_CoralFirst_ID = 0;
+    public static final int irSensor_CoralSecond_ID = 1;
+    public static final int irSensor_Algae_ID = 2;   
+    // Output voltage
     public static final double coralL1OutVol = -3.5;
     public static final double coralL2OutVol = -2;
     public static final double coralL3OutVol = -2;
@@ -415,7 +402,7 @@ public final class Constants {
 
     public static boolean LEDFlag = false;
     public static boolean hasGamePiece = false;
-    public static boolean hasAlgae = false;
+    // public static boolean hasAlgae = false;
     public static boolean intakeGamePiece = false;
     public static boolean tracking = false;
     public static boolean arrivePosition_Intake = false;

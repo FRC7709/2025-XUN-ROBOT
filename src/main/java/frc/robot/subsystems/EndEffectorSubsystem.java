@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.EndEffectorConstants;
+import frc.robot.Constants.WristConstants;
 
 public class EndEffectorSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
@@ -61,16 +62,16 @@ public class EndEffectorSubsystem extends SubsystemBase {
 
     public EndEffectorSubsystem() {
       // Motor controller
-      wheelMotor = new TalonFX(EndEffectorConstants.intakeWheel_ID);
-      pivotMotor = new TalonFX(EndEffectorConstants.intakeArm_ID);
+      wheelMotor = new TalonFX(EndEffectorConstants.wheelMotor_ID);
+      pivotMotor = new TalonFX(WristConstants.wristMotor_ID);
       // Encoder
-      pivotCANcoder = new CANcoder(EndEffectorConstants.armAbsolutedEncoder_ID);
+      pivotCANcoder = new CANcoder(WristConstants.CANcoder_ID);
       // IR sensor
       irSensor_CoralFirst = new DigitalInput(EndEffectorConstants.irSensor_CoralFirst_ID);
       irSensor_CoralSecond = new DigitalInput(EndEffectorConstants.irSensor_CoralSecond_ID);
       irSensor_Algae = new DigitalInput(EndEffectorConstants.irSensor_Algae_ID);
       // Init goal angle
-      goalAngle = EndEffectorConstants.primitiveAngle;
+      goalAngle = WristConstants.primitiveAngle;
   
       // Motor Configurations
       wheelConfig = new TalonFXConfiguration();
@@ -103,7 +104,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       // Absolute Encoder Configurations
       CANcoderConfig = new CANcoderConfiguration();
       CANcoderConfig.MagnetSensor.SensorDirection = SensorDirectionValue.Clockwise_Positive;
-      CANcoderConfig.MagnetSensor.MagnetOffset = EndEffectorConstants.absolutedEncoderOffset;
+      CANcoderConfig.MagnetSensor.MagnetOffset = WristConstants.encoderOffset;
       pivotCANcoder.getConfigurator().apply(CANcoderConfig);
   
       //Motor Configurations
@@ -113,10 +114,8 @@ public class EndEffectorSubsystem extends SubsystemBase {
       pivotMotor.getConfigurator().apply(pivotConfig);
   
       // PID Controller and Feedforward
-      armPID = new PIDController(EndEffectorConstants.armPID_Kp, EndEffectorConstants.armPID_Ki, EndEffectorConstants.armPID_Kd);
-      armFeedforward = new ArmFeedforward(EndEffectorConstants.armFeedforward_Ks, EndEffectorConstants.armFeedforward_Kg, EndEffectorConstants.armFeedforward_Kv);
-      // armPID.setIntegratorRange(EndEffectorConstants.armPIDMinOutput, EndEffectorConstants.armPIDMaxOutput);
-
+      armPID = new PIDController(WristConstants.Kp, WristConstants.Ki, WristConstants.Kd);
+      armFeedforward = new ArmFeedforward(0, WristConstants.Kg1, 0);
       // Init debouncer
       m_Debouncer_first = new Debouncer(0.05, DebounceType.kRising);
       m_Debouncer_second = new Debouncer(0.05, DebounceType.kRising);
@@ -126,52 +125,52 @@ public class EndEffectorSubsystem extends SubsystemBase {
     // Intake coral
     public void intakeCoral_Arm() {
       pivotState = "ARM_INTAKECORAL";
-      goalAngle = EndEffectorConstants.coralStationAngle;}
+      goalAngle = WristConstants.coralStationAngle;}
     public void Arm_IDLE() {
       pivotState = "ARM_IDLE";
-      goalAngle = EndEffectorConstants.primitiveAngle;}
+      goalAngle = WristConstants.primitiveAngle;}
     public void Arm_shootCoral_L1() {
       pivotState = "ARM_SHOOTCORAL_L1"; // Update state for logging
-      goalAngle = EndEffectorConstants.coralL1Angle;}
+      goalAngle = WristConstants.coralL1Angle;}
     public void Arm_shootCoral_L2() {
       pivotState = "ARM_SHOOTCORAL_L2"; // Update state for logging
-      goalAngle = EndEffectorConstants.coralL2Angle;}
+      goalAngle = WristConstants.coralL2Angle;}
     public void Arm_shootCoral_L3() {
       pivotState = "ARM_SHOOTCORAL_L3"; // Update state for logging
-      goalAngle = EndEffectorConstants.coralL3Angle;}
+      goalAngle = WristConstants.coralL3Angle;}
     public void Arm_shootCoral_L4() {
       pivotState = "ARM_SHOOTCORAL_L4"; // Update state for logging
-      goalAngle = EndEffectorConstants.coralL4Angle;}
+      goalAngle = WristConstants.coralL4Angle;}
     public void coralL4Primitive_Arm(){
       pivotState = "ARM_CORAL_L4_PRIMITIVE"; // Update state for logging
-      goalAngle = EndEffectorConstants.coralL4UpAngle;}
+      goalAngle = WristConstants.coralL4UpAngle;}
 
     public void Arm_NET_IDLE() {
       pivotState = "ARM_NET_IDLE"; // Update state for logging
-      goalAngle = EndEffectorConstants.netUpAngle;}
+      goalAngle = WristConstants.netUpAngle;}
     public void Arm_shootAlgae_NET() {
       pivotState = "ARM_SHOOTALGAE_NET"; // Update state for logging
-      goalAngle = EndEffectorConstants.algaeNetAngle;}
+      goalAngle = WristConstants.algaeNetAngle;}
     public void Arm_shootAlgae_Processor() {
       pivotState = "ARM_SHOOTALGAE_PROCESSOR"; // Update state for logging
-      goalAngle = EndEffectorConstants.algaeProccesorAngle;}
+      goalAngle = WristConstants.algaeProccesorAngle;}
     // Intake algae
     public void Arm_intakeAlgae_Low() {
       pivotState = "ARM_INTAKEALGAE_LOW"; // Update state for logging
-      goalAngle = EndEffectorConstants.algaeLowInAngle;}
+      goalAngle = WristConstants.algaeLowInAngle;}
     public void Arm_intakeAlgae_High() {
       pivotState = "ARM_INTAKEALGAE_HIGH"; // Update state for logging
-      goalAngle = EndEffectorConstants.algaeHighInAngle;}
+      goalAngle = WristConstants.algaeHighInAngle;}
     public void Arm_intakeAlgae_Floor() {
       pivotState = "ARM_INTAKEALGAE_FLOOR"; // Update state for logging
-      goalAngle = EndEffectorConstants.algaeFloorAngle;}
+      goalAngle = WristConstants.algaeFloorAngle;}
 
     public void primitiveArm_HasCoral() {
       pivotState = "ARM_PRIMITIVE_HAS_CORAL"; // Update state for logging
-      goalAngle = EndEffectorConstants.primitiveAngle_HasCoral;}
+      goalAngle = WristConstants.primitiveAngle_HasCoral;}
     public void Arm_RemoveAlgae() {
       pivotState = "ARM_REMOVEALGAE"; // Update state for logging
-      goalAngle = EndEffectorConstants.algaeRemoveAngle;}
+      goalAngle = WristConstants.algaeRemoveAngle;}
 
     // ======== Wheel ========
     // Inatake coral
@@ -291,38 +290,40 @@ public class EndEffectorSubsystem extends SubsystemBase {
     public void periodic() {
       // Arm feedforward
       if(90 >= getAngle() && getAngle() > 80 || 75 >= getAngle() && getAngle() > 70) {
-        armFeedforward = new ArmFeedforward(EndEffectorConstants.armFeedforward_Ks, EndEffectorConstants.armFeedforward_Kg, EndEffectorConstants.armFeedforward_Kv);
+        armFeedforward = new ArmFeedforward(0, WristConstants.Kg1, 0);
       }else if(80 >= getAngle() && getAngle() > 75) {
-        armFeedforward = new ArmFeedforward(EndEffectorConstants.armFeedforward_Ks4, EndEffectorConstants.armFeedforward_Kg4, EndEffectorConstants.armFeedforward_Kv4);
+        armFeedforward = new ArmFeedforward(0, WristConstants.Kg4, 0);
       }else if(70 >= getAngle() && getAngle() > 61.6){
-        armFeedforward = new ArmFeedforward(EndEffectorConstants.armFeedforward_Ks2, EndEffectorConstants.armFeedforward_Kg2, EndEffectorConstants.armFeedforward_Kv2);
+        armFeedforward = new ArmFeedforward(0, WristConstants.Kg2, 0);
       }else {
-        armFeedforward = new ArmFeedforward(EndEffectorConstants.armFeedforward_Ks3, EndEffectorConstants.armFeedforward_Kg3, EndEffectorConstants.armFeedforward_Kv3);
+        armFeedforward = new ArmFeedforward(0, WristConstants.Kg3, 0);
       }
       
       // PID and Feedforward
       pidOutput = armPID.calculate(getAngle(), goalAngle);
       feedforwardOutput = armFeedforward.calculate(getRadians(), getVelocity())/12;
-      pidOutput = Constants.setMaxOutput(pidOutput, EndEffectorConstants.armPIDMaxOutput);
+      pidOutput = Constants.setMaxOutput(pidOutput, WristConstants.PIDMaxOutput);
       // Implement
       output = pidOutput + feedforwardOutput;
       pivotMotor.set(output);
 
       //Log
-      SmartDashboard.putNumber("EndEffector/PivotPidOutput", pidOutput);
-      SmartDashboard.putNumber("EndEffector/pivotFeedforwardOutput", feedforwardOutput);
-      SmartDashboard.putNumber("EndEffector/controlOutput", output);
-      SmartDashboard.putBoolean("EndEffector/arrivedSetpoint", arrivedSetpoint());
+      // Wrist
+      SmartDashboard.putNumber("Wrist/PidOutput", pidOutput);
+      SmartDashboard.putNumber("Wrist/FeedforwardOutput", feedforwardOutput);
+      SmartDashboard.putNumber("Wrist/Output", output);
+      SmartDashboard.putBoolean("Wrist/arrivedSetpoint", arrivedSetpoint());
+      SmartDashboard.putNumber("Wrist/PivotAngle", getAngle());
+      SmartDashboard.putNumber("Wrist/PivotSetpoint", goalAngle);
+      SmartDashboard.putString("Wrist/State", pivotState);
+      // Wheel
+      SmartDashboard.putString("EndEffector/WheelState", wheelState);
+      SmartDashboard.putNumber("EndEffector/WheelCurrent", wheelMotor.getStatorCurrent().getValueAsDouble());
       SmartDashboard.putBoolean("EndEffector/FirstIR", getFirstIR());
       SmartDashboard.putBoolean("EndEffector/SecondIR", getSecondIR());
       SmartDashboard.putBoolean("EndEffector/AlgaeIR", getAlgaeIR());
       SmartDashboard.putBoolean("EndEffector/hasCoral", hasCoral());
       SmartDashboard.putBoolean("EndEffector/hasAlgae", hasAlgae());
-      SmartDashboard.putNumber("EndEffector/PivotAngle", getAngle());
-      SmartDashboard.putNumber("EndEffector/PivotSetpoint", goalAngle);
-      SmartDashboard.putNumber("EndEffector/WheelCurrent", wheelMotor.getStatorCurrent().getValueAsDouble());
-      SmartDashboard.putString("EndEffector/PivotState", pivotState);
-      SmartDashboard.putString("EndEffector/WheelState", wheelState);
       
   }
 }
