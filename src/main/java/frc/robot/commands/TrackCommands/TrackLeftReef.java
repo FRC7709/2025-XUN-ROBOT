@@ -45,7 +45,6 @@ public class TrackLeftReef extends Command {
     rotationPidController = new PIDController(PhotonConstants.rotationPid_Kp, PhotonConstants.rotationPid_Ki, PhotonConstants.rotationPid_Kd);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_Swerve.drive(0, 0, 0, false);
@@ -55,7 +54,6 @@ public class TrackLeftReef extends Command {
     LEDConstants.LEDFlag = true;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(m_PhotonVision.hasFrontRightTarget()) {
@@ -87,6 +85,12 @@ public class TrackLeftReef extends Command {
       yPidOutput = 0;
       rotationPidOutput = 0;
     }
+    // Log
+    SmartDashboard.putBoolean("TrackLeftReef/enable", true);
+    SmartDashboard.putNumber("TrackLeftReef/xError", xError);
+    SmartDashboard.putNumber("TrackLeftReef/yError", yError);
+    SmartDashboard.putNumber("TrackLeftReef/rotationError", rotationError);
+
     // Slow mode 
     if(ElevatorConstants.arriveLevel == 1) {
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level1_Reef);
@@ -104,7 +108,9 @@ public class TrackLeftReef extends Command {
   @Override
   public void end(boolean interrupted) {
     m_Swerve.drive(0, 0, 0, false);
-
+    // Log
+    SmartDashboard.putBoolean("TrackLeftReef/enable", false);
+    // LED
     if(m_PhotonVision.isArrive_Reef("LeftReef")) {
       LEDConstants.arrivePosition_Base = true;
       LEDConstants.tracking = false;
