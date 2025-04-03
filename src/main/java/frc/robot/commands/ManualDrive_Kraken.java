@@ -33,15 +33,16 @@ public class ManualDrive_Kraken extends Command {
   private double ySpeed;
   private double zSpeed;
   private boolean isSlow;
-  // private boolean needSlow;
+
+  private double xyMultiplier;
+  private double zMultiplier;
+
   public ManualDrive_Kraken(SwerveSubsystem_Kraken swerveSubsystem, DoubleSupplier xSpeed, DoubleSupplier ySpeed, DoubleSupplier zSpeed, BooleanSupplier isSlow) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.m_SwerveSubsystem_Kraken = swerveSubsystem;
     this.xSpeedFunc = xSpeed;
     this.ySpeedFunc = ySpeed;
     this.zSpeedFunc = zSpeed;
     this.isSlowFunc = isSlow;
-    // this.needSlowFunc = needSlow;
 
     this.xLimiter = new SlewRateLimiter(5.5);
     this.yLimiter = new SlewRateLimiter(5.5);
@@ -53,9 +54,7 @@ public class ManualDrive_Kraken extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -73,21 +72,21 @@ public class ManualDrive_Kraken extends Command {
     this.zSpeed = zLimiter.calculate(this.zSpeed);
 
     this.isSlow = isSlowFunc.getAsBoolean();
-    // this.needSlow = needSlowFunc.getAsBoolean();
 
-    if((isSlow && ElevatorConstants.arriveLevel == 2) || ElevatorConstants.arriveLevel == 2) {
-      xSpeed = xSpeed*Math.abs(xSpeed)*0.1;
-      ySpeed = ySpeed*Math.abs(ySpeed)*0.1;
-      zSpeed = zSpeed*Math.abs(zSpeed)*0.05;
-    }else if(ElevatorConstants.arriveLevel == 1 || isSlow) {
-      xSpeed = xSpeed*Math.abs(xSpeed)*0.2;
-      ySpeed = ySpeed*Math.abs(ySpeed)*0.2;
-      zSpeed = zSpeed*Math.abs(zSpeed)*0.1;
-    }else {
-      xSpeed = xSpeed*Math.abs(xSpeed)*0.8;
-      ySpeed = ySpeed*Math.abs(ySpeed)*0.8;
-      zSpeed = zSpeed*Math.abs(zSpeed)*0.2;
+    if (ElevatorConstants.arriveLevel == 2) {
+      xyMultiplier = 0.1;
+      zMultiplier = 0.05;
+    } else if (ElevatorConstants.arriveLevel == 1 || isSlow) {
+      xyMultiplier = 0.2;
+      zMultiplier = 0.1;
+    } else {
+      xyMultiplier = 0.8;
+      zMultiplier = 0.2;
     }
+
+    xSpeed *= Math.abs(xSpeed) * xyMultiplier;
+    ySpeed *= Math.abs(ySpeed) * xyMultiplier;
+    zSpeed *= Math.abs(zSpeed) * zMultiplier;
 
     SmartDashboard.putNumber("ManualDrive/Xspeed", xSpeed);
     SmartDashboard.putNumber("ManualDrive/Yspeed", ySpeed);
@@ -96,13 +95,11 @@ public class ManualDrive_Kraken extends Command {
     m_SwerveSubsystem_Kraken.drive(this.xSpeed, this.ySpeed, this.zSpeed, true);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_SwerveSubsystem_Kraken.drive(0, 0, 0, false);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
