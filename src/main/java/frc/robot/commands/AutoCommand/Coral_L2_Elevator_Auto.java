@@ -57,15 +57,7 @@ public class Coral_L2_Elevator_Auto extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    // m_Elevator.toPrimitive();
-    // m_EndEffector.primitiveArm();
-    // m_EndEffector.stopWheel();
-
-    // LEDConstants.intakeArriving = false;
-    // LEDConstants.arrivePosition_Intake = false;
-    // LEDConstants.LEDFlag = true;
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
