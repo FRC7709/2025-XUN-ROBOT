@@ -10,20 +10,20 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class IntakeAlgae_Low_Auto extends Command {
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
 
   public IntakeAlgae_Low_Auto(ElevatorSubsystem ElevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
-    this.m_ElevatorSubsystem = ElevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
+    this.m_Elevator = ElevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
 
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_EndEffectorSubsystem.Arm_IDLE();
+    m_EndEffector.Arm_IDLE();
 
     LEDConstants.intakeGamePiece = true;
     LEDConstants.hasAlgae = false;
@@ -35,16 +35,16 @@ public class IntakeAlgae_Low_Auto extends Command {
   @Override
   public void execute() {
     if(!LEDConstants.hasAlgae) {
-      if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp() && !m_EndEffectorSubsystem.hasAlgae()) {
-        m_ElevatorSubsystem.intakeAlgae_Low();
-        m_EndEffectorSubsystem.Arm_intakeAlgae_Low();
-        m_EndEffectorSubsystem.intakeAlgae_Low_Wheel();
+      if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp() && !m_EndEffector.hasAlgae()) {
+        m_Elevator.intakeAlgae_Low();
+        m_EndEffector.Arm_intakeAlgae_Low();
+        m_EndEffector.intakeAlgae_Low_Wheel();
         }
       }
 
-      if(m_EndEffectorSubsystem.hasAlgae()) {
-        m_EndEffectorSubsystem.Arm_IDLE();
-        m_EndEffectorSubsystem.holdAlgae();
+      if(m_EndEffector.hasAlgae()) {
+        m_EndEffector.Arm_IDLE();
+        m_EndEffector.holdAlgae();
 
         LEDConstants.hasGamePiece = true;
         LEDConstants.hasAlgae = true;
@@ -56,9 +56,9 @@ public class IntakeAlgae_Low_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_ElevatorSubsystem.toPrimitive();
-    // m_EndEffectorSubsystem.Arm_IDLE();
-    // m_EndEffectorSubsystem.holdAlgae();
+    // m_Elevator.toPrimitive();
+    // m_EndEffector.Arm_IDLE();
+    // m_EndEffector.holdAlgae();
 
     // LEDConstants.hasGamePiece = true;
     // LEDConstants.intakeGamePiece = false;

@@ -11,11 +11,11 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShootCoral_Auto extends Command {
   /** Creates a new ShootCoral_Auto. */
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final EndEffectorSubsystem m_EndEffector;
   public ShootCoral_Auto(EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
-    addRequirements(m_EndEffectorSubsystem);
+    this.m_EndEffector = endEffectorSubsystem;
+    addRequirements(m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
@@ -26,16 +26,16 @@ public class ShootCoral_Auto extends Command {
   @Override
   public void execute() {
     if(LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base) {
-      m_EndEffectorSubsystem.Wheel_shootCoral_L4();
+      m_EndEffector.Wheel_shootCoral_L4();
     }else {
-      m_EndEffectorSubsystem.stopWheel();
+      m_EndEffector.stopWheel();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_EndEffectorSubsystem.stopWheel();
+    m_EndEffector.stopWheel();
 
     LEDConstants.arrivePosition_Intake = false;
     LEDConstants.tracking = false;

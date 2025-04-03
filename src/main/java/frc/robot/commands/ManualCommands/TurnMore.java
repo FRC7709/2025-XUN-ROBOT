@@ -9,29 +9,24 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TurnMore extends Command {
-  /** Creates a new TurnMore. */
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
-  public TurnMore(EndEffectorSubsystem endEffectorSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
+  private final EndEffectorSubsystem m_EndEffector;
 
-    addRequirements(m_EndEffectorSubsystem);
+  public TurnMore(EndEffectorSubsystem endEffectorSubsystem) {
+    this.m_EndEffector = endEffectorSubsystem;
+    addRequirements(m_EndEffector);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_EndEffectorSubsystem.turnMore_Coral();
+    m_EndEffector.turnMore_Coral();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {}
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_EndEffectorSubsystem.stopWheel();
+    m_EndEffector.stopWheel();
   }
 
   // Returns true when the command should end.

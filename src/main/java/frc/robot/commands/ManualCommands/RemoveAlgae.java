@@ -12,24 +12,24 @@ import frc.robot.Constants.LEDConstants;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class RemoveAlgae extends Command {
   /** Creates a new PrimitiveIntake_Algae. */
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
-  private final ElevatorSubsystem m_ElevatorSubsystem;
+  private final EndEffectorSubsystem m_EndEffector;
+  private final ElevatorSubsystem m_Elevator;
 
   public RemoveAlgae(EndEffectorSubsystem endEffectorSubsystem, ElevatorSubsystem elevatorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_ElevatorSubsystem = elevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
+    this.m_Elevator = elevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
 
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(m_EndEffectorSubsystem.hasCoral() == false) {
-      m_EndEffectorSubsystem.RemoveAlgae();
-      m_EndEffectorSubsystem.Arm_RemoveAlgae();
-      m_ElevatorSubsystem.toPrimitive();
+    if(m_EndEffector.hasCoral() == false) {
+      m_EndEffector.RemoveAlgae();
+      m_EndEffector.Arm_RemoveAlgae();
+      m_Elevator.toPrimitive();
 
       LEDConstants.intakeArriving = false;
       LEDConstants.arrivePosition_Intake = false;
@@ -42,8 +42,8 @@ public class RemoveAlgae extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_EndEffectorSubsystem.hasCoral() == false && m_ElevatorSubsystem.arrivePrimition()) {
-      m_EndEffectorSubsystem.Arm_IDLE();
+    if(m_EndEffector.hasCoral() == false && m_Elevator.arrivePrimition()) {
+      m_EndEffector.Arm_IDLE();
     }
   }
 

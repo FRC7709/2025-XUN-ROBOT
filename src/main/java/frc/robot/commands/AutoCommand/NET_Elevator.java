@@ -13,22 +13,22 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class NET_Elevator extends Command {
   /** Creates a new NET_Elevator. */
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
 
   private boolean isArrive_EndEffector;
   public NET_Elevator(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_ElevatorSubsystem = elevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
+    this.m_Elevator = elevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
 
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.`
   @Override
   public void initialize() {
-    m_EndEffectorSubsystem.Arm_IDLE();
+    m_EndEffector.Arm_IDLE();
 
     isArrive_EndEffector = false;
     LEDConstants.arrivePosition_Intake = false;
@@ -39,14 +39,14 @@ public class NET_Elevator extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_EndEffectorSubsystem.arrivedSetpoint()) {
-      m_ElevatorSubsystem.shootNet();
+    if(m_EndEffector.arrivedSetpoint()) {
+      m_Elevator.shootNet();
       isArrive_EndEffector = true;
     }
 
-    if(m_ElevatorSubsystem.arriveSetPoint() && isArrive_EndEffector) {
-      m_EndEffectorSubsystem.Arm_shootAlgae_NET();
-      if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
+    if(m_Elevator.arriveSetPoint() && isArrive_EndEffector) {
+      m_EndEffector.Arm_shootAlgae_NET();
+      if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
         LEDConstants.arrivePosition_Intake = true;
         LEDConstants.LEDFlag = true;
       }else {
@@ -56,7 +56,7 @@ public class NET_Elevator extends Command {
     }
 
     if(LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base) {
-      m_EndEffectorSubsystem.Wheel_shootAlgae_NET();
+      m_EndEffector.Wheel_shootAlgae_NET();
     }
   }
 
@@ -69,7 +69,7 @@ public class NET_Elevator extends Command {
     LEDConstants.intakeArriving = false;
     LEDConstants.arrivePosition_Base = false;
     LEDConstants.LEDFlag = true;
-    if(!m_EndEffectorSubsystem.hasAlgae()) LEDConstants.hasAlgae = false;
+    if(!m_EndEffector.hasAlgae()) LEDConstants.hasAlgae = false;
   }
 
   // Returns true when the command should end.

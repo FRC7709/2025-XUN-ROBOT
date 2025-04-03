@@ -10,16 +10,16 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class FeedCoral_Auto extends Command {
   /** Creates a new FeedCoral_Auto. */
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final EndEffectorSubsystem m_EndEffector;
   public FeedCoral_Auto(EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_EndEffectorSubsystem = endEffectorSubsystem;
+    m_EndEffector = endEffectorSubsystem;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_EndEffectorSubsystem.Wheel_shootCoral_L1();
+    m_EndEffector.Wheel_shootCoral_L1();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,7 +29,7 @@ public class FeedCoral_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_EndEffectorSubsystem.stopWheel();
+    m_EndEffector.stopWheel();
   }
 
   // Returns true when the command should end.

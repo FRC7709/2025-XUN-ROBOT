@@ -12,13 +12,13 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class PrimitiveIntake_Auto extends Command {
   /** Creates a new PrimitiveIntake_Auto. */
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
   public PrimitiveIntake_Auto(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_ElevatorSubsystem = elevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    this.m_Elevator = elevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
@@ -29,10 +29,10 @@ public class PrimitiveIntake_Auto extends Command {
   @Override
   public void execute() {
     if(LEDConstants.hasAlgae) {
-      m_EndEffectorSubsystem.Arm_IDLE();
-      m_EndEffectorSubsystem.holdAlgae();
-      if(m_EndEffectorSubsystem.arrivedSetpoint()) {
-        m_ElevatorSubsystem.toPrimitive();
+      m_EndEffector.Arm_IDLE();
+      m_EndEffector.holdAlgae();
+      if(m_EndEffector.arrivedSetpoint()) {
+        m_Elevator.toPrimitive();
       }
 
       LEDConstants.intakeArriving = false;
@@ -40,10 +40,10 @@ public class PrimitiveIntake_Auto extends Command {
       LEDConstants.hasGamePiece = true;
       LEDConstants.LEDFlag = true;
     }else {
-      m_EndEffectorSubsystem.Arm_IDLE();
-      m_EndEffectorSubsystem.stopWheel();
-      if(m_EndEffectorSubsystem.arrivedSetpoint()) {
-        m_ElevatorSubsystem.toPrimitive();
+      m_EndEffector.Arm_IDLE();
+      m_EndEffector.stopWheel();
+      if(m_EndEffector.arrivedSetpoint()) {
+        m_Elevator.toPrimitive();
       }
 
       LEDConstants.intakeArriving = false;
@@ -60,6 +60,6 @@ public class PrimitiveIntake_Auto extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_ElevatorSubsystem.arrivePrimition() && m_EndEffectorSubsystem.arrivedSetpoint();
+    return m_Elevator.arrivePrimition() && m_EndEffector.arrivedSetpoint();
   }
 }

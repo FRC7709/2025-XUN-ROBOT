@@ -12,23 +12,23 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Coral_L4_Elevator_Auto extends Command {
   /** Creates a new Coral_L4_Elevator. */
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
 
   private boolean ifArrive_EndEffector;
 
   public Coral_L4_Elevator_Auto(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
-    this.m_ElevatorSubsystem = elevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    this.m_Elevator = elevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_ElevatorSubsystem.outCoral_L4();
-    // m_EndEffectorSubsystem.Arm_shootCoral_L4();
-    m_EndEffectorSubsystem.coralL4Primitive_Arm();
+    // m_Elevator.outCoral_L4();
+    // m_EndEffector.Arm_shootCoral_L4();
+    m_EndEffector.coralL4Primitive_Arm();
 
     ifArrive_EndEffector = false;
     LEDConstants.intakeArriving = true;
@@ -39,14 +39,14 @@ public class Coral_L4_Elevator_Auto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp()) {
-      m_ElevatorSubsystem.outCoral_L4(); 
-      // m_EndEffectorSubsystem.Arm_shootCoral_L4();   
+    if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp()) {
+      m_Elevator.outCoral_L4(); 
+      // m_EndEffector.Arm_shootCoral_L4();   
       ifArrive_EndEffector = true;
     }
 
-    if(m_ElevatorSubsystem.arriveSetPoint() && ifArrive_EndEffector) {
-      m_EndEffectorSubsystem.Arm_shootCoral_L4();   
+    if(m_Elevator.arriveSetPoint() && ifArrive_EndEffector) {
+      m_EndEffector.Arm_shootCoral_L4();   
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
     }
@@ -56,14 +56,14 @@ public class Coral_L4_Elevator_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_ElevatorSubsystem.toPrimitive();
-    // m_EndEffectorSubsystem.primitiveArm();
-    // m_EndEffectorSubsystem.stopWheel();
+    // m_Elevator.toPrimitive();
+    // m_EndEffector.primitiveArm();
+    // m_EndEffector.stopWheel();
 
     // LEDConstants.intakeArriving = false;
     // LEDConstants.arrivePosition_Intake = false;
     // LEDConstants.LEDFlag = true;
-    if(m_ElevatorSubsystem.arriveSetPoint()) {
+    if(m_Elevator.arriveSetPoint()) {
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
     }

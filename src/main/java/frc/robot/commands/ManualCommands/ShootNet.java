@@ -14,8 +14,8 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShootNet extends Command {
   /** Creates a new ShootNet_Elevator. */
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
 
   private final BooleanSupplier ifFeedFunc;
 
@@ -23,20 +23,20 @@ public class ShootNet extends Command {
   private boolean ifFeed;
   public ShootNet(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_ElevatorSubsystem = elevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
+    this.m_Elevator = elevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
 
     this.ifFeedFunc = ifFeed;
 
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_ElevatorSubsystem.shootNet();
-    // m_EndEffectorSubsystem.Arm_shootAlgae_NET();
-    m_EndEffectorSubsystem.Arm_NET_IDLE();
+    // m_Elevator.shootNet();
+    // m_EndEffector.Arm_shootAlgae_NET();
+    m_EndEffector.Arm_NET_IDLE();
 
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
@@ -46,14 +46,14 @@ public class ShootNet extends Command {
   @Override
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp()) {
+    if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp()) {
       arriveEndEffectorPrimition = true;
     }
     if(arriveEndEffectorPrimition) {
-      m_ElevatorSubsystem.shootNet();
-      if(m_ElevatorSubsystem.arriveSetPoint()) {
-        m_EndEffectorSubsystem.Arm_shootAlgae_NET();
-        if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
+      m_Elevator.shootNet();
+      if(m_Elevator.arriveSetPoint()) {
+        m_EndEffector.Arm_shootAlgae_NET();
+        if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
           LEDConstants.arrivePosition_Intake = true;
           LEDConstants.LEDFlag = true;
         }else {
@@ -63,16 +63,16 @@ public class ShootNet extends Command {
       }
     }
     if (ifFeed) {
-      m_EndEffectorSubsystem.Wheel_shootAlgae_NET();
+      m_EndEffector.Wheel_shootAlgae_NET();
     }else {
-      m_EndEffectorSubsystem.holdAlgae();
+      m_EndEffector.holdAlgae();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if(!m_EndEffectorSubsystem.hasAlgae()) LEDConstants.hasAlgae = false;
+    if(!m_EndEffector.hasAlgae()) LEDConstants.hasAlgae = false;
   }
 
   // Returns true when the command should end.
