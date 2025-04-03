@@ -9,6 +9,7 @@ import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.EndEffectorConstants;
 import frc.robot.Constants.LEDConstants;
+import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
@@ -44,7 +45,7 @@ public class Coral_L3_Elevator_Auto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Math.abs(m_EndEffectorSubsystem.getAngle() - EndEffectorConstants.primitiveAngle) <= 2) {
+    if(Math.abs(m_EndEffectorSubsystem.getAngle() - WristConstants.primitiveAngle) <= 2) {
       arriveEndEffectorPrimition = true;
     }
 

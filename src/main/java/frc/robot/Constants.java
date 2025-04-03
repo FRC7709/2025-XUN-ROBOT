@@ -402,7 +402,7 @@ public final class Constants {
 
     public static boolean LEDFlag = false;
     public static boolean hasGamePiece = false;
-    // public static boolean hasAlgae = false;
+    public static boolean hasAlgae = false;
     public static boolean intakeGamePiece = false;
     public static boolean tracking = false;
     public static boolean arrivePosition_Intake = false;
