@@ -15,17 +15,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.LEDConstants;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.PhotonConstants;
 import frc.robot.subsystems.PhotonVisionSubsystem;
 import frc.robot.subsystems.SwerveSubsystem_Kraken;
-import frc.robot.subsystems.SwerveSubsystem_Kraken;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TrackRightReef extends Command {
-  /** Creates a new TrackReef. */
-  private final PhotonVisionSubsystem m_PhotonVisionSubsystem;
-  private final SwerveSubsystem_Kraken m_SwerveSubsystem;
+  private final PhotonVisionSubsystem m_PhotonVision;
+  private final SwerveSubsystem_Kraken m_Swerve;
 
   private PIDController rotationPidController;
   private PIDController xPidController;
@@ -43,34 +39,23 @@ public class TrackRightReef extends Command {
   private double yPidOutput;
   private double rotationPidOutput;
 
-  private boolean rotationReady;
-  private boolean yReady;
-
   public TrackRightReef(PhotonVisionSubsystem photonVisionSubsystem, SwerveSubsystem_Kraken swerveSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_PhotonVisionSubsystem = photonVisionSubsystem;
-    this.m_SwerveSubsystem = swerveSubsystem;
+    this.m_PhotonVision = photonVisionSubsystem;
+    this.m_Swerve = swerveSubsystem;
 
-    addRequirements(m_PhotonVisionSubsystem, m_SwerveSubsystem);
+    addRequirements(m_PhotonVision, m_Swerve);
     // PID
     xPidController = new PIDController(PhotonConstants.xPidController_Kp, PhotonConstants.xPidController_Ki, PhotonConstants.xPidController_Kd);
     yPidController = new PIDController(PhotonConstants.yPidController_Kp, PhotonConstants.yPidController_Ki, PhotonConstants.yPidController_Kd);
     rotationPidController = new PIDController(PhotonConstants.rotationPidController_Kp, PhotonConstants.rotationPidController_Ki, PhotonConstants.rotationPidController_Kd);
-    // Set limits
-    // xPidController.setIntegratorRange(PhotonConstants.xPidMinOutput_Reef, PhotonConstants.xPidMaxOutput_Reef);
-    // yPidController.setIntegratorRange(PhotonConstants.yPidMaxOutput_Reef, PhotonConstants.yPidMaxOutput_Reef);
-    // rotationPidController.setIntegratorRange(PhotonConstants.rotationPidMaxOutput_Reef, PhotonConstants.rotationPidMaxOutput_Reef);
     rotationPidController.enableContinuousInput(-180, 180);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_SwerveSubsystem.drive(0, 0, 0, false);
-
-    rotationReady = false;
-    yReady = false;
-
+    m_Swerve.drive(0, 0, 0, false);
+    // LEDs
     LEDConstants.tracking = true;
     LEDConstants.arrivePosition_Base = false;
     LEDConstants.LEDFlag = true;
@@ -79,26 +64,22 @@ public class TrackRightReef extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // xSpeed = xSpeedFunc.getAsDouble() * 0.8;
-    // xSpeed = MathUtil.applyDeadband(xSpeed, OperatorConstants.kJoystickDeadBand);
-    // xSpeed = xLimiter.calculate(xSpeed);
-
-    if(m_PhotonVisionSubsystem.hasFrontLeftTarget()) {
+    if(m_PhotonVision.hasFrontLeftTarget()) {
       // Rotation-PID calculations
-      rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_FrontLeft();
-      rotationPidError = m_PhotonVisionSubsystem.getRotationError_Reef("FrontRight");
+      rotationPidMeasurements = m_PhotonVision.getRotationMeasurements_FrontLeft();
+      rotationPidError = m_PhotonVision.getRotationError_Reef("FrontRight");
       rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_RightReef;
       rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_RightReef);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Reef);
       // Y-PID calculations
-      yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_FrontLeft();
-      yPidError = m_PhotonVisionSubsystem.getYError_Reef("FrontRight");
+      yPidMeasurements = m_PhotonVision.getYMeasurements_FrontLeft();
+      yPidError = m_PhotonVision.getYError_Reef("FrontRight");
       yPidMeasurements = (yPidError > 0.02) ? yPidMeasurements : PhotonConstants.yPidSetPoint_RightReef;
       yPidOutput = -yPidController.calculate(yPidMeasurements, PhotonConstants.yPidSetPoint_RightReef);
       yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Reef);
       // X-PID calculations
-      xPidMeasurements = m_PhotonVisionSubsystem.getXMeasurements_FrontLeft();
-      xPidError = m_PhotonVisionSubsystem.getXError_Reef("FrontRight");
+      xPidMeasurements = m_PhotonVision.getXMeasurements_FrontLeft();
+      xPidError = m_PhotonVision.getXError_Reef("FrontRight");
       xPidMeasurements = (xPidError > 0.02) ? xPidMeasurements : PhotonConstants.xPidSetPoint_RightReef;
       xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_RightReef);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Reef);
@@ -106,7 +87,7 @@ public class TrackRightReef extends Command {
       // if(xPidController.getError() < 0.02) SmartDashboard.putBoolean("Align/LeftReefAlign", true);
       // else SmartDashboard.putBoolean("Align/LeftReefAlign", false);
 
-      if(m_PhotonVisionSubsystem.isArrive_Reef("RightReef")) {
+      if(m_PhotonVision.isArrive_Reef("RightReef")) {
         LEDConstants.arrivePosition_Base = true;
         LEDConstants.LEDFlag = true;
       }
@@ -134,14 +115,14 @@ public class TrackRightReef extends Command {
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_NeedSlow_Level2_Reef);
     }
     
-    m_SwerveSubsystem.drive(xPidOutput, yPidOutput, rotationPidOutput, false);
+    m_Swerve.drive(xPidOutput, yPidOutput, rotationPidOutput, false);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_SwerveSubsystem.drive(0, 0, 0, false);
-    if(m_PhotonVisionSubsystem.isArrive_Reef("RightReef")) {
+    m_Swerve.drive(0, 0, 0, false);
+    if(m_PhotonVision.isArrive_Reef("RightReef")) {
       LEDConstants.arrivePosition_Base = true;
       LEDConstants.tracking = false;
       LEDConstants.LEDFlag = true;
