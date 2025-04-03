@@ -7,13 +7,10 @@ package frc.robot.commands.ManualCommands;
 import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
-import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Coral_L3 extends Command {
-  /** Creates a new Coral_L3_Elevator. */
   private final ElevatorSubsystem m_Elevator;
   private final EndEffectorSubsystem m_EndEffector;
   private final BooleanSupplier ifFeedFunc;
