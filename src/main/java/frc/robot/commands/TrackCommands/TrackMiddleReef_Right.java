@@ -119,7 +119,6 @@ public class TrackMiddleReef_Right extends Command {
     }
 
     m_Swerve.drive(xPidOutput, yPidOutput, rotationPidOutput, false);
-      
   }
 
   // Called once the command ends or is interrupted.
