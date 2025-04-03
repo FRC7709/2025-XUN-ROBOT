@@ -41,12 +41,6 @@ public class Coral_L2 extends Command {
       m_Elevator.outCoral_L2();
       m_EndEffector.Arm_shootCoral_L2();
     }
-    // Shoot when you ready
-    if((ifFeed) || (LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base)) {
-      m_EndEffector.Wheel_shootCoral_L2();
-    }else {
-      m_EndEffector.stopWheel();
-    }
     // LED control
     if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
       LEDConstants.arrivePosition_Intake = true;
@@ -54,6 +48,12 @@ public class Coral_L2 extends Command {
     }else {
       LEDConstants.arrivePosition_Intake = false;
       LEDConstants.LEDFlag = true;
+    }
+    // Shoot when you ready
+    if((ifFeed) || (LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base)) {
+      m_EndEffector.Wheel_shootCoral_L2();
+    }else {
+      m_EndEffector.stopWheel();
     }
   }
 
