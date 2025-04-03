@@ -100,8 +100,8 @@ public class TrackMiddleReef_Right extends Command {
         LEDConstants.LEDFlag = true;
       }
     // impl
-
-    SmartDashboard.putBoolean("isFinish", LEDConstants.arrivePosition_Base);
+    SmartDashboard.putBoolean("TrackMiddle/Enable", true);
+    SmartDashboard.putBoolean("TrackMiddle/isFinish", LEDConstants.arrivePosition_Base);
     SmartDashboard.putNumber("TrackMiddle/xPidOutput", xPidOutput);
     SmartDashboard.putNumber("TrackMiddle/yPidOutput", yPidOutput);
     SmartDashboard.putNumber("TrackMiddle/rotationPidOutput", rotationPidOutput);
@@ -125,6 +125,7 @@ public class TrackMiddleReef_Right extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("TrackMiddle/Enable", false);
     m_Swerve.drive(0, 0, 0, false);
 
     if(m_PhotonVision.isArrive_Reef("MiddleReef_FrontRight") || m_PhotonVision.isArrive_Reef("MiddleReef_FrontLeft")) {

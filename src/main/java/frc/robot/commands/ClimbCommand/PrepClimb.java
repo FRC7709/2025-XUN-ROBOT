@@ -13,22 +13,21 @@ import frc.robot.subsystems.ClimberSubsystem;
 public class PrepClimb extends Command {
   private final ClimberSubsystem m_Climber;
 
-  private final BooleanSupplier ifClimbFunc;
+  private final BooleanSupplier m_ifClimbFunc;
 
   private boolean ifClimb;
+
   public PrepClimb(ClimberSubsystem climberSubsystem, BooleanSupplier ifClimb) {
     m_Climber = climberSubsystem;
-
-    ifClimbFunc = ifClimb;
+    m_ifClimbFunc = ifClimb;
     addRequirements(m_Climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ifClimb = ifClimbFunc.getAsBoolean();
-    if(ifClimb)
-    m_Climber.Release();
+    ifClimb = m_ifClimbFunc.getAsBoolean();
+    if(ifClimb) m_Climber.Release();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

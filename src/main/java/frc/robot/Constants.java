@@ -212,13 +212,13 @@ public final class Constants {
     public static final double yPidSetPoint_LeftReef = 0.1307;
     public static final double rotationPidSetPoint_LeftReef = 179.2;
 
-    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.416;
-    public static final double yPidSetPoint_MiddleReef_FrontRight = -0.210;
-    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 179.1D;
+    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.411;
+    public static final double yPidSetPoint_MiddleReef_FrontRight = 0.172;
+    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 178.7;
 
     public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.409;
     public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.245;
-    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 177;
+    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 178;
 
     public static final double xPidSetPoint_LeftCoralStation_BackLeft = 0;
     public static final double yPidSetPoint_LeftCoralStation_BackLeft = 0;

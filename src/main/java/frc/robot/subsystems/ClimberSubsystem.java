@@ -119,7 +119,7 @@ public class ClimberSubsystem extends SubsystemBase {
       }
     }else{
       pidOutput = climbPID.calculate(getAngle(), goalAngle);
-      if(getAngle()<-4) pidOutput = 0;
+      if(getAngle()<-6) pidOutput = 0;
       climbMotor.setVoltage(pidOutput);
     }
     // log

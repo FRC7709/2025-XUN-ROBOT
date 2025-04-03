@@ -316,7 +316,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Wrist/PivotSetpoint", goalAngle);
       SmartDashboard.putString("Wrist/State", pivotState);
       // Wheel
-      SmartDashboard.putString("EndEffector/WheelState", wheelState);
+      SmartDashboard.putString("EndEffector/State", wheelState);
       SmartDashboard.putNumber("EndEffector/WheelCurrent", wheelMotor.getStatorCurrent().getValueAsDouble());
       SmartDashboard.putBoolean("EndEffector/FirstIR", getFirstIR());
       SmartDashboard.putBoolean("EndEffector/SecondIR", getSecondIR());

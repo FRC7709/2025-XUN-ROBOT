@@ -5,7 +5,7 @@
     "data": {
       "commands": [
         {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -224,7 +224,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "TrackMiddleReef_Auto"
+                        "name": "TrackMiddle_Left_Auto"
                       }
                     },
                     {

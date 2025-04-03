@@ -16,6 +16,7 @@ public class Climb extends Command {
   private final BooleanSupplier ifClimbFunc;
 
   private boolean ifClimb;
+  
   public Climb(ClimberSubsystem climberSubsystem, BooleanSupplier ifClimb) {
     this.m_ClimberSubsystem = climberSubsystem;
 

@@ -116,6 +116,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("PrepareForScore_Intake", new PrepareForScore_Elevator_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
     NamedCommands.registerCommand("NET_Intake_Auto", new NET_Elevator(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("OutAlgae_Auto", new OutAlgae(m_EndEffectorSubsystem).withTimeout(0.5));
+    NamedCommands.registerCommand("TrackMiddle_Right_Auto", new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    NamedCommands.registerCommand("TrackMiddle_Left_Auto", new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // NamedCommands.registerCommand("TrackRightReef_Auto_LeftSide", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.3));
     NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(0.8));
 
@@ -141,7 +143,7 @@ public class RobotContainer {
 
     BooleanSupplier isSlowFunc = ()-> driverController.getHID().getRightTriggerAxis() > 0.2;
     BooleanSupplier ifFeed = ()-> driverController.getHID().getLeftTriggerAxis() > 0.2;
-    BooleanSupplier ifClimb = ()-> driverController.getHID().getRightTriggerAxis() > 0.2;
+    BooleanSupplier ifClimb = ()-> driverController.getHID().getPOV() == 0; // Use the D-Pad to indicate if climbing, this can be changed to a button if needed
 
 
     driverController.leftBumper().whileTrue(new TrackLeftReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));

@@ -87,7 +87,7 @@ public class TrackRightReef extends Command {
       rotationPidOutput = 0;
     }
 
-    SmartDashboard.putBoolean("TrackRightReef/enable", true);
+    SmartDashboard.putBoolean("TrackRightReef/Enable", true);
     SmartDashboard.putNumber("TrackRightReef/xError", xPidError);
     SmartDashboard.putNumber("TrackRightReef/yError", yPidError);
     SmartDashboard.putNumber("TrackRightReef/rotationError", rotationPidError);
@@ -107,7 +107,7 @@ public class TrackRightReef extends Command {
 
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("TrackRightReef/enable", false);
+    SmartDashboard.putBoolean("TrackRightReef/Enable", false);
     // Stop the swerve
     m_Swerve.drive(0, 0, 0, false);
     // LED

@@ -86,7 +86,7 @@ public class TrackLeftReef extends Command {
       rotationPidOutput = 0;
     }
     // Log
-    SmartDashboard.putBoolean("TrackLeftReef/enable", true);
+    SmartDashboard.putBoolean("TrackLeftReef/Enable", true);
     SmartDashboard.putNumber("TrackLeftReef/xError", xError);
     SmartDashboard.putNumber("TrackLeftReef/yError", yError);
     SmartDashboard.putNumber("TrackLeftReef/rotationError", rotationError);
@@ -109,7 +109,7 @@ public class TrackLeftReef extends Command {
   public void end(boolean interrupted) {
     m_Swerve.drive(0, 0, 0, false);
     // Log
-    SmartDashboard.putBoolean("TrackLeftReef/enable", false);
+    SmartDashboard.putBoolean("TrackLeftReef/Enable", false);
     // LED
     if(m_PhotonVision.isArrive_Reef("LeftReef")) {
       LEDConstants.arrivePosition_Base = true;
