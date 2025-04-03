@@ -10,24 +10,24 @@ import frc.robot.subsystems.EndEffectorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class IntakeAlgae_Low extends Command {
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
 
-  private boolean isArrive_EndEffector;
+  private boolean endEffectorFlag;
 
   public IntakeAlgae_Low(ElevatorSubsystem ElevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
-    this.m_ElevatorSubsystem = ElevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
+    this.m_Elevator = ElevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
 
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_EndEffectorSubsystem.Arm_IDLE();
+    m_EndEffector.Arm_IDLE();
 
-    isArrive_EndEffector = false;
+    endEffectorFlag = false;
     LEDConstants.intakeGamePiece = true;
     LEDConstants.hasGamePiece = false;
     LEDConstants.LEDFlag = true;
@@ -36,14 +36,14 @@ public class IntakeAlgae_Low extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp() && !m_EndEffectorSubsystem.hasAlgae()) {
-      m_ElevatorSubsystem.intakeAlgae_Low();
-      isArrive_EndEffector = true;
+    if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp() && !m_EndEffector.hasAlgae()) {
+      m_Elevator.intakeAlgae_Low();
+      endEffectorFlag = true;
     }
 
-    if(m_ElevatorSubsystem.arriveSetPoint() && isArrive_EndEffector) {
-      m_EndEffectorSubsystem.Arm_intakeAlgae_Low();
-      m_EndEffectorSubsystem.intakeAlgae_Low_Wheel();
+    if(m_Elevator.arriveSetPoint() && endEffectorFlag) {
+      m_EndEffector.Arm_intakeAlgae_Low();
+      m_EndEffector.intakeAlgae_Low_Wheel();
     }
   }
   
@@ -51,8 +51,8 @@ public class IntakeAlgae_Low extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_EndEffectorSubsystem.Arm_IDLE();
-    m_EndEffectorSubsystem.holdAlgae();
+    m_EndEffector.Arm_IDLE();
+    m_EndEffector.holdAlgae();
 
     LEDConstants.hasGamePiece = true;
     LEDConstants.LEDFlag = false;
@@ -61,6 +61,6 @@ public class IntakeAlgae_Low extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_EndEffectorSubsystem.hasAlgae();
+    return m_EndEffector.hasAlgae() && m_EndEffector.wheelOverCurrent();
   }
 }
