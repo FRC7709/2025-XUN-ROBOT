@@ -6,9 +6,6 @@ package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-
-import com.pathplanner.lib.config.PIDConstants;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
