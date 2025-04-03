@@ -4,12 +4,7 @@
 
 package frc.robot.commands.TrackCommands;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -60,7 +55,6 @@ public class TrackRightReef extends Command {
     LEDConstants.LEDFlag = true;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(m_PhotonVision.hasFrontLeftTarget()) {
@@ -82,9 +76,6 @@ public class TrackRightReef extends Command {
       xPidMeasurements = (xPidError > 0.02) ? xPidMeasurements : PhotonConstants.xPidSetPoint_RightReef;
       xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_RightReef);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Reef);
-      // Aligned
-      // if(xPidController.getError() < 0.02) SmartDashboard.putBoolean("Align/LeftReefAlign", true);
-      // else SmartDashboard.putBoolean("Align/LeftReefAlign", false);
 
       if(m_PhotonVision.isArrive_Reef("RightReef")) {
         LEDConstants.arrivePosition_Base = true;
@@ -95,12 +86,11 @@ public class TrackRightReef extends Command {
       yPidOutput = 0;
       rotationPidOutput = 0;
     }
-    // SmartDashboard.putNumber("TrackRightReef/xPidOutput", xPidOutput);
-    // SmartDashboard.putNumber("TrackRightReef/yPidOutput", yPidOutput);
-    // SmartDashboard.putNumber("TrackRightReef/rotationPidOutput", rotationPidOutput);
-    SmartDashboard.putNumber("TrackRightReef/xPidError", xPidError);
-    SmartDashboard.putNumber("TrackRightReef/yPidError", yPidError);
-    SmartDashboard.putNumber("TrackRightReef/rotationPidError", rotationPidError);
+
+    SmartDashboard.putBoolean("TrackRightReef/enable", true);
+    SmartDashboard.putNumber("TrackRightReef/xError", xPidError);
+    SmartDashboard.putNumber("TrackRightReef/yError", yPidError);
+    SmartDashboard.putNumber("TrackRightReef/rotationError", rotationPidError);
 
     if(ElevatorConstants.arriveLevel == 1) {
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_NeedSlow_Level1_Reef);
@@ -115,10 +105,12 @@ public class TrackRightReef extends Command {
     m_Swerve.drive(xPidOutput, yPidOutput, rotationPidOutput, false);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("TrackRightReef/enable", false);
+    // Stop the swerve
     m_Swerve.drive(0, 0, 0, false);
+    // LED
     if(m_PhotonVision.isArrive_Reef("RightReef")) {
       LEDConstants.arrivePosition_Base = true;
       LEDConstants.tracking = false;
@@ -130,7 +122,6 @@ public class TrackRightReef extends Command {
     }
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return LEDConstants.arrivePosition_Base;
