@@ -5,55 +5,51 @@
 package frc.robot.commands.ManualCommands;
 
 import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Coral_L4 extends Command {
-  /** Creates a new Coral_L4_Elevator. */
-  private final ElevatorSubsystem m_ElevatorSubsystem;
-  private final EndEffectorSubsystem m_EndEffectorSubsystem;
+  private final ElevatorSubsystem m_Elevator;
+  private final EndEffectorSubsystem m_EndEffector;
 
   private final BooleanSupplier ifFeedFunc;
 
-  private boolean ifArrive_EndEffector;
+  private boolean endEffectorFlag;
   private boolean ifFeed;
 
   public Coral_L4(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
-    this.m_ElevatorSubsystem = elevatorSubsystem;
-    this.m_EndEffectorSubsystem = endEffectorSubsystem;
+    this.m_Elevator = elevatorSubsystem;
+    this.m_EndEffector = endEffectorSubsystem;
     this.ifFeedFunc = ifFeed;
-    addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
+    addRequirements(m_Elevator, m_EndEffector);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_EndEffectorSubsystem.coralL4Primitive_Arm();
+    m_EndEffector.coralL4Primitive_Arm();
 
-    ifArrive_EndEffector = false;
+    endEffectorFlag = false;
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
     LEDConstants.LEDFlag = true;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // Read the ifFeed value
     ifFeed = ifFeedFunc.getAsBoolean();
-    // 
-    if(m_EndEffectorSubsystem.arrivedSetpoint() && m_EndEffectorSubsystem.canMoveUp()) {
-      m_ElevatorSubsystem.outCoral_L4();    
-      ifArrive_EndEffector = true;
+    // Move to the position
+    if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp()) {
+      m_Elevator.outCoral_L4();    
+      endEffectorFlag = true;
     }
-
-    if(m_ElevatorSubsystem.arriveSetPoint() && ifArrive_EndEffector) {
-      m_EndEffectorSubsystem.Arm_shootCoral_L4();
-
-      if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
+    // Move the end effector
+    if(m_Elevator.arriveSetPoint() && endEffectorFlag) {
+      m_EndEffector.Arm_shootCoral_L4();
+      // LED control
+      if(m_EndEffector.arrivedSetpoint()) {
         LEDConstants.arrivePosition_Intake = true;
         LEDConstants.LEDFlag = true;
       }else {
@@ -61,18 +57,17 @@ public class Coral_L4 extends Command {
         LEDConstants.LEDFlag = true;
       }
     }
-
+    // Shoot when you ready
     if((ifFeed) || (LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base)) {
-      m_EndEffectorSubsystem.Wheel_shootCoral_L4();
+      m_EndEffector.Wheel_shootCoral_L4();
     }else {
-      m_EndEffectorSubsystem.stopWheel();
+      m_EndEffector.stopWheel();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
