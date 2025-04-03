@@ -204,21 +204,21 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Level2_Processor = 0.1;
     public static final double rotationPidMaxOutput_NeedSlow_Level2_Processor = 0.05;
 
-    public static final double xPidSetPoint_RightReef = 0.406; 
-    public static final double yPidSetPoint_RightReef = -0.138;
-    public static final double rotationPidSetPoint_RightReef = 180;
+    public static final double xPidSetPoint_RightReef = 0.412; 
+    public static final double yPidSetPoint_RightReef = -0.122;
+    public static final double rotationPidSetPoint_RightReef = 179.7;
 
-    public static final double xPidSetPoint_LeftReef = 0.4093;
-    public static final double yPidSetPoint_LeftReef = 0.125;
-    public static final double rotationPidSetPoint_LeftReef = 179.3;
+    public static final double xPidSetPoint_LeftReef = 0.4143;
+    public static final double yPidSetPoint_LeftReef = 0.1307;
+    public static final double rotationPidSetPoint_LeftReef = 179.2;
 
-    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.417;
-    public static final double yPidSetPoint_MiddleReef_FrontRight = -0.212;
-    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 180.2;
+    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.416;
+    public static final double yPidSetPoint_MiddleReef_FrontRight = -0.210;
+    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 179.1D;
 
-    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.417;
-    public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.212;
-    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 180.2;
+    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.409;
+    public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.245;
+    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 177;
 
     public static final double xPidSetPoint_LeftCoralStation_BackLeft = 0;
     public static final double yPidSetPoint_LeftCoralStation_BackLeft = 0;

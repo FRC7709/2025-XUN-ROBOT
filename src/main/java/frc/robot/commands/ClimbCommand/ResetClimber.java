@@ -4,20 +4,30 @@
 
 package frc.robot.commands.ClimbCommand;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class ResetClimber extends Command {
   private final ClimberSubsystem m_ClimberSubsystem;
 
-  public ResetClimber(ClimberSubsystem climberSubsystem) {
+  private final BooleanSupplier ifClimbFunc;
+
+  private boolean ifClimb;
+  public ResetClimber(ClimberSubsystem climberSubsystem, BooleanSupplier ifClimb) {
     this.m_ClimberSubsystem = climberSubsystem;
+
+    ifClimbFunc = ifClimb;
     addRequirements(m_ClimberSubsystem);
   }
 
   @Override
   public void initialize() {
-    m_ClimberSubsystem.ResetClimber();
+    ifClimb = ifClimbFunc.getAsBoolean();
+    if(ifClimb) {
+      m_ClimberSubsystem.ResetClimber();
+    }
   }
 
   @Override

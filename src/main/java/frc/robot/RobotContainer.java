@@ -38,6 +38,7 @@ import frc.robot.commands.ManualCommands.ShootNet;
 import frc.robot.commands.ManualCommands.ShootProcessor;
 import frc.robot.commands.ManualCommands.TurnMore;
 import frc.robot.commands.TrackCommands.TrackLeftReef;
+import frc.robot.commands.TrackCommands.TrackMiddleReef_Left;
 import frc.robot.commands.TrackCommands.TrackMiddleReef_Right;
 import frc.robot.commands.TrackCommands.TrackRightReef;
 import frc.robot.commands.TrackCommands.transformCalculation;
@@ -140,15 +141,18 @@ public class RobotContainer {
 
     BooleanSupplier isSlowFunc = ()-> driverController.getHID().getRightTriggerAxis() > 0.2;
     BooleanSupplier ifFeed = ()-> driverController.getHID().getLeftTriggerAxis() > 0.2;
+    BooleanSupplier ifClimb = ()-> driverController.getHID().getRightTriggerAxis() > 0.2;
+
 
     driverController.leftBumper().whileTrue(new TrackLeftReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.leftTrigger(0.4).toggleOnTrue(new TrackMiddleReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.rightBumper().whileTrue(new TrackRightReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.a().toggleOnTrue(new TrackCage(m_SwerveSubsystem, m_PhotonVisionSubsystem));
-    driverController.pov(90).whileTrue(new ManualDrive_RotationSpeedUp(m_SwerveSubsystem, xSpeedFunc, ySpeedFunc, zSpeedFunc, isSlowFunc));
-    driverController.a().toggleOnTrue(new ResetClimber(m_ClimberSubsystem));
-    driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem));
-    driverController.x().toggleOnTrue(new Climb(m_ClimberSubsystem));
+    driverController.pov(180).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    driverController.pov(270).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    driverController.a().toggleOnTrue(new ResetClimber(m_ClimberSubsystem, ifClimb));
+    driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem, ifClimb));
+    driverController.x().toggleOnTrue(new Climb(m_ClimberSubsystem, ifClimb));
 
 
     driverController.y().whileTrue(

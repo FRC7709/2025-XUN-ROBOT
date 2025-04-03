@@ -4,6 +4,8 @@
 
 package frc.robot.commands.ClimbCommand;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ClimberSubsystem;
 
@@ -11,14 +13,21 @@ import frc.robot.subsystems.ClimberSubsystem;
 public class PrepClimb extends Command {
   private final ClimberSubsystem m_Climber;
 
-  public PrepClimb(ClimberSubsystem climberSubsystem) {
+  private final BooleanSupplier ifClimbFunc;
+
+  private boolean ifClimb;
+  public PrepClimb(ClimberSubsystem climberSubsystem, BooleanSupplier ifClimb) {
     m_Climber = climberSubsystem;
+
+    ifClimbFunc = ifClimb;
     addRequirements(m_Climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    ifClimb = ifClimbFunc.getAsBoolean();
+    if(ifClimb)
     m_Climber.Release();
   }
 
