@@ -70,6 +70,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevator_SecondMotor.getConfigurator().apply(elevatorSlot0Config);
     elevator_FirstMotor.getConfigurator().apply(elevatorMotionMagicConfig);
     elevator_SecondMotor.getConfigurator().apply(elevatorMotionMagicConfig);
+
+    resetEncoder();
   }
 
   public void intakeCoral() {
@@ -153,6 +155,10 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public double getSetpointMeter(){
     return goalPosition * 0.02872; // Convert Rotations to Meters
+  }
+
+  public void resetEncoder() {
+    elevator_FirstMotor.setPosition(0);
   }
 
   @Override

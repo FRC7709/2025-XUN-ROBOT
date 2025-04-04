@@ -204,13 +204,13 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Level2_Processor = 0.1;
     public static final double rotationPidMaxOutput_NeedSlow_Level2_Processor = 0.05;
 
-    public static final double xPidSetPoint_RightReef = 0.412; 
-    public static final double yPidSetPoint_RightReef = -0.122;
-    public static final double rotationPidSetPoint_RightReef = 179.7;
+    public static final double xPidSetPoint_RightReef = 0.402; 
+    public static final double yPidSetPoint_RightReef = -0.145;
+    public static final double rotationPidSetPoint_RightReef = 180.9;
 
-    public static final double xPidSetPoint_LeftReef = 0.4143;
-    public static final double yPidSetPoint_LeftReef = 0.1307;
-    public static final double rotationPidSetPoint_LeftReef = 179.2;
+    public static final double xPidSetPoint_LeftReef = 0.4057;
+    public static final double yPidSetPoint_LeftReef = 0.1472;
+    public static final double rotationPidSetPoint_LeftReef = 178.5;
 
     public static final double xPidSetPoint_MiddleReef_FrontRight = 0.411;
     public static final double yPidSetPoint_MiddleReef_FrontRight = 0.172;
@@ -391,7 +391,7 @@ public final class Constants {
 
     public static final double primitiveAngle = 16;
     public static final double climbOutAngle = 67.5;
-    public static final double climbAngle = 29.17; 
+    public static final double climbAngle = 29; 
     public static final double climbInAngle = -3.2;
   }
 
