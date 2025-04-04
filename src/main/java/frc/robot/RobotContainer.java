@@ -150,8 +150,8 @@ public class RobotContainer {
     // driverController.leftTrigger(0.4).toggleOnTrue(new TrackMiddleReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.rightBumper().whileTrue(new TrackRightReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.a().toggleOnTrue(new TrackCage(m_SwerveSubsystem, m_PhotonVisionSubsystem));
-    driverController.pov(180).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
-    driverController.pov(270).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    driverController.pov(270).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    driverController.pov(180).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.a().toggleOnTrue(new ResetClimber(m_ClimberSubsystem, ifClimb));
     driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem, ifClimb));
     driverController.x().toggleOnTrue(new Climb(m_ClimberSubsystem, ifClimb));

@@ -391,7 +391,7 @@ public final class Constants {
 
     public static final double primitiveAngle = 16;
     public static final double climbOutAngle = 67.5;
-    public static final double climbAngle = 42.4; 
+    public static final double climbAngle = 29.17; 
     public static final double climbInAngle = -3.2;
   }
 

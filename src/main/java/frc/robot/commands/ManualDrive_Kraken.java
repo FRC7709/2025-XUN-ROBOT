@@ -77,7 +77,7 @@ public class ManualDrive_Kraken extends Command {
       xyMultiplier = 0.1;
       zMultiplier = 0.05;
     } else if (ElevatorConstants.arriveLevel == 1 || isSlow) {
-      xyMultiplier = 0.2;
+      xyMultiplier = 0.35;
       zMultiplier = 0.1;
     } else {
       xyMultiplier = 0.8;
