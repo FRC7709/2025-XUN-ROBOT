@@ -294,7 +294,7 @@ public final class Constants {
     public static final double primitivePosition = -0.2;//-0.14
     public static final double coralL1Position = 4;//3.72
     public static final double coralL2Position = 11.44;//7.42
-    public static final double coralL3Position = 21.54;//21.42
+    public static final double coralL3Position = 22.5;//21.42
     public static final double coralL4Position = 43.34;//42.52
     public static final double coralStationPosition = -0.2;//0.12
 

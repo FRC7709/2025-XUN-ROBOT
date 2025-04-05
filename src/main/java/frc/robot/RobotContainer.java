@@ -95,8 +95,8 @@ public class RobotContainer {
 
 
     NamedCommands.registerCommand("stopMotor", Commands.runOnce(() -> m_SwerveSubsystem.stopMotor(), m_SwerveSubsystem));
-    NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1));//1
+    NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2));
+    NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2));//1
     NamedCommands.registerCommand("TrackLeftReef_Auto_OneCoral", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(3));
     NamedCommands.registerCommand("TrackRightReef_Auto_OneCoral", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(3));
     NamedCommands.registerCommand("IntakeCoral_Reef", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.3));
@@ -152,9 +152,11 @@ public class RobotContainer {
     // driverController.a().toggleOnTrue(new TrackCage(m_SwerveSubsystem, m_PhotonVisionSubsystem));
     driverController.pov(270).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.pov(180).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
-    driverController.a().toggleOnTrue(new ResetClimber(m_ClimberSubsystem, ifClimb));
+    driverController.pov(90).whileTrue(new  ManualDrive_RotationSpeedUp(m_SwerveSubsystem, xSpeedFunc, ySpeedFunc, zSpeedFunc, isSlowFunc));
+    driverController.a().whileTrue(new ResetClimber(m_ClimberSubsystem, ifClimb));
     driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem, ifClimb));
-    driverController.x().toggleOnTrue(new Climb(m_ClimberSubsystem, ifClimb));
+    driverController.x().whileTrue(new Climb(m_ClimberSubsystem, ifClimb));
+
 
 
     driverController.y().whileTrue(

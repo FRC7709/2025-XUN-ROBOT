@@ -27,15 +27,15 @@ public class PrepClimb extends Command {
   @Override
   public void initialize() {
     ifClimb = m_ifClimbFunc.getAsBoolean();
+    // Go out
     if(ifClimb) m_Climber.Release();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_Climber.arriveSetPoint()){
-      m_Climber.PrepClimb();
-    }
+    // Go back
+    if(m_Climber.arriveSetPoint()) m_Climber.PrepClimb();
   }
 
   // Called once the command ends or is interrupted.
