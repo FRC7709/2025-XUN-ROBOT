@@ -73,7 +73,7 @@ public class TrackMiddleReef_Right extends Command {
       // Rotation-PID calculations
       
       rotationMeasurement = m_PhotonVision.getRotationMeasurements_FrontLeft();
-      rotationError = m_PhotonVision.getRotationError_Reef("MiddleReef_FrontRight");
+      rotationError = m_PhotonVision.getRotationError_Reef("MiddleReef_FrontLeft");
       rotationMeasurement = rotationError >= 0.5 ? rotationMeasurement : PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft;
       rotationPidOutput = rotationPidController.calculate(rotationMeasurement, PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Reef);
@@ -95,7 +95,7 @@ public class TrackMiddleReef_Right extends Command {
       rotationPidOutput = 0;
     }
 
-    if(m_PhotonVision.isArrive_Reef("MiddleReef_FrontRight")) {
+    if(m_PhotonVision.isArrive_Reef("MiddleReef_FrontLeft")) {
         LEDConstants.arrivePosition_Base = true;
         LEDConstants.LEDFlag = true;
       }
@@ -127,7 +127,7 @@ public class TrackMiddleReef_Right extends Command {
     SmartDashboard.putBoolean("TrackMiddle/Enable", false);
     m_Swerve.drive(0, 0, 0, false);
 
-    if(m_PhotonVision.isArrive_Reef("MiddleReef_FrontRight") || m_PhotonVision.isArrive_Reef("MiddleReef_FrontLeft")) {
+    if(m_PhotonVision.isArrive_Reef("MiddleReef_FrontLeft")) {
       LEDConstants.arrivePosition_Base = true;
       LEDConstants.tracking = false;
       LEDConstants.LEDFlag = true;
