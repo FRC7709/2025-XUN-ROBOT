@@ -55,6 +55,7 @@ public class TrackLeftReef_Auto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putBoolean("Auto/TrackLeft", true);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
     LEDConstants.tracking = true;
@@ -116,6 +117,7 @@ public class TrackLeftReef_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("Auto/TrackLeft", false);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
     if(xPidError <= 0.05 && yPidError <= 0.05 && rotationPidError <= 2) {

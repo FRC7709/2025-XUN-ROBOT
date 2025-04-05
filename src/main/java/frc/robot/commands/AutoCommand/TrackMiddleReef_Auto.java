@@ -59,6 +59,7 @@ public class TrackMiddleReef_Auto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putBoolean("Auto/TrackMiddleReef", true);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
     LEDConstants.tracking = true;
@@ -144,6 +145,7 @@ public class TrackMiddleReef_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putBoolean("Auto/TrackMiddleReef", false);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
     if(m_PhotonVisionSubsystem.isArrive_Reef("MiddleReef_FrontRight") || m_PhotonVisionSubsystem.isArrive_Reef("Middle_FrontLeft")) {
