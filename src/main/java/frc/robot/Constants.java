@@ -315,18 +315,12 @@ public final class Constants {
     public static final int CANcoder_ID = 45;
     public static final double encoderOffset = 0.140625;
     // PID
-    public static final double Kp = 0.007;//0.0048  
-    public static final double Ki = 0;
-    public static final double Kd = 0.0001;//0.0001
-    public static final double PIDMaxOutput = 0.2;
+    public static final double Kp = 0.075;//0.0048  
+    public static final double Ki = 0.001;
+    public static final double Kd = 0.005;//0.0001
+    public static final double PIDMaxOutput = 2;
     // Feedforward
-    public static final double Kg1 = 0.6;//
-    // Feedforward
-    public static final double Kg2 = 0.4;//0.4
-    // Feedforward
-    public static final double Kg3 = 0.3;//0.3
-    // Feedforward
-    public static final double Kg4 = 0.6;//0.6
+    public static final double Kg = 0.3;//
     // Setpoint
     public static final double primitiveAngle = 82;
     public static final double primitiveAngle_HasCoral = 82;

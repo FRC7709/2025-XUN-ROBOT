@@ -114,7 +114,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
   
       // PID Controller and Feedforward
       armPID = new PIDController(WristConstants.Kp, WristConstants.Ki, WristConstants.Kd);
-      armFeedforward = new ArmFeedforward(0, WristConstants.Kg1, 0);
+      armFeedforward = new ArmFeedforward(0, WristConstants.Kg, 0);
       // Init debouncer
       m_Debouncer_first = new Debouncer(0.05, DebounceType.kRising);
       m_Debouncer_second = new Debouncer(0.05, DebounceType.kRising);
@@ -287,24 +287,13 @@ public class EndEffectorSubsystem extends SubsystemBase {
   
     @Override
     public void periodic() {
-      // Arm feedforward
-      if(90 >= getAngle() && getAngle() > 80 || 75 >= getAngle() && getAngle() > 70) {
-        armFeedforward = new ArmFeedforward(0, WristConstants.Kg1, 0);
-      }else if(80 >= getAngle() && getAngle() > 75) {
-        armFeedforward = new ArmFeedforward(0, WristConstants.Kg4, 0);
-      }else if(70 >= getAngle() && getAngle() > 61.6){
-        armFeedforward = new ArmFeedforward(0, WristConstants.Kg2, 0);
-      }else {
-        armFeedforward = new ArmFeedforward(0, WristConstants.Kg3, 0);
-      }
-      
       // PID and Feedforward
       pidOutput = armPID.calculate(getAngle(), goalAngle);
-      feedforwardOutput = armFeedforward.calculate(getRadians(), getVelocity())/12;
+      feedforwardOutput = armFeedforward.calculate(getRadians(), getVelocity());
       pidOutput = Constants.setMaxOutput(pidOutput, WristConstants.PIDMaxOutput);
       // Implement
       output = pidOutput + feedforwardOutput;
-      pivotMotor.set(output);
+      pivotMotor.setVoltage(output);
 
       //Log
       // Wrist
