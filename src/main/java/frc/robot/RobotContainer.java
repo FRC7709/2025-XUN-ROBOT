@@ -13,8 +13,11 @@ import frc.robot.commands.AutoCommand.Coral_L3_Elevator_Auto;
 import frc.robot.commands.AutoCommand.Coral_L4_Elevator_Auto;
 import frc.robot.commands.AutoCommand.IntakeAlgae_High_Auto;
 import frc.robot.commands.AutoCommand.IntakeAlgae_Low_Auto;
+import frc.robot.commands.AutoCommand.IntakeCoral_Fast;
+import frc.robot.commands.AutoCommand.IntakeCoral_Slow;
 import frc.robot.commands.AutoCommand.NET_Elevator;
 import frc.robot.commands.AutoCommand.PrepareForScore_Algae_Auto;
+import frc.robot.commands.AutoCommand.PrepareForScore_Coral_Auto;
 import frc.robot.commands.AutoCommand.PrimitiveIntake_Auto;
 import frc.robot.commands.AutoCommand.ShootCoral_Auto;
 import frc.robot.commands.AutoCommand.TrackLeftReef_Auto;
@@ -101,6 +104,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("TrackRightReef_Auto_OneCoral", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(3));
     NamedCommands.registerCommand("IntakeCoral_Reef", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.3));
     NamedCommands.registerCommand("IntakeCoral", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(5));
+    NamedCommands.registerCommand("IntakeCoral_fast", new IntakeCoral_Fast(m_EndEffectorSubsystem));
+    NamedCommands.registerCommand("IntakeCoral_Slow", new IntakeCoral_Slow(m_EndEffectorSubsystem));
     NamedCommands.registerCommand("PrimitiveIntake", new PrimitiveIntake_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.4));
     NamedCommands.registerCommand("Coral_L4_Intake_WithTrack", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("Coral_L4_Intake", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.8));
@@ -114,6 +119,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("IntakeHighAlgae_Auto", new IntakeAlgae_High_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("IntakeLowAlgae_Auto", new IntakeAlgae_Low_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("PrepareForScore_Net", new PrepareForScore_Algae_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
+    NamedCommands.registerCommand("PrepareForScore_Coral", new PrepareForScore_Coral_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
     NamedCommands.registerCommand("NET_Intake_Auto", new NET_Elevator(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("OutAlgae_Auto", new OutAlgae(m_EndEffectorSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("TrackMiddle_Right_Auto", new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));

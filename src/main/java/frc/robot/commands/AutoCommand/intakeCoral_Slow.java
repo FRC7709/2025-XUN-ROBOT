@@ -9,10 +9,10 @@ import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class intakeCoral_Slow extends Command {
+public class IntakeCoral_Slow extends Command {
   /** Creates a new intakeCoral_Slow. */
   private final EndEffectorSubsystem m_EndEffectorSubsystem;
-  public intakeCoral_Slow(EndEffectorSubsystem endEffectorSubsystem) {
+  public IntakeCoral_Slow(EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_EndEffectorSubsystem = endEffectorSubsystem;
 

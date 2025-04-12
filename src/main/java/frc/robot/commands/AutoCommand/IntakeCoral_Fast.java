@@ -9,10 +9,10 @@ import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class intakeCoral_isSlow extends Command {
+public class IntakeCoral_Fast extends Command {
   /** Creates a new intakeCoral_isSlow. */
   private final EndEffectorSubsystem m_EndEffectorSubsystem;
-  public intakeCoral_isSlow(EndEffectorSubsystem endEffectorSubsystem) {
+  public IntakeCoral_Fast(EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_EndEffectorSubsystem = endEffectorSubsystem;
 
@@ -37,13 +37,20 @@ public class intakeCoral_isSlow extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_EndEffectorSubsystem.intakeCoral_Arm();
-    m_EndEffectorSubsystem.intakeCoralSlow_Wheel();
+    if(m_EndEffectorSubsystem.hasCoral()) {
+      m_EndEffectorSubsystem.Arm_IDLE();
+      m_EndEffectorSubsystem.stopWheel();
 
-    if(m_EndEffectorSubsystem.shouldCoralSlow()) {
+      LEDConstants.intakeGamePiece = false;
+      LEDConstants.hasGamePiece = true;
+      LEDConstants.LEDFlag = true;
+    }else if(m_EndEffectorSubsystem.shouldCoralSlow()) {
       LEDConstants.intakeGamePiece = true;
       LEDConstants.hasGamePiece = false;
       LEDConstants.LEDFlag = true;
+
+      m_EndEffectorSubsystem.intakeCoral_Arm();
+      m_EndEffectorSubsystem.intakeCoralSlow_Wheel();
     }else {
       LEDConstants.intakeGamePiece = false;
       LEDConstants.hasGamePiece = false;
@@ -54,6 +61,6 @@ public class intakeCoral_isSlow extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_EndEffectorSubsystem.shouldCoralSlow();
+    return m_EndEffectorSubsystem.shouldCoralSlow() || m_EndEffectorSubsystem.hasCoral();
   }
 }
