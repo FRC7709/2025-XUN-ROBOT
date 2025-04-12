@@ -34,40 +34,37 @@ public class IntakeAlgae_Low_Auto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!LEDConstants.hasAlgae) {
       if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp() && !m_EndEffector.hasAlgae()) {
         m_Elevator.intakeAlgae_Low();
         m_EndEffector.Arm_intakeAlgae_Low();
         m_EndEffector.intakeAlgae_Low_Wheel();
         }
-      }
-
-      if(m_EndEffector.hasAlgae()) {
-        m_EndEffector.Arm_IDLE();
-        m_EndEffector.holdAlgae();
-
-        LEDConstants.hasGamePiece = true;
-        LEDConstants.hasAlgae = true;
-        LEDConstants.LEDFlag = false;
-      }
     }
   
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_Elevator.toPrimitive();
-    // m_EndEffector.Arm_IDLE();
-    // m_EndEffector.holdAlgae();
+    if(m_EndEffector.hasAlgae()) {
+      m_EndEffector.Arm_IDLE();
+      m_EndEffector.holdAlgae();
 
-    // LEDConstants.hasGamePiece = true;
-    // LEDConstants.intakeGamePiece = false;
-    // LEDConstants.LEDFlag = true;
+      LEDConstants.hasGamePiece = true;
+      LEDConstants.hasAlgae = true;
+      LEDConstants.LEDFlag = false;
+    }else {
+      m_EndEffector.Arm_IDLE();
+      m_EndEffector.stopWheel();
+
+      LEDConstants.intakeGamePiece = false;
+      LEDConstants.hasGamePiece = false;
+      LEDConstants.LEDFlag = true;
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_EndEffector.hasAlgae() && m_EndEffector.wheelOverCurrent();
   }
 }

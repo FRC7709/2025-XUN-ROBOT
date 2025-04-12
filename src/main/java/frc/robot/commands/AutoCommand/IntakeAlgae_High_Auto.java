@@ -42,7 +42,6 @@ public class IntakeAlgae_High_Auto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!LEDConstants.hasAlgae) {
       if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp() && !m_EndEffector.hasAlgae()) {
         m_Elevator.intakeAlgae_High();
 
@@ -50,25 +49,31 @@ public class IntakeAlgae_High_Auto extends Command {
           m_EndEffector.Arm_intakeAlgae_High();
           m_EndEffector.intakeAlgae_High_Wheel();
         }
-      }
-
-      if(m_EndEffector.hasAlgae()) {
-        m_EndEffector.Arm_IDLE();
-        m_EndEffector.holdAlgae();
-
-        LEDConstants.hasGamePiece = true;
-        LEDConstants.LEDFlag = true;
-      }
     }
   }
 
   @Override
   public void end(boolean interrupted) {
+    if(m_EndEffector.hasAlgae()) {
+      m_EndEffector.Arm_IDLE();
+      m_EndEffector.holdAlgae();
+
+      LEDConstants.hasGamePiece = true;
+      LEDConstants.intakeGamePiece = false;
+      LEDConstants.LEDFlag = true;
+    }else {
+      m_EndEffector.Arm_IDLE();
+      m_EndEffector.stopWheel();
+
+      LEDConstants.intakeGamePiece = false;
+      LEDConstants.hasGamePiece = false;
+      LEDConstants.LEDFlag = true;
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_EndEffector.hasAlgae() && m_EndEffector.wheelOverCurrent();
   }
 }
