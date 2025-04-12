@@ -290,7 +290,8 @@ public final class Constants {
     public static final int elevator_FirstMotor_ID = 11;
     public static final int elevator_SecondMotor_ID = 12;
 
-    public static final double prepareForScorePosition = 20;
+    public static final double prepareForScorePosition_Net = 20;
+    public static final double prepareForScorePosition_Coral = 20;
     public static final double primitivePosition = -0.2;//-0.14
     public static final double coralL1Position = 4;//3.72
     public static final double coralL2Position = 11.44;//7.42

@@ -14,7 +14,7 @@ import frc.robot.commands.AutoCommand.Coral_L4_Elevator_Auto;
 import frc.robot.commands.AutoCommand.IntakeAlgae_High_Auto;
 import frc.robot.commands.AutoCommand.IntakeAlgae_Low_Auto;
 import frc.robot.commands.AutoCommand.NET_Elevator;
-import frc.robot.commands.AutoCommand.PrepareForScore_Elevator_Auto;
+import frc.robot.commands.AutoCommand.PrepareForScore_Algae_Auto;
 import frc.robot.commands.AutoCommand.PrimitiveIntake_Auto;
 import frc.robot.commands.AutoCommand.ShootCoral_Auto;
 import frc.robot.commands.AutoCommand.TrackLeftReef_Auto;
@@ -113,7 +113,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("TrackMiddleReef_Auto", new TrackMiddleReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("IntakeHighAlgae_Auto", new IntakeAlgae_High_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("IntakeLowAlgae_Auto", new IntakeAlgae_Low_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("PrepareForScore_Intake", new PrepareForScore_Elevator_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
+    NamedCommands.registerCommand("PrepareForScore_Net", new PrepareForScore_Algae_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
     NamedCommands.registerCommand("NET_Intake_Auto", new NET_Elevator(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("OutAlgae_Auto", new OutAlgae(m_EndEffectorSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("TrackMiddle_Right_Auto", new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));

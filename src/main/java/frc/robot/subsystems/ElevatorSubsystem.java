@@ -123,9 +123,14 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorState = "HOME";
     goalPosition = ElevatorConstants.primitivePosition;}
 
-  public void prepareForScore() {
-    elevatorState = "PREPARE";
-    goalPosition = ElevatorConstants.prepareForScorePosition;
+  public void prepareForScore_Net() {
+    elevatorState = "PREPARE_NET";
+    goalPosition = ElevatorConstants.prepareForScorePosition_Net;
+  }
+
+  public void prepareForScore_Coral() {
+    elevatorState = "PREPARE_CORAL";
+    goalPosition = ElevatorConstants.prepareForScorePosition_Coral;
   }
 
   public double getPositionRot() {

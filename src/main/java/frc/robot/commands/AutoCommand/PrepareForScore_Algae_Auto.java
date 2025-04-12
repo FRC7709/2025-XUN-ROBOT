@@ -10,11 +10,11 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class PrepareForScore_Elevator_Auto extends Command {
+public class PrepareForScore_Algae_Auto extends Command {
   /** Creates a new PrepareForNet_Intake_Auto. */
   private final EndEffectorSubsystem m_EndEffector;
   private final ElevatorSubsystem m_Elevator;
-  public PrepareForScore_Elevator_Auto(EndEffectorSubsystem endEffectorSubsystem, ElevatorSubsystem elevatorSubsystem) {
+  public PrepareForScore_Algae_Auto(EndEffectorSubsystem endEffectorSubsystem, ElevatorSubsystem elevatorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_EndEffector = endEffectorSubsystem;
     this.m_Elevator = elevatorSubsystem;
@@ -25,7 +25,7 @@ public class PrepareForScore_Elevator_Auto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Elevator.prepareForScore();
+    m_Elevator.prepareForScore_Net();
     m_EndEffector.Arm_IDLE();
   }
 
