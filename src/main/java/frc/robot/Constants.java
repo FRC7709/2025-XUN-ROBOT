@@ -184,15 +184,25 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Level2_Cage = 0.1;
     public static final double rotationPidMaxOutput_NeedSlow_Level2_Cage = 0.05;
 
-    public static final double xPidMaxOutput_Net = 0.4;
-    public static final double yPidMaxOutput_Net = 0.4;
-    public static final double rotationPidMaxOutput_Net = 0.4;
-    public static final double xPidMaxOutput_NeedSlow_Level1_Net = 0.2;
-    public static final double yPidMaxOutput_NeedSlow_Level1_Net = 0.2;
-    public static final double rotationPidMaxOutput_NeedSlow_Level1_Net = 0.1;
-    public static final double xPidMaxOutput_NeedSlow_Level2_Net = 0.1;
-    public static final double yPidMaxOutput_NeedSlow_Level2_Net = 0.1;
-    public static final double rotationPidMaxOutput_NeedSlow_Level2_Net = 0.05;
+    public static final double xPidMaxOutput_Reef_Auto = 0.3;
+    public static final double yPidMaxOutput_Reef_Auto = 0.3;
+    public static final double rotationPidMaxOutput_Reef_Auto = 0.2;
+    public static final double xPidMaxOutput_NeedSlow_Level1_Reef_Auto= 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_Reef_Auto = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_Reef_Auto = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_Reef_Auto= 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_Reef_Auto = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_Reef_Auto = 0.05;
+
+    public static final double xPidMaxOutput_Net_Auto = 0.4;
+    public static final double yPidMaxOutput_Net_Auto = 0.4;
+    public static final double rotationPidMaxOutput_Net_Auto = 0.4;
+    public static final double xPidMaxOutput_NeedSlow_Level1_Net_Auto = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_Net_Auto = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_Net_Auto = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_Net_Auto = 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_Net_Auto = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_Net_Auto = 0.05;
 
     public static final double xPidMaxOutput_Processor = 0.4;
     public static final double yPidMaxOutput_Processor = 0.4;
@@ -203,6 +213,16 @@ public final class Constants {
     public static final double xPidMaxOutput_NeedSlow_Level2_Processor = 0.1;
     public static final double yPidMaxOutput_NeedSlow_Level2_Processor = 0.1;
     public static final double rotationPidMaxOutput_NeedSlow_Level2_Processor = 0.05;
+
+    public static final double xPidMaxOutput_Net = 0.4;
+    public static final double yPidMaxOutput_Net = 0.4;
+    public static final double rotationPidMaxOutput_Net = 0.4;
+    public static final double xPidMaxOutput_NeedSlow_Level1_Net = 0.2;
+    public static final double yPidMaxOutput_NeedSlow_Level1_Net = 0.2;
+    public static final double rotationPidMaxOutput_NeedSlow_Level1_Net = 0.1;
+    public static final double xPidMaxOutput_NeedSlow_Level2_Net = 0.1;
+    public static final double yPidMaxOutput_NeedSlow_Level2_Net = 0.1;
+    public static final double rotationPidMaxOutput_NeedSlow_Level2_Net = 0.05;
 
     public static final double xPidSetPoint_RightReef = 0.402; 
     public static final double yPidSetPoint_RightReef = -0.145;
