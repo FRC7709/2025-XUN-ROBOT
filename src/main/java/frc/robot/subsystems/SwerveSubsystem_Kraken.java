@@ -88,7 +88,7 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
 
      resetGyro();
      // All other subsystem initialization
-    // ...                                                              
+    // ...                                                         
     try{
       robotConfig = RobotConfig.fromGUISettings();
     } catch (Exception e) {

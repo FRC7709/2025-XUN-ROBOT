@@ -122,6 +122,11 @@ public class RobotContainer {
     NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(0.8));
 
     autoChooser = AutoBuilder.buildAutoChooser();
+    // autoChooser = AutoBuilder.buildAutoChooserWithOptionsModifier(
+    //   (stream) -> true
+    //     ? stream.filter(auto -> auto.getName().startsWith("comp"))
+    //     : stream
+    // );
     SmartDashboard.putData("Auto Mode", autoChooser);
     configureBindings();
   }

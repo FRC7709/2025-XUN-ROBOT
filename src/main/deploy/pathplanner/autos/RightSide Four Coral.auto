@@ -156,6 +156,12 @@
                       "data": {
                         "name": "Coral_L2_Intake"
                       }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L3_Intake"
+                      }
                     }
                   ]
                 }
@@ -282,6 +288,12 @@
                       "type": "named",
                       "data": {
                         "name": "Coral_L2_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L3_Intake"
                       }
                     }
                   ]
