@@ -357,6 +357,7 @@ public final class Constants {
     public static final double algaeLowInAngle = 64;
     public static final double algaeHighInAngle = 64;
     public static final double algaeProccesorAngle = 9;//not yet
+    public static final double algaePreProccesorAngle = 20;
     public static final double algaeRemoveAngle = 75;
   }
 
@@ -380,6 +381,7 @@ public final class Constants {
     public static final double algaeLowInVol = -6;
     public static final double algaeHighInVol = -6;
     public static final double algaeShootProcessorVol = 3;
+    public static final double algaeShootProcessor_SlowVol = 1;
     public static final double algaeHoldVol = -4;  
     public static final double algaeOutVol = 6; 
     public static final double algaeRemoveVol = -6;

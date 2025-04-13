@@ -181,7 +181,7 @@ public class RobotContainer {
     operatorController.pov(180).toggleOnTrue(new Coral_L1(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.pov(0).toggleOnTrue(new Coral_L2(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.leftTrigger().toggleOnTrue(new Coral_L3(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
-    operatorController.leftBumper().toggleOnTrue(new Coral_L4(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
+    operatorController.leftBumper().toggleOnTrue(new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem));
     operatorController.pov(270).toggleOnTrue(new ShootProcessor(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.pov(90).toggleOnTrue(new IntakeAlgae_Floor(m_ElevatorSubsystem, m_EndEffectorSubsystem));
     operatorController.rightTrigger().toggleOnTrue(new IntakeAlgae_Low(m_ElevatorSubsystem, m_EndEffectorSubsystem));

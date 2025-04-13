@@ -21,6 +21,7 @@ import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.filter.Debouncer.DebounceType;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -55,6 +56,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
 
   private Debouncer m_Debouncer_first;
   private Debouncer m_Debouncer_second;
+  private Debouncer m_Debouncer_algae;
 
   private String pivotState = "IDLE"; // State of the end effector subsystem
   private String wheelState = "STOP"; // State of the motor (wheel or pivot)
@@ -118,6 +120,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       // Init debouncer
       m_Debouncer_first = new Debouncer(0.05, DebounceType.kRising);
       m_Debouncer_second = new Debouncer(0.05, DebounceType.kRising);
+      m_Debouncer_algae = new Debouncer(0.05, DebounceType.kRising);
     }
   
     // ======== Arm ========
@@ -163,6 +166,9 @@ public class EndEffectorSubsystem extends SubsystemBase {
     public void Arm_intakeAlgae_Floor() {
       pivotState = "ARM_INTAKEALGAE_FLOOR"; // Update state for logging
       goalAngle = WristConstants.algaeFloorAngle;}
+    public void Arm_Algae_PreProcessor(){
+      pivotState = "ARM_ALGAE_PREPROCESSOR"; // Update state for logging
+      goalAngle = WristConstants.algaePreProccesorAngle;}
 
     public void primitiveArm_HasCoral() {
       pivotState = "ARM_PRIMITIVE_HAS_CORAL"; // Update state for logging
@@ -213,6 +219,9 @@ public class EndEffectorSubsystem extends SubsystemBase {
     public void Wheel_shootAlgae_Processor() {
       wheelState = "WHEEL_SHOOTALGAE_PROCESSOR";
       wheelMotor.setVoltage(EndEffectorConstants.algaeShootProcessorVol);}
+    public void Wheel_shootAlgae_Processor_Slow() {
+      wheelState = "WHEEL_SHOOT_PROCESSOR_SLOW";
+      wheelMotor.setVoltage(EndEffectorConstants.algaeShootProcessor_SlowVol);}
     // Wheel control
     public void outAlgae() {
       wheelState = "WHEEL_OUTALGAE";
@@ -257,7 +266,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
     }
 
     public boolean getAlgaeIR() {
-      return irSensor_Algae.get();
+      return m_Debouncer_algae.calculate(irSensor_Algae.get());
     }
 
     public boolean shouldCoralSlow() {
@@ -281,7 +290,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
     }
   
     public boolean arrivedSetpoint() {
-      return (Math.abs(armPID.getError()) <= 2);
+      return (Math.abs(armPID.getError()) <= 3);
     }
   
   

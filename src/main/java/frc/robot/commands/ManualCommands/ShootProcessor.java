@@ -6,8 +6,11 @@ package frc.robot.commands.ManualCommands;
 
 import java.util.function.BooleanSupplier;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.EndEffectorConstants;
 import frc.robot.Constants.LEDConstants;
+import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
@@ -20,12 +23,13 @@ public class ShootProcessor extends Command {
   private final BooleanSupplier ifFeedFunc;
 
   private boolean ifFeed;
+  private boolean readyPosition;
+
   public ShootProcessor(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
     this.m_Elevator = elevatorSubsystem;
     this.m_EndEffector = endEffectorSubsystem;
 
-    this.ifFeedFunc = ifFeed;
-
+    ifFeedFunc = ifFeed;
     addRequirements(m_Elevator, m_EndEffector);
   }
 
@@ -33,7 +37,10 @@ public class ShootProcessor extends Command {
   @Override
   public void initialize() {
     m_Elevator.shootProcessor();
-    m_EndEffector.Arm_shootAlgae_Processor();
+    m_EndEffector.Arm_Algae_PreProcessor();
+    m_EndEffector.holdAlgae();
+
+    readyPosition = false;
 
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
@@ -43,10 +50,17 @@ public class ShootProcessor extends Command {
   @Override
   public void execute() {
     ifFeed = ifFeedFunc.getAsBoolean();
-
-    if(ifFeed || (LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base)) {
+    // First step
+    if(Math.abs(m_EndEffector.getAngle() - WristConstants.algaePreProccesorAngle) < 3 && ifFeed) {
+      m_EndEffector.Wheel_shootAlgae_Processor_Slow();
+      m_EndEffector.Arm_shootAlgae_Processor();
+      readyPosition = true;
+    }
+    // Second step
+    if (readyPosition && !m_EndEffector.hasAlgae()) {
       m_EndEffector.Wheel_shootAlgae_Processor();
     }
+
     if(m_EndEffector.arrivedSetpoint()) {
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
