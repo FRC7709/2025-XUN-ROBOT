@@ -9,20 +9,16 @@ import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class IntakeCoral extends Command {
-  /** Creates a new IntakeCoral_Elevator. */
   private final ElevatorSubsystem m_Elevator;
   private final EndEffectorSubsystem m_EndEffector;
   
   public IntakeCoral(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     this.m_Elevator = elevatorSubsystem;
     this.m_EndEffector = endEffectorSubsystem;
-
     addRequirements(m_Elevator, m_EndEffector);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_Elevator.intakeCoral();
@@ -36,7 +32,6 @@ public class IntakeCoral extends Command {
     LEDConstants.LEDFlag = true;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(!m_EndEffector.getFirstIR() && !m_EndEffector.getSecondIR()) {
@@ -44,7 +39,6 @@ public class IntakeCoral extends Command {
     }
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_Elevator.toPrimitive();
@@ -62,7 +56,6 @@ public class IntakeCoral extends Command {
     }
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return m_EndEffector.getFirstIR() && !m_EndEffector.getSecondIR();

@@ -4,14 +4,20 @@
 
 package frc.robot;
 
+import java.util.Optional;
+
+import com.pathplanner.lib.commands.FollowPathCommand;
+
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.LEDConstants;
+import frc.robot.subsystems.SwerveSubsystem_Kraken;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -22,6 +28,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
+  private final SwerveSubsystem_Kraken m_SwerveSubsystem = new SwerveSubsystem_Kraken();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -56,6 +63,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("MatchTime", DriverStation.getMatchTime());
   }
 
+  // PathPlanner recommendations
+  @Override
+  public void robotInit() {
+    FollowPathCommand.warmupCommand().schedule();
+  }
+
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
@@ -85,10 +98,18 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
+    Optional<Alliance> ally = DriverStation.getAlliance();
+    // If in red alliance, reset the gyro.
+    if (ally.isPresent()) {
+      if (ally.get() == Alliance.Red) {
+        double gyroAngle = m_SwerveSubsystem.getRotation().getDegrees();
+        // if gryoAngle < 0, add 180. if gyroAngle > 0, subtract 180
+        if (gyroAngle < 0) gyroAngle += 180;
+        else gyroAngle -= 180;
+        m_SwerveSubsystem.setGyroAngle(gyroAngle);
+      }
+    }
+
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

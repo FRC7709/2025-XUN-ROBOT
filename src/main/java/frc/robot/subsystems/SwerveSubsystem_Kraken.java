@@ -140,6 +140,10 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
     return gyro.getRotation2d();
   }
 
+  public void setGyroAngle(double degree) {
+    gyro.setYaw(degree);
+  }
+
   public SwerveModulePosition[] getModulesPosition() {
     return new SwerveModulePosition[]{
       leftFront.getPosition(),

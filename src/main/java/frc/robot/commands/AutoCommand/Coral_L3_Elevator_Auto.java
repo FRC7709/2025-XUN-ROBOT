@@ -4,10 +4,7 @@
 
 package frc.robot.commands.AutoCommand;
 
-import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.EndEffectorConstants;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -18,8 +15,8 @@ public class Coral_L3_Elevator_Auto extends Command {
   /** Creates a new Coral_L3_Elevator. */
   private final ElevatorSubsystem m_Elevator;
   private final EndEffectorSubsystem m_EndEffector;
-
   private boolean arriveEndEffectorPrimition;
+
   public Coral_L3_Elevator_Auto(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_Elevator = elevatorSubsystem;
@@ -28,13 +25,9 @@ public class Coral_L3_Elevator_Auto extends Command {
     addRequirements(m_Elevator, m_EndEffector);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_Elevator.outCoral_L3();
-    // m_EndEffector.Arm_shootCoral_L3();
     m_EndEffector.Arm_IDLE();
-
     arriveEndEffectorPrimition = false;
 
     LEDConstants.intakeArriving = true;
@@ -62,15 +55,7 @@ public class Coral_L3_Elevator_Auto extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    // m_Elevator.toPrimitive();
-    // m_EndEffector.Arm_IDLE();
-    // m_EndEffector.stopWheel();
-
-    // LEDConstants.intakeArriving = false;
-    // LEDConstants.arrivePosition_Intake = false;
-    // LEDConstants.LEDFlag = true;
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

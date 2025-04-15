@@ -40,13 +40,12 @@ public class Coral_L4_Elevator_Auto extends Command {
       // m_EndEffector.Arm_shootCoral_L4();   
       ifArrive_EndEffector = true;
     }
-    // 
+
     if(m_Elevator.arriveSetPoint() && ifArrive_EndEffector) {  
       m_EndEffector.Arm_shootCoral_L4();
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
     }
-    
   }
 
   // Called once the command ends or is interrupted.

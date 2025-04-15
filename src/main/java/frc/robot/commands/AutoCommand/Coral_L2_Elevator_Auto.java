@@ -4,8 +4,6 @@
 
 package frc.robot.commands.AutoCommand;
 
-import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
