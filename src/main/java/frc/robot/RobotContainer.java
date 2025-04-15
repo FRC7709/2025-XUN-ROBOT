@@ -127,6 +127,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("TrackMiddle_Left_Auto", new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // NamedCommands.registerCommand("TrackRightReef_Auto_LeftSide", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.3));
     NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(0.8));
+    NamedCommands.registerCommand("ResetGyro", Commands.runOnce(()->{m_SwerveSubsystem.resetGyro();}));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Mode", autoChooser);

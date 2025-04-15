@@ -35,7 +35,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "TrackLeftReef_Auto_OneCoral"
+                  "name": "TrackRightReef_Auto_OneCoral"
                 }
               },
               {
@@ -56,13 +56,25 @@
         {
           "type": "named",
           "data": {
+            "name": "TrackMiddle_Right_Auto"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeLowAlgae_Auto"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "PrimitiveIntake"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Turn More"
+            "pathName": "Turn More_Right"
           }
         },
         {
