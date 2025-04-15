@@ -115,7 +115,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       pivotMotor.getConfigurator().apply(pivotConfig);
   
       // PID Controller and Feedforward
-      armPID = new PIDController(WristConstants.Kp, WristConstants.Ki, WristConstants.Kd);
+      armPID = new PIDController(WristConstants.Kp, 0, WristConstants.Kd);
       armFeedforward = new ArmFeedforward(0, WristConstants.Kg, 0);
       // Init debouncer
       m_Debouncer_first = new Debouncer(0.05, DebounceType.kRising);

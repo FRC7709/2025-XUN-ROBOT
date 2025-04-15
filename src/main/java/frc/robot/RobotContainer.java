@@ -40,6 +40,7 @@ import frc.robot.commands.ManualCommands.RemoveAlgae;
 import frc.robot.commands.ManualCommands.ShootNet;
 import frc.robot.commands.ManualCommands.ShootProcessor;
 import frc.robot.commands.ManualCommands.TurnMore;
+import frc.robot.commands.TestCommand.Coral_L4Test;
 import frc.robot.commands.TrackCommands.TrackLeftReef;
 import frc.robot.commands.TrackCommands.TrackMiddleReef_Left;
 import frc.robot.commands.TrackCommands.TrackMiddleReef_Right;
@@ -162,7 +163,8 @@ public class RobotContainer {
     driverController.rightBumper().whileTrue(new TrackRightReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.a().toggleOnTrue(new TrackCage(m_SwerveSubsystem, m_PhotonVisionSubsystem));
     // driverController.pov(270).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
-    driverController.pov(180).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    // driverController.pov(180).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    driverController.pov(270).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.pov(90).whileTrue(new  ManualDrive_RotationSpeedUp(m_SwerveSubsystem, xSpeedFunc, ySpeedFunc, zSpeedFunc, isSlowFunc));
     driverController.a().whileTrue(new ResetClimber(m_ClimberSubsystem, ifClimb));
     driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem, ifClimb));
@@ -181,13 +183,14 @@ public class RobotContainer {
     operatorController.pov(180).toggleOnTrue(new Coral_L1(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.pov(0).toggleOnTrue(new Coral_L2(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.leftTrigger().toggleOnTrue(new Coral_L3(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
-    operatorController.leftBumper().toggleOnTrue(new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem));
+    operatorController.leftBumper().toggleOnTrue(new Coral_L4Test(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.pov(270).toggleOnTrue(new ShootProcessor(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.pov(90).toggleOnTrue(new IntakeAlgae_Floor(m_ElevatorSubsystem, m_EndEffectorSubsystem));
     operatorController.rightTrigger().toggleOnTrue(new IntakeAlgae_Low(m_ElevatorSubsystem, m_EndEffectorSubsystem));
     operatorController.rightBumper().toggleOnTrue(new IntakeAlgae_High(m_ElevatorSubsystem, m_EndEffectorSubsystem));
     
-    operatorController.x().toggleOnTrue(new RemoveAlgae(m_EndEffectorSubsystem, m_ElevatorSubsystem));
+    // operatorController.x().toggleOnTrue(new RemoveAlgae(m_EndEffectorSubsystem, m_ElevatorSubsystem));
+    // operatorController.x().toggleOnTrue(new PrepareForScore_Coral_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
     operatorController.a().toggleOnTrue(new PrimitiveIntake(m_ElevatorSubsystem, m_EndEffectorSubsystem));
     operatorController.b().toggleOnTrue(new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem));
     operatorController.y().toggleOnTrue(new ShootNet(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
