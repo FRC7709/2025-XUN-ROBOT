@@ -111,7 +111,7 @@ public class TrackLeftReef_Auto extends Command {
     SmartDashboard.putBoolean("Auto/TrackLeft", false);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
-    if(xPidError <= 0.05 && yPidError <= 0.05 && rotationError <= 2) {
+    if(xPidError <= 0.1 && yPidError <= 0.1 && rotationPidError <= 3) {
       LEDConstants.arrivePosition_Base = true;
       LEDConstants.LEDFlag = true;
     }else {

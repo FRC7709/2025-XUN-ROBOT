@@ -224,21 +224,21 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Level2_Net = 0.1;
     public static final double rotationPidMaxOutput_NeedSlow_Level2_Net = 0.05;
 
-    public static final double xPidSetPoint_RightReef = 0.402; 
-    public static final double yPidSetPoint_RightReef = -0.145;
-    public static final double rotationPidSetPoint_RightReef = 180.9;
+    public static final double xPidSetPoint_RightReef = 0.397; 
+    public static final double yPidSetPoint_RightReef = -0.133;
+    public static final double rotationPidSetPoint_RightReef = 177.9;
 
-    public static final double xPidSetPoint_LeftReef = 0.4057;
-    public static final double yPidSetPoint_LeftReef = 0.1472;
-    public static final double rotationPidSetPoint_LeftReef = 178.5;
+    public static final double xPidSetPoint_LeftReef = 0.411;
+    public static final double yPidSetPoint_LeftReef = 0.1448;
+    public static final double rotationPidSetPoint_LeftReef = 179.2;
 
-    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.411;
-    public static final double yPidSetPoint_MiddleReef_FrontRight = 0.172;
-    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 178.7;
+    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.409;
+    public static final double yPidSetPoint_MiddleReef_FrontRight = 0.197;
+    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 180.2;
 
-    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.395;
-    public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.257;
-    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 182.8;
+    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.400;
+    public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.256;
+    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 177.6;
 
     public static final double xPidSetPoint_LeftCoralStation_BackLeft = 0;
     public static final double yPidSetPoint_LeftCoralStation_BackLeft = 0;
@@ -311,7 +311,7 @@ public final class Constants {
     public static final int elevator_SecondMotor_ID = 12;
 
     public static final double prepareForScorePosition_Net = 20;
-    public static final double prepareForScorePosition_Coral = 20;
+    public static final double prepareForScorePosition_Coral = 25;
     public static final double primitivePosition = -0.2;//-0.14
     public static final double coralL1Position = 4;//3.72
     public static final double coralL2Position = 11.44;//7.42
@@ -349,14 +349,14 @@ public final class Constants {
     public static final double coralL2Angle = 75;
     public static final double coralL3Angle = 75;
     public static final double coralL4Angle = 56;//not yet
-    public static final double coralStationAngle = 75;
+    public static final double coralStationAngle = 82;
     public static final double coralL4UpAngle = 70;
     public static final double algaeFloorAngle = 7;
     public static final double algaeNetAngle = 100;//not yet
     public static final double netUpAngle = 82;
     public static final double algaeLowInAngle = 64;
     public static final double algaeHighInAngle = 64;
-    public static final double algaeProccesorAngle = 9;//not yet
+    public static final double algaeProccesorAngle = 5;//not yet
     public static final double algaePreProccesorAngle = 20;
     public static final double algaeRemoveAngle = 75;
   }
