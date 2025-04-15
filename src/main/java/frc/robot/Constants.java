@@ -312,7 +312,7 @@ public final class Constants {
 
     public static final double prepareForScorePosition_Net = 20;
     public static final double prepareForScorePosition_Coral = 25;
-    public static final double primitivePosition = -0.2;//-0.14
+    public static final double primitivePosition = 0;//-0.2
     public static final double coralL1Position = 4;//3.72
     public static final double coralL2Position = 11.44;//7.42
     public static final double coralL3Position = 22.5;//21.42
@@ -324,7 +324,7 @@ public final class Constants {
     public static final double algaeL2Position = 2.84;//3.82
     public static final double algaeL3Position = 16;//15.82
 
-    public static final double algaeProccesorPosition = -0.2;//0.12
+    public static final double algaeProccesorPosition = 0;//0.12
 
     public static int arriveLevel = 0;
   }

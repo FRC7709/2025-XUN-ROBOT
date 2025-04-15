@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5409193984691636,
-        "y": 7.308675806035089
+        "x": 1.8525,
+        "y": 6.832999999999999
       },
       "isLocked": false,
       "linkedName": "RightCoralStation_Right"
@@ -20,8 +20,8 @@
         "y": 5.32175
       },
       "prevControl": {
-        "x": 3.334180327868852,
-        "y": 5.520026639344262
+        "x": 3.42225,
+        "y": 5.82875
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 6.0,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 7.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -47,7 +47,7 @@
   "reversed": false,
   "folder": "LeftCoralStation",
   "idealStartingState": {
-    "velocity": 4.0,
+    "velocity": 0.0,
     "rotation": -51.15460919463883
   },
   "useDefaultConstraints": true

@@ -129,11 +129,6 @@ public class RobotContainer {
     NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(0.8));
 
     autoChooser = AutoBuilder.buildAutoChooser();
-    // autoChooser = AutoBuilder.buildAutoChooserWithOptionsModifier(
-    //   (stream) -> true
-    //     ? stream.filter(auto -> auto.getName().startsWith("comp"))
-    //     : stream
-    // );
     SmartDashboard.putData("Auto Mode", autoChooser);
     configureBindings();
   }
@@ -169,8 +164,6 @@ public class RobotContainer {
     driverController.a().whileTrue(new ResetClimber(m_ClimberSubsystem, ifClimb));
     driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem, ifClimb));
     driverController.x().whileTrue(new Climb(m_ClimberSubsystem, ifClimb));
-
-
 
     driverController.y().whileTrue(
       Commands.runOnce(()->{

@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.911007940497853,
-        "y": 1.9316182243862847
+        "x": 6.181500000000001,
+        "y": 1.87025
       },
       "isLocked": false,
       "linkedName": "MiddleRedStart"
@@ -20,8 +20,8 @@
         "y": 2.5429999999999997
       },
       "prevControl": {
-        "x": 4.971173820173645,
-        "y": 2.3412048782852786
+        "x": 5.6354999999999995,
+        "y": 1.9677499999999997
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 6.0,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 7.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -42,12 +42,12 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 121.79891282429443
+    "rotation": 119.99999999999999
   },
   "reversed": false,
   "folder": "StartRightSide",
   "idealStartingState": {
-    "velocity": 5.9,
+    "velocity": 0.0,
     "rotation": 180.0
   },
   "useDefaultConstraints": true
