@@ -49,6 +49,8 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
   .getStructArrayTopic("Swerve/ModuleStates", SwerveModuleState.struct).publish();
   StructPublisher<Pose2d> robot_pose_pub = NetworkTableInstance.getDefault()
   .getStructTopic("Swerve/RobotPose", Pose2d.struct).publish();
+  StructPublisher<ChassisSpeeds> chassis_speeds_pub = NetworkTableInstance.getDefault()
+  .getStructTopic("Swerve/ChassisSpeeds", ChassisSpeeds.struct).publish();
 
 
   public SwerveSubsystem_Kraken() {
@@ -213,6 +215,7 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
     // Log publisher
     module_state_pub.set(getModuleStates());
     robot_pose_pub.set(getRobotPose());
+    chassis_speeds_pub.set(getChassisSpeed());
     // Odmoetry update
     odometry.update(getRotation(), getModulesPosition());
     field.setRobotPose(odometry.getPoseMeters());

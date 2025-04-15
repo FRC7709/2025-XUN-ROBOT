@@ -14,9 +14,7 @@ import frc.robot.Constants.PhotonConstants;
 import frc.robot.subsystems.PhotonVisionSubsystem;
 import frc.robot.subsystems.SwerveSubsystem_Kraken;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TrackLeftReef_Auto extends Command {
-  /** Creates a new TrackReef. */
   private final PhotonVisionSubsystem m_PhotonVisionSubsystem;
   private final SwerveSubsystem_Kraken m_SwerveSubsystem;
 
@@ -26,11 +24,11 @@ public class TrackLeftReef_Auto extends Command {
 
   private double xPidMeasurements;
   private double yPidMeasurements;
-  private double rotationPidMeasurements;
+  private double rotationMeasurements;
 
   private double xPidError;
   private double yPidError;
-  private double rotationPidError;
+  private double rotationError;
 
   private double xPidOutput;
   private double yPidOutput;
@@ -46,13 +44,8 @@ public class TrackLeftReef_Auto extends Command {
     xPidController = new PIDController(PhotonConstants.xPid_Kp, PhotonConstants.xPid_Ki, PhotonConstants.xPid_Kd);
     yPidController = new PIDController(PhotonConstants.yPid_Kp, PhotonConstants.yPid_Ki, PhotonConstants.yPid_Kd);
     rotationPidController = new PIDController(PhotonConstants.rotationPid_Kp, PhotonConstants.rotationPid_Ki, PhotonConstants.rotationPid_Kd);
-    // Set limits
-    // xPidController.setIntegratorRange(PhotonConstants.xPidMinOutput_Reef, PhotonConstants.xPidMaxOutput_Reef);
-    // yPidController.setIntegratorRange(PhotonConstants.yPidMaxOutput_Reef, PhotonConstants.yPidMaxOutput_Reef);
-    // rotationPidController.setIntegratorRange(PhotonConstants.rotationPidMaxOutput_Reef, PhotonConstants.rotationPidMaxOutput_Reef);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     SmartDashboard.putBoolean("Auto/TrackLeft", true);
@@ -68,10 +61,10 @@ public class TrackLeftReef_Auto extends Command {
   public void execute() {
     if(m_PhotonVisionSubsystem.hasFrontRightTarget()) {
       // Rotation-PID calculations
-      rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_FrontRight();
-      rotationPidError = Math.abs(rotationPidMeasurements - PhotonConstants.rotationPidSetPoint_LeftReef);
-      rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_LeftReef;
-      rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_LeftReef);
+      rotationMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_FrontRight();
+      rotationError = Math.abs(rotationMeasurements - PhotonConstants.rotationPidSetPoint_LeftReef);
+      rotationMeasurements = (rotationError > 0.5) ? rotationMeasurements : PhotonConstants.rotationPidSetPoint_LeftReef;
+      rotationPidOutput = rotationPidController.calculate(rotationMeasurements, PhotonConstants.rotationPidSetPoint_LeftReef);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Reef);
       // Y-PID calculations
       yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_FrontRight();
@@ -85,10 +78,8 @@ public class TrackLeftReef_Auto extends Command {
       xPidMeasurements = (xPidError > 0.02) ? xPidMeasurements : PhotonConstants.xPidSetPoint_LeftReef;
       xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_LeftReef);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidSetPoint_LeftReef);
-      // if(xPidController.getError()<0.05) SmartDashboard.putBoolean("Align/LeftReefAlign", true);
-      // else SmartDashboard.putBoolean("Align/LeftReefAlign", false);
 
-      if(xPidError <= 0.05 && yPidError <= 0.05 && rotationPidError <= 2) {
+      if(xPidError <= 0.05 && yPidError <= 0.05 && rotationError <= 2) {
         LEDConstants.arrivePosition_Base = true;
         LEDConstants.LEDFlag = true;
       }
@@ -120,7 +111,7 @@ public class TrackLeftReef_Auto extends Command {
     SmartDashboard.putBoolean("Auto/TrackLeft", false);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
-    if(xPidError <= 0.05 && yPidError <= 0.05 && rotationPidError <= 2) {
+    if(xPidError <= 0.05 && yPidError <= 0.05 && rotationError <= 2) {
       LEDConstants.arrivePosition_Base = true;
       LEDConstants.LEDFlag = true;
     }else {

@@ -9,9 +9,7 @@ import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Coral_L4_Elevator_Auto extends Command {
-  /** Creates a new Coral_L4_Elevator. */
   private final ElevatorSubsystem m_Elevator;
   private final EndEffectorSubsystem m_EndEffector;
 
@@ -23,11 +21,8 @@ public class Coral_L4_Elevator_Auto extends Command {
     addRequirements(m_Elevator, m_EndEffector);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_Elevator.outCoral_L4();
-    // m_EndEffector.Arm_shootCoral_L4();
     m_EndEffector.coralL4Primitive_Arm();
 
     ifArrive_EndEffector = false;
@@ -36,16 +31,16 @@ public class Coral_L4_Elevator_Auto extends Command {
     LEDConstants.LEDFlag = true;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // If end effector can move up, move elevator to coral L4 position
     if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp()) {
+      // Elevator move to coral L4 position and end effector coral L4 angle
       m_Elevator.outCoral_L4(); 
       m_EndEffector.Arm_shootCoral_L4(); 
-      // m_EndEffector.Arm_shootCoral_L4();   
       ifArrive_EndEffector = true;
     }
-
+    // 
     if(m_Elevator.arriveSetPoint() && ifArrive_EndEffector) {  
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
