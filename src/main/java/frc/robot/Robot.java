@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import java.util.Optional;
+
 import com.pathplanner.lib.commands.FollowPathCommand;
 
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -95,8 +98,17 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    double gyroAngle = m_SwerveSubsystem.getRotation().getDegrees();
-    
+    Optional<Alliance> ally = DriverStation.getAlliance();
+    // If in red alliance, reset the gyro.
+    if (ally.isPresent()) {
+      if (ally.get() == Alliance.Red) {
+        double gyroAngle = m_SwerveSubsystem.getRotation().getDegrees();
+        // if gryoAngle < 0, add 180. if gyroAngle > 0, subtract 180
+        if (gyroAngle < 0) gyroAngle += 180;
+        else gyroAngle -= 180;
+        m_SwerveSubsystem.setGyroAngle(gyroAngle);
+      }
+    }
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
