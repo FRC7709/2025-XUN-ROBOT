@@ -76,12 +76,6 @@
           "data": {
             "pathName": "Turn More_Right"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetGyro"
-          }
         }
       ]
     }

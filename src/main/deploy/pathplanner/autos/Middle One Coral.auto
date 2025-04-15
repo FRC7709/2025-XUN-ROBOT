@@ -64,12 +64,6 @@
           "data": {
             "pathName": "Turn More"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetGyro"
-          }
         }
       ]
     }
