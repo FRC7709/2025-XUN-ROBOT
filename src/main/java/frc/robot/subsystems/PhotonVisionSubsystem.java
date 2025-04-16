@@ -33,13 +33,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   private double botXMeasurements_FrontLeft;
   private double botYMeasurements_FrontLeft;
   private double botRotationMeasurements_FrontLeft;
-  private double botXMeasurements_BackRight;
-  private double botYMeasurements_BackRight;
-  private double botRotationMeasurements_BackRight;
-  private double botXMeasurements_BackLeft;
-  private double botYMeasurements_BackLeft;
-  private double botRotationMeasurements_BackLeft;
-
 
   public PhotonVisionSubsystem() {
     frontRightCamera = new PhotonCamera("OV9281_FrontRight");
@@ -90,22 +83,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     return frontLeftTarget.getBestCameraToTarget();
   }
 
-  // public Optional<Matrix<N3, N3>> getCameraMatrix(String camera) {
-  //   if(camera == "FrontRight") return frontRightCamera.getCameraMatrix();
-  //   if(camera == "FrontLeft") return frontLeftCamera.getCameraMatrix();
-  //   if(camera == "backRight") return backRightCamera.getCameraMatrix();
-  //   if(camera == "backLeft") return backLeftCamera.getCameraMatrix();
-  //   return null;
-  // }
-
-  // public Optional<Matrix<N8, N1>> getCameraDistCoeffs(String camera) {
-  //   if(camera == "FrontRight") return frontRightCamera.getDistCoeffs();
-  //   if(camera == "FrontLeft") return frontLeftCamera.getDistCoeffs();
-  //   if(camera == "backRight") return backRightCamera.getDistCoeffs();
-  //   if(camera == "backLeft") return backLeftCamera.getDistCoeffs();
-  //   return null;
-  // }
-
   public double getXMeasurements_FrontRight() {
     return botXMeasurements_FrontRight;
   }
@@ -128,52 +105,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
 
   public double getRotationMeasurements_FrontLeft() {
     return botRotationMeasurements_FrontLeft;
-  }
-
-  public double getXMeasurements_BackRight() {
-    return botXMeasurements_BackRight;
-  }
-
-  public double getYMeasurements_BackRight() {
-    return botYMeasurements_BackRight;
-  }
-
-  public double getRotationMeasurements_BackRight() {
-    return botRotationMeasurements_BackRight;
-  }
-
-  public double getXMeasurements_BackLeft() {
-    return botXMeasurements_BackLeft;
-  }
-
-  public double getYMeasurements_BackLeft() {
-    return botYMeasurements_BackLeft;
-  }
-
-  public double getRotationMeasurements_BackLeft() {
-    return botRotationMeasurements_BackLeft;
-  }
-
-
-  public double getRotationError_Net(String camera, String ID) {
-    if(camera == "BackRight") {
-      if(ID == "ID20_ID11") return Math.abs(getYMeasurements_BackRight() - PhotonConstants.yPidSetPoint_Net_BackRight_ID20_ID11);
-      else return Math.abs(getYMeasurements_BackRight() - PhotonConstants.yPidSetPoint_Net_BackRight_ID21_ID10);
-    }else {
-      return Math.abs(getYMeasurements_BackLeft() - PhotonConstants.yPidSetPoint_Net_BackLeft_ID13_ID1);
-    }
-  }
-
-  public double getXError_Processor() {
-    return Math.abs(getXMeasurements_BackRight() - PhotonConstants.xPidSetPoint_Processor_BackRight);
-  }
-
-  public double getYError_Processor() {
-    return Math.abs(getYMeasurements_BackRight() - PhotonConstants.yPidSetPoint_Processor_BackRight);
-  }
-
-  public double getRotationError_Processor() {
-    return Math.abs(getRotationMeasurements_BackRight() - PhotonConstants.rotationPidSetPoint_Processor_BackRight);
   }
   
   
@@ -199,7 +130,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   }
 
 
-
   public boolean isArrive_Reef(String reef) {
     double x_range = 0.04;
     double y_range = 0.03;
@@ -217,12 +147,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
       if((getXError_Reef("MiddleReef_FrontLeft") <= x_range) && (getYError_Reef("MiddleReef_FrontLeft") <= y_range) && (getRotationError_Reef("MiddleReef_FrontLeft") <= rotation_range)) return true;
       else return false;
     } 
-  }
-
-
-  public boolean isArrive_Processor() {
-    if(getXError_Processor() <= 0.03 && getYError_Processor() <= 0.03 && getRotationError_Processor() <= 0.5) return true;
-    else return false;
   }
 
   public PhotonPipelineResult getResult(String camera) {
@@ -256,7 +180,6 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Photon/FL_hasTarget", hasFrontLeftTarget());
 
 
-    // backRightTargets = backRightResult.getTargets();
     if(hasFrontRightTarget()) {
       botXMeasurements_FrontRight = getRobotToTargetPose_FrontRight().getTranslation().getX();
       botYMeasurements_FrontRight = getRobotToTargetPose_FrontRight().getTranslation().getY();
