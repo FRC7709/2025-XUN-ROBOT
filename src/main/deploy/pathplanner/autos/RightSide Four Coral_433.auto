@@ -132,11 +132,11 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
-                "type": "sequential",
+                "type": "parallel",
                 "data": {
                   "commands": [
                     {
@@ -148,29 +148,16 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "stopMotor"
+                        "name": "Coral_L3_Intake"
                       }
                     }
                   ]
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Coral_L3_Intake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "TrackRightReef_Auto"
-                      }
-                    }
-                  ]
+                  "name": "TrackRightReef_Auto"
                 }
               }
             ]
@@ -241,11 +228,11 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
-                "type": "sequential",
+                "type": "parallel",
                 "data": {
                   "commands": [
                     {
@@ -257,29 +244,16 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "stopMotor"
+                        "name": "Coral_L3_Intake"
                       }
                     }
                   ]
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Coral_L3_Intake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "TrackLeftReef_Auto"
-                      }
-                    }
-                  ]
+                  "name": "TrackLeftReef_Auto"
                 }
               }
             ]
@@ -293,6 +267,12 @@
                 "type": "named",
                 "data": {
                   "name": "ShootCoral_Auto"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "stopMotor"
                 }
               }
             ]
