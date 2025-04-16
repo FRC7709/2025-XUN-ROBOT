@@ -124,7 +124,7 @@ public class TrackLeftReef_Auto extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_PhotonVisionSubsystem.isArrive_Reef("LeftReef");
+    return LEDConstants.arrivePosition_Base;
   }
 
 }

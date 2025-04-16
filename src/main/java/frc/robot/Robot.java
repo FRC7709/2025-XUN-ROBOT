@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
-  private final SwerveSubsystem_Kraken m_SwerveSubsystem = new SwerveSubsystem_Kraken();
+  // private final SwerveSubsystem_Kraken m_SwerveSubsystem = new SwerveSubsystem_Kraken();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -63,11 +63,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("MatchTime", DriverStation.getMatchTime());
   }
 
-  // PathPlanner recommendations
-  @Override
-  public void robotInit() {
-    FollowPathCommand.warmupCommand().schedule();
-  }
+  // // PathPlanner recommendations
+  // @Override
+  // public void robotInit() {
+  //   FollowPathCommand.warmupCommand().schedule();
+  // }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
@@ -98,17 +98,17 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    Optional<Alliance> ally = DriverStation.getAlliance();
-    // If in red alliance, reset the gyro.
-    if (ally.isPresent()) {
-      if (ally.get() == Alliance.Red) {
-        double gyroAngle = m_SwerveSubsystem.getRotation().getDegrees();
-        // if gryoAngle < 0, add 180. if gyroAngle > 0, subtract 180
-        if (gyroAngle < 0) gyroAngle += 180;
-        else gyroAngle -= 180;
-        m_SwerveSubsystem.setGyroAngle(gyroAngle);
-      }
-    }
+    // Optional<Alliance> ally = DriverStation.getAlliance();
+    // // If in red alliance, reset the gyro.
+    // if (ally.isPresent()) {
+    //   if (ally.get() == Alliance.Red) {
+    //     double gyroAngle = m_SwerveSubsystem.getRotation().getDegrees();
+    //     // if gryoAngle < 0, add 180. if gyroAngle > 0, subtract 180
+    //     if (gyroAngle < 0) gyroAngle += 180;
+    //     else gyroAngle -= 180;
+    //     m_SwerveSubsystem.setGyroAngle(gyroAngle);
+    //   }
+    // }
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();

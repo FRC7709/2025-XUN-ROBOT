@@ -313,7 +313,7 @@ public final class Constants {
     public static final double prepareForScorePosition_Net = 20;
     public static final double prepareForScorePosition_Coral = 25;
     public static final double primitivePosition = 0;//-0.2
-    public static final double coralL1Position = 4;//3.72
+    public static final double coralL1Position = 7;//3.72
     public static final double coralL2Position = 11.44;//7.42
     public static final double coralL3Position = 22.5;//21.42
     public static final double coralL4Position = 43.34;//42.52
@@ -349,7 +349,7 @@ public final class Constants {
     public static final double coralL2Angle = 75;
     public static final double coralL3Angle = 75;
     public static final double coralL4Angle = 56;//not yet
-    public static final double coralStationAngle = 82;
+    public static final double coralStationAngle = 80;
     public static final double coralL4UpAngle = 70;
     public static final double algaeFloorAngle = 7;
     public static final double algaeNetAngle = 100;//not yet
@@ -369,15 +369,16 @@ public final class Constants {
     public static final int irSensor_CoralSecond_ID = 1;
     public static final int irSensor_Algae_ID = 2;   
     // Output voltage
-    public static final double coralL1OutVol = -3.5;
+    public static final double coralL1OutVol = -5;
     public static final double coralL2OutVol = -2;
     public static final double coralL3OutVol = -2;
     public static final double coralL4OutVol = -2;
     public static final double coralTurnMore = -0.5;
     public static final double coralInSpeed_RotionPerSecond = -32;
-    public static final double coralInSpeedSlow_RotationPerSecond = -5;
+    public static final double coralInSpeedSlow_RotationPerSecond = -6;
+    public static final double coralInSpeedSlow_RotationPerSecond_IDLE = -5;
     public static final double algaeFloorInVol = -6;
-    public static final double algaeShootNetVol = 6;
+    public static final double algaeShootNetVol = 8;
     public static final double algaeLowInVol = -6;
     public static final double algaeHighInVol = -6;
     public static final double algaeShootProcessorVol = 3;

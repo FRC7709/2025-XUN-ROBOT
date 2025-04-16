@@ -182,6 +182,9 @@ public class EndEffectorSubsystem extends SubsystemBase {
     public void intakeCoral_Wheel() {
       wheelState = "WHEEL_INTAKECORAL";
       wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeed_RotionPerSecond));}
+      public void intakeCoralSlow_Wheel_IDLE() {
+        wheelState = "WHEEL_INTAKECORAL_SLOW"; 
+        wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeedSlow_RotationPerSecond_IDLE));}
     public void intakeCoralSlow_Wheel() {
       wheelState = "WHEEL_INTAKECORAL_SLOW"; 
       wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeedSlow_RotationPerSecond));}
@@ -304,6 +307,8 @@ public class EndEffectorSubsystem extends SubsystemBase {
       output = pidOutput + feedforwardOutput;
       pivotMotor.setVoltage(output);
 
+      double wheelTemp = wheelMotor.getDeviceTemp().getValueAsDouble();
+
       //Log
       // Wrist
       SmartDashboard.putNumber("Wrist/PidOutput", pidOutput);
@@ -321,6 +326,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       SmartDashboard.putBoolean("EndEffector/AlgaeIR", getAlgaeIR());
       SmartDashboard.putBoolean("EndEffector/hasCoral", hasCoral());
       SmartDashboard.putBoolean("EndEffector/hasAlgae", hasAlgae());
+      SmartDashboard.putNumber("EndEffector/wheelTemp", wheelTemp);
       
   }
 }

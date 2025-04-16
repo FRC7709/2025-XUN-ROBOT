@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.892930327868852,
-        "y": 6.128842213114754
+        "x": 6.2595,
+        "y": 6.16025
       },
       "isLocked": false,
       "linkedName": "MiddleBlueStart"
     },
     {
       "anchor": {
-        "x": 5.1675,
-        "y": 5.53625
+        "x": 5.109,
+        "y": 5.468
       },
       "prevControl": {
         "x": 5.6160000000000005,
-        "y": 6.062749999999999
+        "y": 6.1114999999999995
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 6.0,
-    "maxAcceleration": 7.5,
+    "maxAcceleration": 6.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

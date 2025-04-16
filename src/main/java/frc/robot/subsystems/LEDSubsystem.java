@@ -39,7 +39,7 @@ public class LEDSubsystem extends SubsystemBase {
   }
 
   public void fireAnimation() {
-    ledAnimation = new FireAnimation(0.6, 0.2, ledNum, 1, 0.2, false, 0);
+    ledAnimation = new FireAnimation(0.6, 0.01, ledNum, 1, 0.2, false, 0);
     candle.animate(ledAnimation);
     LEDConstants.LEDFlag = false;
   }

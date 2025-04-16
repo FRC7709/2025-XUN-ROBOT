@@ -45,7 +45,7 @@ public class Coral_L3_Elevator_Auto extends Command {
     if(arriveEndEffectorPrimition && m_EndEffector.canMoveUp()) {
       m_Elevator.outCoral_L3();
       m_EndEffector.Arm_shootCoral_L3();
-      if(m_Elevator.arriveSetPoint()) {
+      if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
         LEDConstants.arrivePosition_Intake = true;
         LEDConstants.LEDFlag = true;
       } 
@@ -55,11 +55,16 @@ public class Coral_L3_Elevator_Auto extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    if(m_Elevator.arriveSetPoint()) {
+      LEDConstants.arrivePosition_Intake = true;
+      LEDConstants.LEDFlag = true;
+    }
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint();
+    return LEDConstants.arrivePosition_Intake;
   }
 }

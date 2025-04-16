@@ -27,7 +27,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Coral_L3_Intake"
+                        "name": "PrepareForScore_Coral"
                       }
                     }
                   ]
@@ -95,15 +95,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "PrimitiveIntake"
+                        "pathName": "E(Reef) Out To RightCoralStations"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "IntakeCoral"
+                        "name": "stopMotor"
                       }
                     }
                   ]
@@ -114,15 +114,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "path",
+                      "type": "named",
                       "data": {
-                        "pathName": "E(Reef) Out To RightCoralStations"
+                        "name": "PrimitiveIntake"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "stopMotor"
+                        "name": "IntakeCoral_fast"
                       }
                     }
                   ]
@@ -148,13 +148,19 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Coral_L1_Intake"
+                        "name": "IntakeCoral_Slow"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "Coral_L3_Intake"
+                        "name": "Coral_L2_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PrepareForScore_Coral"
                       }
                     }
                   ]
@@ -222,15 +228,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "PrimitiveIntake"
+                        "pathName": "D(Reef) Out To RightCoralStations"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "IntakeCoral"
+                        "name": "stopMotor"
                       }
                     }
                   ]
@@ -241,15 +247,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "path",
+                      "type": "named",
                       "data": {
-                        "pathName": "D(Reef) Out To RightCoralStations"
+                        "name": "PrimitiveIntake"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "stopMotor"
+                        "name": "IntakeCoral_fast"
                       }
                     }
                   ]
@@ -275,13 +281,19 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Coral_L1_Intake"
+                        "name": "IntakeCoral_Slow"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "Coral_L3_Intake"
+                        "name": "Coral_L2_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PrepareForScore_Coral"
                       }
                     }
                   ]
@@ -357,7 +369,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "IntakeCoral"
+                        "name": "IntakeCoral_fast"
                       }
                     }
                   ]
@@ -402,13 +414,19 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Coral_L1_Intake"
+                        "name": "IntakeCoral_Slow"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "Coral_L2_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PrepareForScore_Coral"
                       }
                     }
                   ]

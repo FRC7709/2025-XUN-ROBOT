@@ -50,7 +50,7 @@ public class IntakeCoral_Fast extends Command {
       LEDConstants.LEDFlag = true;
 
       m_EndEffectorSubsystem.intakeCoral_Arm();
-      m_EndEffectorSubsystem.intakeCoralSlow_Wheel();
+      m_EndEffectorSubsystem.stopWheel();
     }else {
       LEDConstants.intakeGamePiece = false;
       LEDConstants.hasGamePiece = false;

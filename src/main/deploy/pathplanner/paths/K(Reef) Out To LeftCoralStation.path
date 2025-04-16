@@ -4,28 +4,28 @@
     {
       "anchor": {
         "x": 3.9,
-        "y": 5.399749999999999
+        "y": 5.38025
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9835000000000003,
-        "y": 5.80925
+        "x": 3.4027499999999997,
+        "y": 6.267500000000002
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.38,
-        "y": 7.5
+        "x": 1.16025,
+        "y": 7.81775
       },
       "prevControl": {
-        "x": 2.36925,
-        "y": 6.101749999999999
+        "x": 1.4962500000000003,
+        "y": 7.26775
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "LeftCoralStation"
     }
   ],
   "rotationTargets": [],
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 6.0,
-    "maxAcceleration": 7.5,
+    "maxAcceleration": 6.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

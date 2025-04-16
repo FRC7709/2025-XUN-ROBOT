@@ -95,15 +95,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "PrimitiveIntake"
+                        "pathName": "J(Reef) Out To LeftCoralStation"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "IntakeCoral"
+                        "name": "stopMotor"
                       }
                     }
                   ]
@@ -114,15 +114,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "path",
+                      "type": "named",
                       "data": {
-                        "pathName": "J(Reef) Out To LeftCoralStation"
+                        "name": "PrimitiveIntake"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "stopMotor"
+                        "name": "IntakeCoral"
                       }
                     }
                   ]
@@ -142,37 +142,12 @@
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Coral_L3_Intake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrepareForScore_Coral"
-                      }
-                    }
-                  ]
+                  "name": "Coral_L3_Intake"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopMotor"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Coral_L4_Intake"
           }
         },
         {
@@ -183,12 +158,6 @@
                 "type": "named",
                 "data": {
                   "name": "TrackLeftReef_Auto"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Coral_L4_Intake_WithTrack"
                 }
               }
             ]
@@ -222,15 +191,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "PrimitiveIntake"
+                        "pathName": "K(Reef) Out To LeftCoralStation"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "IntakeCoral"
+                        "name": "stopMotor"
                       }
                     }
                   ]
@@ -241,15 +210,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "path",
+                      "type": "named",
                       "data": {
-                        "pathName": "K(Reef) Out To LeftCoralStation"
+                        "name": "PrimitiveIntake"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "stopMotor"
+                        "name": "IntakeCoral"
                       }
                     }
                   ]
@@ -269,37 +238,12 @@
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Coral_L3_Intake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrepareForScore_Coral"
-                      }
-                    }
-                  ]
+                  "name": "Coral_L3_Intake"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopMotor"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Coral_L4_Intake"
           }
         },
         {
@@ -310,12 +254,6 @@
                 "type": "named",
                 "data": {
                   "name": "TrackRightReef_Auto"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Coral_L4_Intake_WithTrack"
                 }
               }
             ]
