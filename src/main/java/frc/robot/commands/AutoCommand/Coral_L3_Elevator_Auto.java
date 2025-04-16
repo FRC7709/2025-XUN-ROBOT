@@ -7,13 +7,10 @@ package frc.robot.commands.AutoCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
-import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Coral_L3_Elevator_Auto extends Command {
-  /** Creates a new Coral_L3_Elevator. */
   private final ElevatorSubsystem m_Elevator;
   private final EndEffectorSubsystem m_EndEffector;
   private boolean flag;
@@ -34,7 +31,6 @@ public class Coral_L3_Elevator_Auto extends Command {
     LEDConstants.LEDFlag = true;
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp()) {
@@ -50,7 +46,6 @@ public class Coral_L3_Elevator_Auto extends Command {
     } 
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putString("Auto/State", "C3_Elevator_END");

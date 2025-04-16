@@ -4,9 +4,7 @@
 
 package frc.robot.commands.AutoCommand;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.PhotonVisionSubsystem;
@@ -16,9 +14,7 @@ import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.PhotonConstants;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TrackMiddleReef_Auto extends Command {
-  /** Creates a new TrackMiddleReef. */
   private final PhotonVisionSubsystem m_PhotonVisionSubsystem;
   private final SwerveSubsystem_Kraken m_SwerveSubsystem;
 
@@ -37,8 +33,6 @@ public class TrackMiddleReef_Auto extends Command {
   private double xPidOutput;
   private double yPidOutput;
   private double rotationPidOutput;
-
-  private int fiducialId;
 
   public TrackMiddleReef_Auto(PhotonVisionSubsystem photonVisionSubsystem, SwerveSubsystem_Kraken swerveSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
