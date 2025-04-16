@@ -15,20 +15,18 @@ public class Coral_L3_Elevator_Auto extends Command {
   /** Creates a new Coral_L3_Elevator. */
   private final ElevatorSubsystem m_Elevator;
   private final EndEffectorSubsystem m_EndEffector;
-  private boolean arriveEndEffectorPrimition;
+  private boolean flag;
 
   public Coral_L3_Elevator_Auto(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.m_Elevator = elevatorSubsystem;
     this.m_EndEffector = endEffectorSubsystem;
-
     addRequirements(m_Elevator, m_EndEffector);
   }
 
   @Override
   public void initialize() {
     m_EndEffector.Arm_IDLE();
-    arriveEndEffectorPrimition = false;
+    flag = false;
 
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
@@ -39,12 +37,14 @@ public class Coral_L3_Elevator_Auto extends Command {
   @Override
   public void execute() {
     if(Math.abs(m_EndEffector.getAngle() - WristConstants.primitiveAngle) <= 2) {
-      arriveEndEffectorPrimition = true;
+      flag = true;
     }
 
-    if(arriveEndEffectorPrimition && m_EndEffector.canMoveUp()) {
+    if(flag && m_EndEffector.canMoveUp()) {
+      // Impl
       m_Elevator.outCoral_L3();
       m_EndEffector.Arm_shootCoral_L3();
+      // LED
       if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
         LEDConstants.arrivePosition_Intake = true;
         LEDConstants.LEDFlag = true;

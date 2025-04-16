@@ -47,8 +47,8 @@
   "reversed": false,
   "folder": "RightCoralStation",
   "idealStartingState": {
-    "velocity": 5.9,
-    "rotation": 52.488513854650755
+    "velocity": 0.0,
+    "rotation": 52.50000000000001
   },
   "useDefaultConstraints": true
 }

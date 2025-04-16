@@ -136,53 +136,60 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "RightCoralStations Out To D(Reef)"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "RightCoralStations Out To D(Reef)"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "Coral_L3_Intake"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L3_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "TrackRightReef_Auto"
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "stopMotor"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "TrackRightReef_Auto"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "stopMotor"
-                }
-              },
               {
                 "type": "named",
                 "data": {
                   "name": "ShootCoral_Auto"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "stopMotor"
                 }
               }
             ]
@@ -238,49 +245,50 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "RightCoralStations Out To C(Reef)"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "RightCoralStations Out To C(Reef)"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "Coral_L3_Intake"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L3_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "TrackLeftReef_Auto"
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "stopMotor"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "TrackLeftReef_Auto"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "stopMotor"
-                }
-              },
               {
                 "type": "named",
                 "data": {
@@ -299,15 +307,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "PrimitiveIntake"
+                        "pathName": "C(Reef) Out To RightCoralStation"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "IntakeCoral"
+                        "name": "stopMotor"
                       }
                     }
                   ]
@@ -318,15 +326,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "path",
+                      "type": "named",
                       "data": {
-                        "pathName": "C(Reef) Out To RightCoralStation"
+                        "name": "PrimitiveIntake"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "stopMotor"
+                        "name": "IntakeCoral"
                       }
                     }
                   ]

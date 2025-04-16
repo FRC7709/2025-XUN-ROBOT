@@ -14,10 +14,8 @@ public class PrepareForScore_Coral_Auto extends Command {
   private final EndEffectorSubsystem m_EndEffectorSubsystem;
   private final ElevatorSubsystem m_ElevatorSubsystem;
   public PrepareForScore_Coral_Auto(EndEffectorSubsystem endEffectorSubsystem, ElevatorSubsystem elevatorSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.m_EndEffectorSubsystem = endEffectorSubsystem;
     this.m_ElevatorSubsystem = elevatorSubsystem;
-
     addRequirements(m_EndEffectorSubsystem, m_ElevatorSubsystem);
   }
 

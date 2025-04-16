@@ -183,7 +183,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       wheelState = "WHEEL_INTAKECORAL";
       wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeed_RotionPerSecond));}
       public void intakeCoralSlow_Wheel_IDLE() {
-        wheelState = "WHEEL_INTAKECORAL_SLOW"; 
+        wheelState = "WHEEL_INTAKECORAL_SLOW_IDLE"; 
         wheelMotor.setControl(requst_wheelSpeed.withVelocity(EndEffectorConstants.coralInSpeedSlow_RotationPerSecond_IDLE));}
     public void intakeCoralSlow_Wheel() {
       wheelState = "WHEEL_INTAKECORAL_SLOW"; 
