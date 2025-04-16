@@ -4,6 +4,7 @@
 
 package frc.robot.commands.AutoCommand;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.WristConstants;
@@ -27,7 +28,7 @@ public class Coral_L3_Elevator_Auto extends Command {
   public void initialize() {
     m_EndEffector.Arm_IDLE();
     flag = false;
-
+    SmartDashboard.putString("Auto/State", "C3_Elevator_INIT");
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
     LEDConstants.LEDFlag = true;
@@ -36,26 +37,23 @@ public class Coral_L3_Elevator_Auto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Math.abs(m_EndEffector.getAngle() - WristConstants.primitiveAngle) <= 2) {
-      flag = true;
-    }
-
-    if(flag && m_EndEffector.canMoveUp()) {
+    if(m_EndEffector.arrivedSetpoint() && m_EndEffector.canMoveUp()) {
       // Impl
       m_Elevator.outCoral_L3();
       m_EndEffector.Arm_shootCoral_L3();
-      // LED
-      if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
-        LEDConstants.arrivePosition_Intake = true;
-        LEDConstants.LEDFlag = true;
-      } 
+      flag = true;
     }
 
+    if(flag && m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
+      LEDConstants.arrivePosition_Intake = true;
+      LEDConstants.LEDFlag = true;
+    } 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("Auto/State", "C3_Elevator_END");
     if(m_Elevator.arriveSetPoint()) {
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;

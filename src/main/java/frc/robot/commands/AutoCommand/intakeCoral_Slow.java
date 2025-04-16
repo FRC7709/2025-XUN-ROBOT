@@ -4,6 +4,7 @@
 
 package frc.robot.commands.AutoCommand;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.EndEffectorSubsystem;
@@ -22,6 +23,7 @@ public class IntakeCoral_Slow extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putString("Auto/State", "IntakeCoral_Slow_INIT");
     m_EndEffectorSubsystem.intakeCoral_Arm();
     m_EndEffectorSubsystem.intakeCoralSlow_Wheel();
 
@@ -32,12 +34,12 @@ public class IntakeCoral_Slow extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("Auto/State", "IntakeCoral_Slow_END");
     m_EndEffectorSubsystem.Arm_IDLE();
     m_EndEffectorSubsystem.stopWheel();
 

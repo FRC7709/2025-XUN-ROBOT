@@ -59,6 +59,7 @@ public class TrackMiddleReef_Auto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putString("Auto/State", "TrackMiddleReef_INIT");
     SmartDashboard.putBoolean("Auto/TrackMiddleReef", true);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
@@ -145,6 +146,7 @@ public class TrackMiddleReef_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("Auto/State", "TrackMiddleReef_END");
     SmartDashboard.putBoolean("Auto/TrackMiddleReef", false);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 

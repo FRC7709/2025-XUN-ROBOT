@@ -4,25 +4,24 @@
 
 package frc.robot.commands.AutoCommand;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.EndEffectorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShootCoral_Auto extends Command {
-  /** Creates a new ShootCoral_Auto. */
   private final EndEffectorSubsystem m_EndEffector;
+
   public ShootCoral_Auto(EndEffectorSubsystem endEffectorSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.m_EndEffector = endEffectorSubsystem;
     addRequirements(m_EndEffector);
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    SmartDashboard.putString("Auto/State", "ShootCoral_Auto_INIT");
+  }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base) {
@@ -32,9 +31,9 @@ public class ShootCoral_Auto extends Command {
     }
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("Auto/State", "ShootCoral_Auto_END");
     m_EndEffector.stopWheel();
 
     LEDConstants.arrivePosition_Intake = false;
@@ -44,7 +43,6 @@ public class ShootCoral_Auto extends Command {
     LEDConstants.LEDFlag = true;
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

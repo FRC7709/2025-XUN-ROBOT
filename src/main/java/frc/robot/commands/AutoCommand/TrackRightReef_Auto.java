@@ -58,6 +58,7 @@ public class TrackRightReef_Auto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putString("Auto/State", "TrackRightReef_INIT");
     SmartDashboard.putBoolean("Auto/TrackRight", true);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 
@@ -131,6 +132,7 @@ public class TrackRightReef_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("Auto/State", "TrackRightReef_END");
     SmartDashboard.putBoolean("Auto/TrackRight", false);
     m_SwerveSubsystem.drive(0, 0, 0, false);
 

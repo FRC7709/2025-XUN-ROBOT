@@ -4,6 +4,7 @@
 
 package frc.robot.commands.AutoCommand;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -21,6 +22,7 @@ public class Coral_L1_Elevator_Auto extends Command {
 
   @Override
   public void initialize() {
+    SmartDashboard.putString("Auto/State", "C1_Elevator_INIT");
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
     LEDConstants.LEDFlag = true;
@@ -49,13 +51,7 @@ public class Coral_L1_Elevator_Auto extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_Elevator.toPrimitive();
-    // m_EndEffector.primitiveArm();
-    // m_EndEffector.stopWheel();
-
-    // LEDConstants.intakeArriving = false;
-    // LEDConstants.arrivePosition_Intake = false;
-    // LEDConstants.LEDFlag = true;
+    SmartDashboard.putString("Auto/State", "C1_Elevator_END");
   }
 
   // Returns true when the command should end.

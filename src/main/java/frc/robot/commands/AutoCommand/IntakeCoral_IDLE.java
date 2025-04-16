@@ -4,6 +4,7 @@
 
 package frc.robot.commands.AutoCommand;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -21,6 +22,7 @@ public class IntakeCoral_IDLE extends Command {
 
   @Override
   public void initialize() {
+    SmartDashboard.putString("Auto/State", "IntakeCoral_IDLE_INIT");
     m_Elevator.intakeCoral();
     m_EndEffector.intakeCoral_Arm();
     m_EndEffector.intakeCoralSlow_Wheel_IDLE();
@@ -33,11 +35,11 @@ public class IntakeCoral_IDLE extends Command {
   }
 
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("Auto/State", "IntakeCoral_IDLE_END");
     m_Elevator.toPrimitive();
     m_EndEffector.Arm_IDLE();
     m_EndEffector.stopWheel();
@@ -55,6 +57,6 @@ public class IntakeCoral_IDLE extends Command {
 
   @Override
   public boolean isFinished() {
-    return m_EndEffector.getFirstIR() && !m_EndEffector.getSecondIR();
+    return m_EndEffector.hasCoral();
   }
 }
