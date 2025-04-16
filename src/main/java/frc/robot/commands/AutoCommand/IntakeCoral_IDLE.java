@@ -23,7 +23,7 @@ public class IntakeCoral_IDLE extends Command {
   public void initialize() {
     m_Elevator.intakeCoral();
     m_EndEffector.intakeCoral_Arm();
-    m_EndEffector.intakeCoral_Wheel();
+    m_EndEffector.intakeCoralSlow_Wheel_IDLE();
 
     LEDConstants.intakeGamePiece = true;
     LEDConstants.hasGamePiece = false;
@@ -34,9 +34,6 @@ public class IntakeCoral_IDLE extends Command {
 
   @Override
   public void execute() {
-    if(!m_EndEffector.getFirstIR() && !m_EndEffector.getSecondIR()) {
-      m_EndEffector.intakeCoralSlow_Wheel_IDLE();
-    }
   }
 
   @Override
