@@ -30,14 +30,12 @@ import frc.robot.commands.ClimbCommand.ResetClimber;
 import frc.robot.commands.ManualCommands.Coral_L1;
 import frc.robot.commands.ManualCommands.Coral_L2;
 import frc.robot.commands.ManualCommands.Coral_L3;
-import frc.robot.commands.ManualCommands.Coral_L4;
 import frc.robot.commands.ManualCommands.IntakeAlgae_Floor;
 import frc.robot.commands.ManualCommands.IntakeAlgae_High;
 import frc.robot.commands.ManualCommands.IntakeAlgae_Low;
 import frc.robot.commands.ManualCommands.IntakeCoral;
 import frc.robot.commands.ManualCommands.OutAlgae;
 import frc.robot.commands.ManualCommands.PrimitiveIntake;
-import frc.robot.commands.ManualCommands.RemoveAlgae;
 import frc.robot.commands.ManualCommands.ShootNet;
 import frc.robot.commands.ManualCommands.ShootProcessor;
 import frc.robot.commands.ManualCommands.TurnMore;
@@ -46,7 +44,6 @@ import frc.robot.commands.TrackCommands.TrackLeftReef;
 import frc.robot.commands.TrackCommands.TrackMiddleReef_Left;
 import frc.robot.commands.TrackCommands.TrackMiddleReef_Right;
 import frc.robot.commands.TrackCommands.TrackRightReef;
-import frc.robot.commands.TrackCommands.transformCalculation;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
@@ -59,20 +56,13 @@ import java.util.function.DoubleSupplier;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
-import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and trigger mappings) should be declared here.
- */
+
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem();
@@ -82,23 +72,12 @@ public class RobotContainer {
   private final EndEffectorSubsystem m_EndEffectorSubsystem = new EndEffectorSubsystem();
   private final LEDSubsystem m_LEDSubsystem = new LEDSubsystem(); 
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   private final CommandXboxController driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final CommandXboxController operatorController = new CommandXboxController(OperatorConstants.kOperatorControllerPort);
   
   private final SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
-    // Configure the trigger bindings
-
-    // NamedCommands.registerCommand("Coral_L3_Left", new Coral_L3_Auto_LeftReef(m_ElevatorSubsystem, m_EndEffectorSubsystem, m_SwerveSubsystem, m_PhotonVisionSubsystem));
-    // NamedCommands.registerCommand("Coral_L3_Right", new Coral_L3_Auto_RightReef(m_ElevatorSubsystem, m_EndEffectorSubsystem, m_SwerveSubsystem, m_PhotonVisionSubsystem));
-    // NamedCommands.registerCommand("TrackLeftReef", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(5));
-    // NamedCommands.registerCommand("Coral_L4_RightReef", new Coral_L4_Auto_RightReef(m_ElevatorSubsystem, m_EndEffectorSubsystem, m_SwerveSubsystem, m_PhotonVisionSubsystem));
-
-
     NamedCommands.registerCommand("stopMotor", Commands.runOnce(() -> m_SwerveSubsystem.stopMotor(), m_SwerveSubsystem));
     NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2.5));
     NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2.5));//1
@@ -133,15 +112,7 @@ public class RobotContainer {
     configureBindings();
   }
 
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
+
   private void configureBindings() {
     // Driver Controller
     DoubleSupplier xSpeedFunc = ()-> driverController.getRawAxis(1);
@@ -151,7 +122,6 @@ public class RobotContainer {
     BooleanSupplier isSlowFunc = ()-> driverController.getHID().getRightTriggerAxis() > 0.2;
     BooleanSupplier ifFeed = ()-> driverController.getHID().getLeftTriggerAxis() > 0.2;
     BooleanSupplier ifClimb = ()-> driverController.getHID().getPOV() == 0; // Use the D-Pad to indicate if climbing, this can be changed to a button if needed
-
 
     driverController.leftBumper().whileTrue(new TrackLeftReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.leftTrigger(0.4).toggleOnTrue(new TrackMiddleReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
@@ -194,13 +164,7 @@ public class RobotContainer {
     m_SwerveSubsystem.setDefaultCommand(new ManualDrive_Kraken(m_SwerveSubsystem, xSpeedFunc, ySpeedFunc, zSpeedFunc, isSlowFunc));
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
     return autoChooser.getSelected();
   }
 } 
