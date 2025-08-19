@@ -224,21 +224,21 @@ public final class Constants {
     public static final double yPidMaxOutput_NeedSlow_Level2_Net = 0.1;
     public static final double rotationPidMaxOutput_NeedSlow_Level2_Net = 0.05;
 
-    public static final double xPidSetPoint_RightReef = 0.397; 
-    public static final double yPidSetPoint_RightReef = -0.133;
-    public static final double rotationPidSetPoint_RightReef = 177.9;
+    public static final double xPidSetPoint_RightReef = 0.393; 
+    public static final double yPidSetPoint_RightReef = -0.125;
+    public static final double rotationPidSetPoint_RightReef = 180.6;
 
     public static final double xPidSetPoint_LeftReef = 0.411;
-    public static final double yPidSetPoint_LeftReef = 0.1448;
-    public static final double rotationPidSetPoint_LeftReef = 179.2;
+    public static final double yPidSetPoint_LeftReef = 0.1342;
+    public static final double rotationPidSetPoint_LeftReef = 180.4;
 
-    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.409;
-    public static final double yPidSetPoint_MiddleReef_FrontRight = 0.197;
-    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 180.2;
+    public static final double xPidSetPoint_MiddleReef_FrontRight = 0.414;
+    public static final double yPidSetPoint_MiddleReef_FrontRight = 0.216;
+    public static final double rotationPidSetPoint_MiddleReef_FrontRight = 180.1;
 
-    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.400;
-    public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.256;
-    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 177.6;
+    public static final double xPidSetPoint_MiddleReef_FrontLeft = 0.408;
+    public static final double yPidSetPoint_MiddleReef_FrontLeft = -0.263;
+    public static final double rotationPidSetPoint_MiddleReef_FrontLeft = 179.1;
 
     public static final double xPidSetPoint_LeftCoralStation_BackLeft = 0;
     public static final double yPidSetPoint_LeftCoralStation_BackLeft = 0;
@@ -374,7 +374,7 @@ public final class Constants {
     public static final double coralL3OutVol = -2;
     public static final double coralL4OutVol = -2;
     public static final double coralTurnMore = -0.5;
-    public static final double coralInSpeed_RotionPerSecond = -32;
+    public static final double coralInSpeed_RotionPerSecond = -40;
     public static final double coralInSpeedSlow_RotationPerSecond = -6;
     public static final double coralInSpeedSlow_RotationPerSecond_IDLE = -5;
     public static final double algaeFloorInVol = -6;

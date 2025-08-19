@@ -44,7 +44,7 @@ public class Coral_L2_Elevator_Auto extends Command {
     }
 
 
-    if(m_Elevator.arriveSetPoint()) {
+    if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
       LEDConstants.arrivePosition_Intake = true;
       LEDConstants.LEDFlag = true;
     }else {
@@ -53,16 +53,22 @@ public class Coral_L2_Elevator_Auto extends Command {
     }
 
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putString("Auto/State", "C2_Elevator_END");
+    if(m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint()) {
+      LEDConstants.arrivePosition_Intake = true;
+      LEDConstants.LEDFlag = true;
+    }else {
+      LEDConstants.arrivePosition_Intake = false;
+      LEDConstants.LEDFlag = true;
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_Elevator.arriveSetPoint() && m_EndEffector.arrivedSetpoint();
+    return LEDConstants.arrivePosition_Intake;
   }
 }

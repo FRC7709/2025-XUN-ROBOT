@@ -81,8 +81,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("stopMotor", Commands.runOnce(() -> m_SwerveSubsystem.stopMotor(), m_SwerveSubsystem));
     NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2.5));
     NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2.5));//1
-    NamedCommands.registerCommand("TrackLeftReef_Auto_OneCoral", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(3));
-    NamedCommands.registerCommand("TrackRightReef_Auto_OneCoral", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("TrackLeftReef_Auto_OneCoral", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2.5));
+    NamedCommands.registerCommand("TrackRightReef_Auto_OneCoral", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2.5));
     NamedCommands.registerCommand("IntakeCoral", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(5));
     NamedCommands.registerCommand("IntakeCoral_fast", new IntakeCoral_Fast(m_EndEffectorSubsystem));
     NamedCommands.registerCommand("IntakeCoral_Slow", new IntakeCoral_Slow(m_EndEffectorSubsystem));
@@ -91,22 +91,22 @@ public class RobotContainer {
     NamedCommands.registerCommand("Coral_L4_Intake", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.8));
     NamedCommands.registerCommand("Coral_L4_Intake_WithTrack_OneCoral", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(2));
     NamedCommands.registerCommand("Coral_L4_Intake_OneCoral", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(2));
-    NamedCommands.registerCommand("Coral_L2_Intake", new Coral_L2_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.2));
+    NamedCommands.registerCommand("Coral_L2_Intake", new Coral_L2_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1.5));
     NamedCommands.registerCommand("Coral_L3_Intake", new Coral_L3_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1.5));
     NamedCommands.registerCommand("Coral_L1_Intake", new Coral_L1_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.1));
     NamedCommands.registerCommand("IntakeCoral_IDLE", new IntakeCoral_IDLE(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.8));
     NamedCommands.registerCommand("TrackMiddleReef_Auto", new TrackMiddleReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("IntakeHighAlgae_Auto", new IntakeAlgae_High_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("IntakeLowAlgae_Auto", new IntakeAlgae_Low_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
+    NamedCommands.registerCommand("IntakeLowAlgae_Auto", new IntakeAlgae_Low_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(3));
     NamedCommands.registerCommand("PrepareForScore_Net", new PrepareForScore_Algae_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
     NamedCommands.registerCommand("PrepareForScore_Coral", new PrepareForScore_Coral_Auto(m_EndEffectorSubsystem, m_ElevatorSubsystem));
     NamedCommands.registerCommand("NET_Intake_Auto", new NET_Elevator(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
     NamedCommands.registerCommand("OutAlgae_Auto", new OutAlgae(m_EndEffectorSubsystem).withTimeout(0.5));
-    NamedCommands.registerCommand("TrackMiddle_Right_Auto", new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
-    NamedCommands.registerCommand("TrackMiddle_Left_Auto", new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    NamedCommands.registerCommand("TrackMiddle_Right_Auto", new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1.5));
+    NamedCommands.registerCommand("TrackMiddle_Left_Auto", new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(1.5));
     NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(0.4));
     NamedCommands.registerCommand("ResetGyro", Commands.runOnce(()->{m_SwerveSubsystem.resetGyro();}));
-
+    
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Mode", autoChooser);
     configureBindings();
@@ -130,11 +130,12 @@ public class RobotContainer {
     // driverController.pov(270).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.pov(180).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.pov(270).whileTrue(new TrackMiddleReef_Left(m_PhotonVisionSubsystem, m_SwerveSubsystem));
+    driverController.pov(180).whileTrue(new TrackMiddleReef_Right(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.pov(90).whileTrue(new  ManualDrive_RotationSpeedUp(m_SwerveSubsystem, xSpeedFunc, ySpeedFunc, zSpeedFunc, isSlowFunc));
     driverController.a().whileTrue(new ResetClimber(m_ClimberSubsystem, ifClimb));
     driverController.b().toggleOnTrue(new PrepClimb(m_ClimberSubsystem, ifClimb));
     driverController.x().whileTrue(new Climb(m_ClimberSubsystem, ifClimb));
-
+    
     driverController.y().whileTrue(
       Commands.runOnce(()->{
         m_SwerveSubsystem.resetGyro();

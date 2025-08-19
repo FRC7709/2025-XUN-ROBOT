@@ -35,7 +35,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "TrackLeftReef_Auto_OneCoral"
+                  "name": "TrackRightReef_Auto_OneCoral"
                 }
               },
               {
@@ -56,7 +56,7 @@
         {
           "type": "named",
           "data": {
-            "name": "TrackMiddle_Left_Auto"
+            "name": "TrackMiddle_Right_Auto"
           }
         },
         {

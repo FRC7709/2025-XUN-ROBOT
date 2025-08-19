@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "RightSide Out To E(Reef)"
+                  "pathName": "LeftSide Out To J(Reef)"
                 }
               },
               {
@@ -40,405 +40,6 @@
           "type": "named",
           "data": {
             "name": "stopMotor"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "TrackLeftReef_Auto"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Coral_L4_Intake_WithTrack"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "stopMotor"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootCoral_Auto"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "E(Reef) Out To RightCoralStations"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "stopMotor"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrimitiveIntake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeCoral_fast"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "RightCoralStations Out To D(Reef)"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeCoral_Slow"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Coral_L2_Intake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrepareForScore_Coral"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopMotor"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Coral_L4_Intake"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "TrackRightReef_Auto"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Coral_L4_Intake_WithTrack"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "stopMotor"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootCoral_Auto"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "D(Reef) Out To RightCoralStations"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "stopMotor"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrimitiveIntake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeCoral_fast"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "RightCoralStations Out To C(Reef)"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeCoral_Slow"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Coral_L2_Intake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrepareForScore_Coral"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopMotor"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Coral_L4_Intake"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "TrackLeftReef_Auto"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Coral_L4_Intake_WithTrack"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "stopMotor"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootCoral_Auto"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrimitiveIntake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeCoral_fast"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "C(Reef) Out To RightCoralStation"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "stopMotor"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "RightCoralStations Out To B(Reef)"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "IntakeCoral_Slow"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Coral_L2_Intake"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PrepareForScore_Coral"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopMotor"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Coral_L4_Intake"
           }
         },
         {
@@ -509,7 +110,237 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "B(Reef) Out To RightCoralStations"
+                        "pathName": "J(Reef) Out To LeftCoralStation"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftCoralStation Out To K(Reef)"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L3_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PrepareForScore_Coral"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopMotor"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Coral_L4_Intake"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "TrackLeftReef_Auto"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Coral_L4_Intake_WithTrack"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "stopMotor"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootCoral_Auto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PrimitiveIntake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeCoral"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "L(Reef) Out To LeftCoralStation"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftCoralStation Out To A(Reef)"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L2_Intake"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "TrackLeftReef_Auto"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootCoral_Auto"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "stopMotor"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PrimitiveIntake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeCoral"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "A(Reef) Out To LeftCoralStation"
                       }
                     },
                     {
